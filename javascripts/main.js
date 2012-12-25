@@ -183,6 +183,7 @@
                 hexText = document.createElement('p'),
                 white   = document.createElement('span'),
                 black   = document.createElement('span'),
+                orig    = document.createElement('span'),
                 frag    = document.createDocumentFragment(),
                 rgb     = "";
 
@@ -193,16 +194,18 @@
             rgbText.innerHTML   = rgb;
             //hslText.innerHTML   = 'hsl(' + hue + ', ' + saturation + '%'+', ' + lightness + '%)';
 
-            hexText.className   = "hextext upper";
-            rgbText.className   = "rgbtext";
-            white.className     = "white-preview";
-            black.className     = "black-preview";
+            hexText.className = "hextext upper";
+            rgbText.className = "rgbtext";
+            white.className = "white-preview";
+            black.className = "black-preview";
+            orig.style.backgroundColor = Shadowlord._color;
 
             frag.appendChild(hexText);
             frag.appendChild(rgbText);
             //frag.appendChild(hslText);
             frag.appendChild(white);
             frag.appendChild(black);
+            frag.appendChild(orig);
             el.appendChild(frag);
 
             return el;
