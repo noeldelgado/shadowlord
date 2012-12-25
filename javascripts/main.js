@@ -9,6 +9,7 @@
         updateBtn       : document.querySelector('.update-btn'),
         colorPreview    : document.querySelector('.current-color-preview'),
         elementsHolder  : document.querySelector('[role="main"]'),
+        complementary   : document.querySelector('[role="complementary"]'),
         HEXRegExp       : /^(#)?([0-9a-fA-F]{3})([0-9a-fA-F]{3})?$/,
         RGBRegExp       : /^\s*rgba?\s*\((\d+)\,\s*(\d+)\,\s*(\d+)(,\s*(\d+(\.\d+)?))?\)\s*$/,
 
@@ -163,6 +164,106 @@
                 i -= 1;
             };
             Shadowlord.elementsHolder.appendChild(frag);
+
+            this.printComplementary(h, s, l);
+            this.printTriad(h, s, l);
+            this.printTetrad(h, s, l);
+            this.printAnalogic(h, s, l);
+        },
+
+        printComplementary: function (h, s, l) {
+            var hue = ((h + 180) * 360) / 360,
+                holder = document.createElement('div'),
+                e = document.createElement('div'),
+                t = document.createElement('span');
+
+            hue = hue > 360 ? hue - 360 : hue;
+
+            holder.className = 'complementary';
+            e.style.backgroundColor = 'hsl('+hue+','+s+'%,'+l+'%)';
+            e.title = Shadowlord.RGBtoHEX(e.style.backgroundColor);
+            t.innerHTML = "Complementary";
+            holder.appendChild(e);
+            holder.appendChild(t);
+            this.complementary.appendChild(holder);
+        },
+
+        printTriad: function ( h, s, l ) {
+            var hue1 = ((h + 120) * 360) / 360,
+                hue2 = ((hue1 + 120) * 360) / 360,
+                holder = document.createElement('div'),
+                e1 = document.createElement('div'),
+                e2 = document.createElement('div'),
+                t = document.createElement('span');
+
+            hue1 = hue1 > 360 ? hue1 - 360 : hue1;
+            hue2 = hue2 > 360 ? hue2 - 360 : hue2;
+
+            holder.className = 'triad';
+            e1.style.backgroundColor = 'hsl('+hue1+','+s+'%,'+l+'%)';
+            e1.title = Shadowlord.RGBtoHEX(e1.style.backgroundColor);
+            e2.style.backgroundColor = 'hsl('+hue2+','+s+'%,'+l+'%)';
+            e2.title = Shadowlord.RGBtoHEX(e2.style.backgroundColor);
+            t.innerHTML = "Triad";
+            holder.appendChild(e1);
+            holder.appendChild(e2);
+            holder.appendChild(t);
+
+            this.complementary.appendChild(holder);
+        },
+
+        printTetrad : function ( h, s, l ) {
+            var hue1 = ((h + 90) * 360) / 360,
+                hue2 = ((hue1 + 90) * 360) / 360,
+                hue3 = ((hue2 + 90) * 360) / 360,
+                holder = document.createElement('div'),
+                e1 = document.createElement('div'),
+                e2 = document.createElement('div'),
+                e3 = document.createElement('div'),
+                t = document.createElement('span');
+
+            hue1 = hue1 > 360 ? hue1 - 360 : hue1;
+            hue2 = hue2 > 360 ? hue2 - 360 : hue2;
+            hue3 = hue3 > 360 ? hue3 - 360 : hue3;
+
+            holder.className = 'tetrad';
+            e1.style.backgroundColor = 'hsl('+hue1+','+s+'%,'+l+'%)';
+            e1.title = Shadowlord.RGBtoHEX(e1.style.backgroundColor);
+            e2.style.backgroundColor = 'hsl('+hue2+','+s+'%,'+l+'%)';
+            e2.title = Shadowlord.RGBtoHEX(e2.style.backgroundColor);
+            e3.style.backgroundColor = 'hsl('+hue3+','+s+'%,'+l+'%)';
+            e3.title = Shadowlord.RGBtoHEX(e3.style.backgroundColor);
+            t.innerHTML = "Tetrad";
+            holder.appendChild(e1);
+            holder.appendChild(e2);
+            holder.appendChild(e3);
+            holder.appendChild(t);
+
+            this.complementary.appendChild(holder);
+        },
+
+        printAnalogic: function (h, s, l) {
+            var hue1 = ((h + 90) * 360) / 360,
+                hue2 = ((hue1 + 270) * 360) / 360,
+                holder = document.createElement('div'),
+                e1 = document.createElement('div'),
+                e2 = document.createElement('div'),
+                t = document.createElement('span');
+
+            hue1 = hue1 > 360 ? hue1 - 360 : hue1;
+            hue2 = hue2 > 360 ? hue2 - 360 : hue2;
+
+            holder.className = 'analogic';
+            e1.style.backgroundColor = 'hsl('+hue1+','+s+'%,'+l+'%)';
+            e1.title = Shadowlord.RGBtoHEX(e1.style.backgroundColor);
+            e2.style.backgroundColor = 'hsl('+hue2+','+s+'%,'+l+'%)';
+            e2.title = Shadowlord.RGBtoHEX(e2.style.backgroundColor);
+            t.innerHTML = "Analogous";
+            holder.appendChild(e1);
+            holder.appendChild(e2);
+            holder.appendChild(t);
+
+            this.complementary.appendChild(holder);
         },
 
         setColor: function (colour) {
@@ -209,6 +310,7 @@
 
         clearContainer: function () {
             this.elementsHolder.innerHTML = "";
+            this.complementary.innerHTML = "";
         },
 
         addEvent: function (obj, type, fn) {
