@@ -51,7 +51,6 @@
             for (var i = 0; i < 6; i += 1) {
                 colour += b16[Math.round(Math.random(0, b16.length) * (b16.length - 1))];
             }
-            window.location.hash = colour;
             this.printTints(colour);
         },
 
@@ -145,6 +144,7 @@
                 frag = document.createDocumentFragment();
 
             this.clearContainer();
+            window.location.hash = "#" + this._color.toUpperCase();
             Shadowlord._input.value = "#" + this._color;
             Shadowlord.colorPreview.style.backgroundColor = "#" + this._color;
             Shadowlord.colorPreview.title = "#" + this._color;
