@@ -12,26 +12,44 @@
 	<!--[if lt IE 9]> <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> <![endif]-->
 </head>
 <body>
-<header role="banner">
+
+<header>
   <div class="wrapper clearfix">
-    <div class="idholder">
-      <h1 class="upper">Shadowlord</h1>
-      <h2 class="upper">Color Tints &amp; Shade Generator</h2>
-    </div>
+    <!-- <div class="idholder"> -->
+      <h1 role="banner" class="upper">Shadowlord</h1>
+      <h2 class="upper">Tints &amp; Shade Generator</h2>
+    <!-- </div> -->
     <span class="current-color-preview" title=""></span>
     <div class="inputholder">
       <input value="" placeholder="#0099cc" id="input" type="text" />
       <button class="update-btn entypo">d</button>
+    </div>
+    <div class="options">
+      Copy as:
+      <label for="hex"><input type="radio" name="copy-format" value="hex" id="hex" checked> HEX</label>
+      <label for="rgb"><input type="radio" name="copy-format" value="rgb" id="rgb"> RGB</label>
+      <label for="hsl"><input type="radio" name="copy-format" value="hsl" id="hsl"> HSL</label>
     </div>
     <button class="randomness">
       <span class="entypo">f</span>
     </button>
   </div>
 </header>
-<div class="wrapper">
-  <section role="main" class="clearfix"></section>
+
+
+<section role="main" id="main">
+  <div class="content clearfix"></div>
+</section>
+
+<div class="by upper">
+  by <a href="https://twitter.com/pixelia_me" target="_blank">@pixelia_me</a>
 </div>
 
+
+<!-- <script type="text/javascript" src="../Values.js/values.js"></script> -->
+
+<script type="text/javascript" src="javascripts/ZeroClipboard.min.js"></script>
+<script type="text/javascript" src="javascripts/values.js"></script>
 <script type="text/javascript" src="javascripts/main.js"></script>
 </body>
 </html>
