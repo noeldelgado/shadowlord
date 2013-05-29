@@ -91,8 +91,8 @@
                 var e       = document.createElement('div'),
                     inner   = document.createElement('div'),
                     hex     = that.__values[i].hex,
-                    rgb     = that.__values[i].rgbText,
-                    hsl     = that.__values[i].hslText;
+                    rgb     = that.__values[i].rgb.text,
+                    hsl     = that.__values[i].hsl.text;
 
                 e.className     = "item";
 
