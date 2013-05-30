@@ -12,13 +12,23 @@
         colorPreview    : document.querySelector('.current-color-preview'),
         elementsHolder  : document.querySelector('#main .content'),
         options         : document.querySelectorAll('.options [type="radio"]'),
-        complementary   : document.querySelector('[role="complementary"]'),
+        overlay         : document.querySelector('.overlay-background'),
+        overlays        : {},
         HEXRegExp       : /^(#)?([0-9a-fA-F]{3})([0-9a-fA-F]{3})?$/,
         RGBRegExp       : /^\s*rgba?\s*\((\d+)\,\s*(\d+)\,\s*(\d+)(,\s*(\d+(\.\d+)?))?\)\s*$/,
 
         init: function () {
             var hash = window.location.hash;
-            ZeroClipboard.setDefaults({ moviePath: "javascripts/ZeroClipboard.swf" });
+
+            ZeroClipboard.setDefaults({
+                moviePath: "javascripts/ZeroClipboard.swf"
+            });
+
+            this.overlays.copied = {
+                el  : document.querySelector('.overlay-color-copied'),
+                text: document.querySelector('.overlay-color-copied').querySelector('.dynamic-text')
+            };
+
             this.bindEvents();
 
             if ( this.isValidColorModel(hash) ) {
@@ -45,11 +55,13 @@
                 that._input.className = "";
             });
 
+            // update data-clipboard when an option format is changed
             for (var i = 0; i < that.options.length; i += 1) {
                 this.addEvent(that.options[i], "change", function(e) {
                     for (var i = 0; i < that.items.length; i += 1) {
                         that.items[i].setAttribute("data-clipboard-text", that.items[i].getAttribute('data-'+e.target.value) );
                     }
+                    document.body.focus();
                 });
             }
 
@@ -99,12 +111,16 @@
                 if ( that.__values[i].hex === color.getColor().hex )
                     e.className += ' original';
 
-                clips.push(new ZeroClipboard( e ));
+                var clip = new ZeroClipboard(e);
+                clips.push(clip);
                 e.setAttribute("data-clipboard-text", hex);
-
                 e.setAttribute("data-hex", hex);
                 e.setAttribute("data-rgb", rgb);
                 e.setAttribute("data-hsl", hsl);
+                clip.on('complete', function(client, args) {
+                    document.body.focus();
+                    that.showOverlay( that.overlays.copied, args.text );
+                });
 
                 inner.style.backgroundColor = hsl;
                 inner.className = "item-inner";
@@ -118,6 +134,19 @@
             that.reCalcSize();
             // var by = document.querySelector('.by');
             // by.getElementsByTagName('a')[0].style.color = color.getColor().hex;
+        },
+
+        showOverlay: function( overlay, message ) {
+            var that = this;
+            that.overlay.style.display = "block";
+            overlay.el.classList.add('show');
+            overlay.text.innerHTML = message;
+            var t = setTimeout(function() {
+                that.overlay.style.display = "none";
+                overlay.el.classList.remove('show');
+                document.body.focus();
+                clearTimeout(t);
+            }, 1000);
         },
 
         reCalcSize: function() {
