@@ -118,8 +118,8 @@
                 e.setAttribute("data-rgb", rgb);
                 e.setAttribute("data-hsl", hsl);
                 clip.on('complete', function(client, args) {
-                    document.body.focus();
                     that.showOverlay( that.overlays.copied, args.text );
+                    this.classList.add('copied');
                 });
 
                 inner.style.backgroundColor = hsl;
