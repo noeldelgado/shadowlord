@@ -85,7 +85,7 @@
 
         printTints: function (colour) {
             var that    = this,
-                color   = new Values( colour ).setRange(1),
+                color   = new Values( colour ).setStep(1),
                 current = color.getColor(),
                 frag    = document.createDocumentFragment(),
                 clips   = [];
