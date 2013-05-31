@@ -2,18 +2,22 @@
 
     "use strict";
 
-    var Shadowlord = {
-        _color          : "",
-        __values        : null,
-        items           : null,
+    var UI = {
         _input          : document.getElementById('input'),
         randomButton    : document.querySelector('.randomness'),
         updateBtn       : document.querySelector('.update-btn'),
         colorPreview    : document.querySelector('.current-color-preview'),
         elementsHolder  : document.querySelector('#main .content'),
+        colorPicker     : document.getElementById('colorpicker'),
         options         : document.querySelectorAll('.options [type="radio"]'),
         overlay         : document.querySelector('.overlay-background'),
-        overlays        : {},
+        overlays        : {}
+    };
+
+    var Shadowlord = {
+        _color          : "",
+        __values        : null,
+        items           : null,
         HEXRegExp       : /^(#)?([0-9a-fA-F]{3})([0-9a-fA-F]{3})?$/,
         RGBRegExp       : /^\s*rgba?\s*\((\d+)\,\s*(\d+)\,\s*(\d+)(,\s*(\d+(\.\d+)?))?\)\s*$/,
 
@@ -24,7 +28,7 @@
                 moviePath: "javascripts/ZeroClipboard.swf"
             });
 
-            this.overlays.copied = {
+            UI.overlays.copied = {
                 el  : document.querySelector('.overlay-color-copied'),
                 text: document.querySelector('.overlay-color-copied').querySelector('.dynamic-text')
             };
@@ -40,24 +44,33 @@
 
         bindEvents: function () {
             var that = this;
-            this.addEvent(that.updateBtn, "click", function (e) {
-                var input = that._input.value;
-                if (that.isValidColorModel(input)) {
-                    that.printTints(input);
-                    that._input.className = "";
-                    return false;
-                }
-                that._input.className = "error";
+            helpers.addEvent(UI._input, "focus", function(e) {
+                helpers.triggerEvent( UI.colorPicker, 'click');
             });
 
-            this.addEvent(that.randomButton, "click", function () {
+            helpers.addEvent(UI.colorPicker, "change", function(event) {
+                UI._input.value = event.target.value;
+                helpers.triggerEvent( UI.updateBtn, 'click');
+            });
+
+            helpers.addEvent(UI.updateBtn, "click", function (e) {
+                var input = UI._input.value;
+                if (that.isValidColorModel(input)) {
+                    that.printTints(input);
+                    UI._input.className = "";
+                    return false;
+                }
+                UI._input.className = "error";
+            });
+
+            helpers.addEvent(UI.randomButton, "click", function () {
                 that.generateRandomColor();
-                that._input.className = "";
+                UI._input.className = "";
             });
 
             // update data-clipboard when an option format is changed
-            for (var i = 0; i < that.options.length; i += 1) {
-                this.addEvent(that.options[i], "change", function(e) {
+            for (var i = 0; i < UI.options.length; i += 1) {
+                helpers.addEvent(UI.options[i], "change", function(e) {
                     for (var i = 0; i < that.items.length; i += 1) {
                         that.items[i].setAttribute("data-clipboard-text", that.items[i].getAttribute('data-'+e.target.value) );
                     }
@@ -65,7 +78,7 @@
                 });
             }
 
-            this.addEvent(window, "resize", that.reCalcSize);
+            helpers.addEvent(window, "resize", that.reCalcSize);
         },
 
         isValidColorModel: function (hash) {
@@ -95,9 +108,9 @@
 
             this.clearContainer();
             window.location.hash = current.hex.toUpperCase();
-            that._input.value = current.hex;
-            that.colorPreview.style.backgroundColor = current.hex;
-            that.colorPreview.title = current.hex;
+            UI._input.value = current.hex;
+            UI.colorPreview.style.backgroundColor = current.hex;
+            UI.colorPreview.title = current.hex;
 
             for (var i = 0; i < that.__values.length; i += 1) {
                 var e       = document.createElement('div'),
@@ -118,7 +131,7 @@
                 e.setAttribute("data-rgb", rgb);
                 e.setAttribute("data-hsl", hsl);
                 clip.on('complete', function(client, args) {
-                    that.showOverlay( that.overlays.copied, args.text );
+                    that.showOverlay( UI.overlays.copied, args.text );
                     this.classList.add('copied');
                 });
 
@@ -130,7 +143,7 @@
                 frag.appendChild(e);
             }
 
-            that.elementsHolder.appendChild(frag);
+            UI.elementsHolder.appendChild(frag);
             that.reCalcSize();
             // var by = document.querySelector('.by');
             // by.getElementsByTagName('a')[0].style.color = color.getColor().hex;
@@ -138,11 +151,11 @@
 
         showOverlay: function( overlay, message ) {
             var that = this;
-            that.overlay.style.display = "block";
+            UI.overlay.style.display = "block";
             overlay.el.classList.add('show');
             overlay.text.innerHTML = message;
             var t = setTimeout(function() {
-                that.overlay.style.display = "none";
+                UI.overlay.style.display = "none";
                 overlay.el.classList.remove('show');
                 document.body.focus();
                 clearTimeout(t);
@@ -158,7 +171,7 @@
                 columns = 10,
                 rows = 10;
 
-            var items = Shadowlord.elementsHolder.childNodes;
+            var items = UI.elementsHolder.childNodes;
             for (var i = 0; i < items.length; i++) {
                 if (items[i].nodeName.toLowerCase() === 'div') {
                     items[i].style.width    = (W - paddingLR) / columns + "px";
@@ -178,9 +191,11 @@
         },
 
         clearContainer: function () {
-            this.elementsHolder.innerHTML = "";
-        },
+            UI.elementsHolder.innerHTML = "";
+        }
+    };
 
+    var helpers = {
         addEvent: function (obj, type, fn) {
             if (obj.addEventListener) {
                 obj.addEventListener(type, fn, false);
@@ -190,6 +205,11 @@
                     obj['e' + type + fn](window.event);
                 };
                 obj.attachEvent("on" + type, obj[type + fn]);
+            }
+        },
+        triggerEvent: function (el, type) {
+            if ((el[type] || false) && typeof el[type] == 'function') {
+                el[type](el);
             }
         }
     };
