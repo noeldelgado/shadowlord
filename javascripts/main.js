@@ -18,8 +18,6 @@
         _color          : "",
         __values        : null,
         items           : null,
-        HEXRegExp       : /^(#)?([0-9a-fA-F]{3})([0-9a-fA-F]{3})?$/,
-        RGBRegExp       : /^\s*rgba?\s*\((\d+)\,\s*(\d+)\,\s*(\d+)(,\s*(\d+(\.\d+)?))?\)\s*$/,
 
         init: function () {
             var hash = window.location.hash;
@@ -82,8 +80,8 @@
         },
 
         isValidColorModel: function (hash) {
-            if (Shadowlord.HEXRegExp.test(hash)) return true;
-            if (Shadowlord.RGBRegExp.test(hash)) return true;
+            if (Values.Utils.isHEX(hash)) return true;
+            if (Values.Utils.isRGB(hash)) return true;
             return false;
         },
 
@@ -99,29 +97,28 @@
         printTints: function (colour) {
             var that    = this,
                 color   = new Values( colour ).setStep(1),
-                current = color.getColor(),
                 frag    = document.createDocumentFragment(),
                 clips   = [];
 
-            that.__values = color.getTintsAndShades();
+            that.__values = color.all;
             that.items = [];
 
             this.clearContainer();
-            window.location.hash = current.hex.toUpperCase();
-            UI._input.value = current.hex;
-            UI.colorPreview.style.backgroundColor = current.hex;
-            UI.colorPreview.title = current.hex;
+            window.location.hash = color.hex.toUpperCase();
+            UI._input.value = color.hex;
+            UI.colorPreview.style.backgroundColor = color.hex;
+            UI.colorPreview.title = color.hex;
 
             for (var i = 0; i < that.__values.length; i += 1) {
                 var e       = document.createElement('div'),
                     inner   = document.createElement('div'),
                     hex     = that.__values[i].hex,
-                    rgb     = that.__values[i].rgb.text,
-                    hsl     = that.__values[i].hsl.text;
+                    rgb     = that.__values[i].rgb,
+                    hsl     = that.__values[i].hsl;
 
                 e.className     = "item";
 
-                if ( that.__values[i].hex === color.getColor().hex )
+                if ( that.__values[i].hex === color.hex )
                     e.className += ' original';
 
                 var clip = new ZeroClipboard(e);
