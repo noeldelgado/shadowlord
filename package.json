@@ -1,0 +1,31 @@
+{
+  "name": "Shadowlord",
+  "version": "0.2.0",
+  "description": "Shades and tints generator online.",
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noeldelgado/shadowlord.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-compass": "~0.6.0",
+    "load-grunt-tasks": "~0.2.0"
+  },
+  "author": "Noel Delgado",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "colors",
+    "tints",
+    "shades",
+    "hex",
+    "hsl",
+    "rgb"
+  ]
+}

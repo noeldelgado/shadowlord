@@ -1,0 +1,37 @@
+@include font-face("Entypo", font-files("entypo/entypo.ttf", "entypo/entypo.otf"));
+@import url(//fonts.googleapis.com/css?family=Exo:100,300,400,500,700,800,900);
+
+
+.header__right .btn,
+.checkbox-wrapper span:after,
+.modal__close {
+    font-family: 'Entypo';
+}
+
+.logo,
+.input-wrapper input,
+.options-wrapper,
+.item__inner,
+footer,
+.modal {
+    font-family: 'Exo', sans-serif;
+}
+
+.logo__inner span {
+    font-weight: 100;
+}
+.item__inner {
+    .original & {
+        font-weight: 600;
+    }
+}
+.input-wrapper input,
+.checkbox-wrapper label {
+    font-weight: 100;
+}
+footer {
+    font-weight: 300;
+}
+.logo {
+    font-weight: 700;
+}

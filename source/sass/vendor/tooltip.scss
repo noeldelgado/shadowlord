@@ -1,0 +1,146 @@
+@import 'compass';
+
+$tooltip-transition-delay: .2s !default;
+$tooltip-transition-duration: .3s !default;
+$tooltip-background: #1b3a59 !default;
+$tooltip-forground: white !default;
+
+.effekt-tooltip[data-tooltip-text] {
+  position: relative;
+  display: inline-block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  @include transform(translateZ(0));
+
+  &:before,
+  &:after {
+    opacity: 0;
+    @include transition($tooltip-transition-delay);
+  }
+
+  &:hover:before,
+  &:hover:after {
+    visibility: visible;
+    opacity: 1;
+    @include transition($tooltip-transition-delay $tooltip-transition-duration);
+  }
+}
+
+.effekt-tooltip{
+  &:after {
+    content: attr(data-tooltip-text);
+    position: absolute;
+    border-radius: 4px;
+    background: $tooltip-background;
+    color: $tooltip-forground;
+    padding: 5px 8px 6px;
+    font-size: 11px;
+    line-height: 1em;
+    white-space: nowrap;
+    visibility: hidden;
+    z-index: 2;
+  }
+
+  &:before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+}
+
+.effekt-tooltip[data-position="top"],
+.effekt-tooltip[data-position="bottom"] {
+  &:after {
+    @include transform(translateX(-50%)); // horizontal centering
+    left:50%;
+  }
+  &:before {
+    left: 50%;
+    margin-left: -5px;
+  }
+}
+
+.effekt-tooltip[data-position="top"] {
+  &:after,
+  &:before {
+    bottom: 125%;
+  }
+  &:before {
+    border-top: 5px solid $tooltip-background;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    margin-bottom: -4px; // one less pixel to prevent occational 1px gap
+  }
+  &:hover:before,
+  &:hover:after {
+    bottom: 115%;
+  }
+}
+
+.effekt-tooltip[data-position="bottom"] {
+  &:after,
+  &:before {
+    top: 125%;
+  }
+
+  &:before {
+    border-bottom: 5px solid $tooltip-background;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    margin-top: -4px; // one less pixel to prevent occational 1px gap
+  }
+
+  &:hover:before,
+  &:hover:after {
+    top: 115%;
+  }
+}
+
+.effekt-tooltip[data-position="right"],
+.effekt-tooltip[data-position="left"] {
+  &:after, &:before {
+    top:45%;
+    @include transform(translateY(-45%)); // half font-size size
+    margin-top:2px;
+  }
+}
+
+.effekt-tooltip[data-position="right"] {
+  &:after,
+  &:before {
+    left: 115%;
+  }
+
+  &:before {
+    border-right: 5px solid $tooltip-background;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    margin-left: -4px; // one less pixel to prevent occational 1px gap
+  }
+
+  &:hover:before,
+  &:hover:after {
+    left: 105%;
+  }
+}
+
+.effekt-tooltip[data-position="left"] {
+  &:after,
+  &:before {
+    right: 115%;
+  }
+
+  &:before {
+    border-left: 5px solid $tooltip-background;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    margin-right: -4px; // one less pixel to prevent occational 1px gap
+  }
+
+  &:hover:before,
+  &:hover:after {
+    right: 105%;
+  }
+}

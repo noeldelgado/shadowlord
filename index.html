@@ -1,56 +1,92 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Shadowlord - Simple titns and shade generator</title>
-  <meta name="description" content="">
-  <meta name="author" content="Noel Delgado">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link href='http://fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="stylesheets/normalize.css" type="text/css">
-  <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
-	<!--[if lt IE 9]> <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> <![endif]-->
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link href="source/css/all.css" rel="stylesheet" media="all" />
+  </head>
+  <body>
+    <!-- <script src="//localhost:35729/livereload.js"></script> -->
 
-  <header>
-    <div class="wrapper clearfix">
-      <h1 role="banner" class="upper">Shadowlord</h1>
-      <h2 class="upper">Tints &amp; Shade Generator</h2>
-      <span class="current-color-preview" title=""></span>
-      <div class="inputholder">
-        <input type="color" id="colorpicker" value="#ffffff" />
-        <input value="" placeholder="#0099cc" id="input" type="text" />
-        <button class="update-btn entypo">d</button>
+    <div class="app-container">
+      <div class="app-container__inner">
+        <header>
+          <div class="header__left">
+            <div class="logo">
+              <div class="logo__inner">Sl</div>
+            </div>
+            <div class="preview">
+              <div class="preview__color"></div>
+            </div>
+            <div class="input-wrapper">
+              <input type="text" name="input" value="#0099cc">
+            </div>
+            <div class="options-wrapper">
+              <div class="checkbox-wrapper">
+                <input type="checkbox" id="hex">
+                <span></span>
+                <label for="hex">Hex</label>
+              </div>
+              <div class="checkbox-wrapper">
+                <input type="checkbox" id="rgb">
+                <span></span>
+                <label for="rgb">RGBA</label>
+              </div>
+              <div class="checkbox-wrapper">
+                <input type="checkbox" id="hsl">
+                <span></span>
+                <label for="hsl">HSLA</label>
+              </div>
+            </div>
+          </div>
+          <div class="header__right">
+            <button class="btn light random-color-btn">&#128256;</button>
+          </div>
+        </header>
+
+        <div class="main-container scroll" role="main-content">
+        </div>
+
       </div>
-      <div class="options">
-        Copy as:
-        <label for="hex"><input type="radio" name="copy-format" value="hex" id="hex" checked> HEX</label>
-        <label for="rgb"><input type="radio" name="copy-format" value="rgb" id="rgb"> RGB</label>
-        <label for="hsl"><input type="radio" name="copy-format" value="hsl" id="hsl"> HSL</label>
-      </div>
-      <button class="randomness">
-        <span class="entypo">f</span>
-      </button>
+
+      <footer>
+        <a href="#" class="credits-btn">Info</a>
+      </footer>
+
     </div>
-  </header>
 
-  <section role="main" id="main">
-    <div class="content clearfix"></div>
-  </section>
+    <div class="modal credits">
+      <div class="modal__wrapper">
+        <div class="modal__inner">
+          <button class="btn modal__close">&#10062;</button>
+          <section>
+            <h3>About</h3>
+            <p>Tints and shades generator made by Noel Delgado <a href="http://twitter.com/pixelia_me" target="_blank">@pixelia_me</a>.</p>
+          </section>
+          <section>
+            <h3>Credits</h3>
+            <p>Neon.js by Fernando Trasvi&ntilde;a – <span>https://github.com/azendal/neon</span></p>
+            <p>Entypo pictograms by Daniel Bruce – <span>www.entypo.com</span></p>
+            <p>Background Image by Cat Noone – <span>http://dribbble.com/imcatnoone</span></p>
+            <p>Values.js – <span>https://github.com/noeldegado/values.js</span></p>
+          </section>
+        </div>
+      </div>
+    </div>
 
-  <div class="by upper">
-    by <a href="https://twitter.com/pixelia_me" target="_blank">@pixelia_me</a>
-  </div>
+    <script src="source/js/helpers.js"></script>
+    <script src="source/js/vendor/neon.js"></script>
+    <script src="source/js/vendor/custom_event_support.js"></script>
+    <script src="source/js/vendor/node_support.js"></script>
+    <script src="source/js/vendor/values.js"></script>
 
-  <div class="overlay-background"></div>
-  <div class="overlay overlay-color-copied">
-    <p class="dynamic-text">#0099cc</p>
-    <p>Copied</p>
-  </div>
+    <script src="source/js/widget.js"></script>
+    <script src="source/js/ui/colors_collection.js"></script>
+    <script src="source/js/ui/color.js"></script>
+    <script src="source/js/app.js"></script>
 
-  <!-- <script type="text/javascript" src="../Values.js/values.js"></script> -->
-  <script type="text/javascript" src="javascripts/ZeroClipboard.min.js"></script>
-  <script type="text/javascript" src="javascripts/values.js"></script>
-  <script type="text/javascript" src="javascripts/main.js"></script>
-</body>
+    <script>var Shadowlord = new UI.App();</script>
+  </body>
 </html>

@@ -1,0 +1,43 @@
+.modal {
+    visibility: hidden;
+    opacity: 0;
+    background-color: transparentize($dark-color, .5);
+    color: $dark-color;
+
+    @include transition(
+        visibility 250ms ease,
+        opacity 250ms ease
+    );
+
+    .modal__close {
+        background-color: transparent;
+        color: #ff1f3f;
+        opacity: .5;
+        &:hover {
+            opacity: .8;
+        }
+    }
+    .modal__inner {
+        @include transition(transform 200ms ease);
+        @include transform(scale(.5));
+        background-color: transparentize(lighten($light-color, 10), .05);
+        @include border-radius(3px);
+        @include box-shadow(0 0 30px 5px rgba(0, 0, 0, 0.15));
+    }
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+        .modal__inner {
+            @include transform(scale(1));
+        }
+    }
+
+    &.credits {
+        span {
+            background-color: transparentize($dark-color, .95);
+            color: transparentize($dark-color, .4);
+            @include border-radius(3px);
+        }
+    }
+}

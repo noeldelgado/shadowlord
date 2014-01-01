@@ -1,0 +1,39 @@
+.checkbox-wrapper {
+    cursor: pointer;
+    label {
+        cursor: pointer;
+        opacity: .8;
+    }
+    input[type="checkbox"] {
+        cursor: pointer;
+        opacity: 0;
+        z-index: 1;
+    }
+    span {
+        cursor: pointer;
+        background-color: transparentize($dark-color, 0.8);
+        @include border-radius(8px);
+        @include transition(background-color 250ms ease);
+        &:after {
+            content: "\2713";
+            opacity: 0;
+            @include transform(scale(0));
+            @include transition(transform 250ms ease, opacity 250ms ease);
+        }
+    }
+    &:hover {
+        span {
+            background-color: transparentize($dark-color, 0.6);
+        }
+    }
+    input[type="checkbox"]:checked + span {
+        background-color: transparentize($dark-color, 0.6);
+        &:after {
+            opacity: 1;
+            @include transform(scale(1));
+        }
+        + label {
+            opacity: 1;
+        }
+    }
+}

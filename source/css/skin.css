@@ -1,0 +1,154 @@
+/* line 6, ../sass/skin.scss */
+body {
+  background-color: #3b4a4c;
+  background-image: url('../../assets/images/lightining.jpg?1360984196');
+  background-size: cover;
+  background-position: 50%;
+  color: #f3f3f3;
+}
+
+/* line 14, ../sass/skin.scss */
+.scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* line 17, ../sass/skin.scss */
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #3b4a4c;
+}
+
+/* line 21, ../sass/skin.scss */
+a {
+  color: #09f;
+}
+/* line 23, ../sass/skin.scss */
+a:hover {
+  color: #33adff;
+}
+
+/* line 28, ../sass/skin.scss */
+.app-container__inner {
+  -webkit-box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* line 33, ../sass/skin.scss */
+header {
+  background-color: rgba(243, 243, 243, 0.2);
+  -webkit-box-shadow: inset 0 1px 0 rgba(243, 243, 243, 0.25), inset 0 0 0 4px rgba(243, 243, 243, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(243, 243, 243, 0.25), inset 0 0 0 4px rgba(243, 243, 243, 0.05);
+  box-shadow: inset 0 1px 0 rgba(243, 243, 243, 0.25), inset 0 0 0 4px rgba(243, 243, 243, 0.05);
+}
+
+/* line 40, ../sass/skin.scss */
+.header__right {
+  text-align: right;
+}
+/* line 42, ../sass/skin.scss */
+.header__right .btn {
+  width: 60px;
+  height: 60px;
+  margin-left: 10px;
+}
+
+/* line 48, ../sass/skin.scss */
+.logo {
+  background-color: #303c3e;
+  color: #f3f3f3;
+  text-align: center;
+}
+
+/* line 55, ../sass/skin.scss */
+.preview__color {
+  border-color: rgba(243, 243, 243, 0.75);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.25);
+  -webkit-transition: background-color 400ms ease;
+  -moz-transition: background-color 400ms ease;
+  -o-transition: background-color 400ms ease;
+  transition: background-color 400ms ease;
+}
+
+/* line 61, ../sass/skin.scss */
+[name="input"] {
+  text-transform: uppercase;
+}
+
+/* line 64, ../sass/skin.scss */
+.options-wrapper {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+}
+
+/* line 68, ../sass/skin.scss */
+.main-container {
+  background-color: rgba(243, 243, 243, 0.2);
+}
+
+/* line 72, ../sass/skin.scss */
+footer {
+  text-align: right;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+/* line 77, ../sass/skin.scss */
+footer a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+}
+/* line 80, ../sass/skin.scss */
+footer a:hover {
+  color: #fff;
+}
+
+/* line 86, ../sass/skin.scss */
+.label {
+  text-transform: uppercase;
+}
+
+/* line 90, ../sass/skin.scss */
+input[type="text"] {
+  outline: none;
+  background-color: rgba(59, 74, 76, 0.2);
+  color: #f3f3f3;
+  border-style: none;
+  border-color: rgba(243, 243, 243, 0.4);
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  border-radius: 15px;
+}
+/* line 97, ../sass/skin.scss */
+input[type="text"].error {
+  background-color: rgba(255, 31, 64, 0.5);
+}
+
+@media all and (max-width: 480px) {
+  /* line 103, ../sass/skin.scss */
+  .app-container__inner {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+  }
+
+  /* line 106, ../sass/skin.scss */
+  .header__left {
+    background: #303C3E;
+  }
+}

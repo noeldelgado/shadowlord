@@ -1,0 +1,109 @@
+@import "compass";
+
+$dark-color: #3B4A4C;
+$light-color: #F3F3F3;
+
+body {
+    background-color: $dark-color;
+    background-image: image-url('lightining.jpg');
+    background-size: cover;
+    background-position: 50%;
+    color: $light-color;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll::-webkit-scrollbar-thumb {
+  background-color: $dark-color;
+}
+
+ a {
+   color: #09f;
+   &:hover {
+        color: #33adff;
+   }
+ }
+
+.app-container__inner {
+    @include box-shadow(0 0 30px 10px rgba(0, 0, 0, 0.15));
+    @include border-radius(5px);
+}
+
+header {
+    background-color: transparentize($light-color, 0.8);
+    @include box-shadow(
+        inset 0 1px 0 transparentize($light-color, 0.75),
+        inset 0 0 0 4px transparentize($light-color, 0.95)
+    );
+}
+.header__right {
+    text-align: right;
+    .btn {
+        width: 60px;
+        height: 60px;
+        margin-left: 10px;
+    }
+}
+.logo {
+    background-color: darken($dark-color, 5);
+    color: $light-color;
+    text-align: center;
+}
+.preview {
+}
+.preview__color {
+    border-color: transparentize($light-color, 0.25);
+    @include border-radius(50%);
+    @include box-shadow(inset 0 2px 2px rgba(0, 0, 0, 0.25));
+    @include transition(background-color 400ms ease);
+}
+[name="input"] {
+    text-transform: uppercase;
+}
+.options-wrapper {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+}
+.main-container {
+    background-color: transparentize($light-color, 0.8);
+}
+
+footer {
+    text-align: right;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    a {
+        text-decoration: none;
+        color: rgba(#fff, .8);
+        &:hover {
+            color: #fff;
+        }
+    }
+}
+
+.label {
+    text-transform: uppercase;
+}
+
+input[type="text"] {
+    outline: none;
+    background-color: transparentize($dark-color, 0.8);
+    color: $light-color;
+    border-style: none;
+    border-color: transparentize($light-color, 0.6);
+    @include border-radius(15px);
+    &.error {
+        background-color: rgba(255, 31, 64, .5);
+    }
+}
+
+@media all and(max-width: 480px) {
+    .app-container__inner {
+        @include border-radius(0);
+    }
+    .header__left {
+        background: #303C3E;
+    }
+}
