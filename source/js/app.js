@@ -1,13 +1,12 @@
 Class(UI, 'App').inherits(Widget)({
     prototype : {
 
-        values : null,
-        current_color: null,
-        step : 1,
+        values          : null,
+        current_color   : null,
+        step            : 1,
+        hash            : window.location.hash,
 
         init : function init() {
-            this.hash = window.location.hash;
-
             this.ui = {
                 preview         : document.querySelector('.preview__color'),
                 checkboxes      : document.querySelectorAll('[type="checkbox"]'),
@@ -17,7 +16,6 @@ Class(UI, 'App').inherits(Widget)({
                 creditsModal    : document.querySelector('.modal.credits'),
                 closeModal      : document.querySelector('.modal__close')
             }
-
 
             this.colors = new UI.ColorsCollection({
                 name    : 'colors',
@@ -48,6 +46,7 @@ Class(UI, 'App').inherits(Widget)({
                 this.ui.checkboxes[i].addEventListener('change', this.checkboxUpdated.bind(this, this.ui.checkboxes[i]), false);
             }
 
+            window.addEventListener('hashchange', this.checkHash.bind(this), false);
             this.ui.input.addEventListener("keypress", this.checkInput.bind(this), false);
             this.ui.randomColorBtn.addEventListener('click', this.randomColor.bind(this), false);
             this.ui.creditsBtn.addEventListener("click", this.showModal.bind(this), false);
@@ -59,6 +58,16 @@ Class(UI, 'App').inherits(Widget)({
             if (Values.Utils.isHEX(color)) return true;
             if (Values.Utils.isRGB(color)) return true;
             return false;
+        },
+
+        checkHash : function checkHash(e) {
+            var new_color = window.location.hash;
+            if (this.hash !== new_color) {
+                if (this._isValidColorModel(new_color)) {
+                    this.printValues(new_color);
+                }
+            }
+            new_color = null;
         },
 
         checkInput : function checkInput(event) {
@@ -136,6 +145,7 @@ Class(UI, 'App').inherits(Widget)({
 
         updateHash : function updateHash(hash) {
             window.location.hash = hash;
+            this.hash = hash;
             return this;
         }
     }
