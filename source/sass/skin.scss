@@ -1,7 +1,4 @@
-@import "compass";
-
-$dark-color: #3B4A4C;
-$light-color: #F3F3F3;
+@import "compass", "vars";
 
 body {
     background-color: $dark-color;

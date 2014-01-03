@@ -1,0 +1,55 @@
+/* line 1, ../../sass/layout/modal.scss */
+.modal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+/* line 11, ../../sass/layout/modal.scss */
+.modal .modal__close {
+  font-size: 3em;
+  line-height: .5em;
+  position: absolute;
+  top: 10px;
+  right: 8px;
+}
+/* line 19, ../../sass/layout/modal.scss */
+.modal .modal__wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 24, ../../sass/layout/modal.scss */
+.modal .modal__inner {
+  position: relative;
+  margin: 0 auto;
+  padding: 25px 25px 22px;
+  font-size: 0.8em;
+}
+/* line 31, ../../sass/layout/modal.scss */
+.modal section {
+  margin-bottom: 20px;
+}
+/* line 33, ../../sass/layout/modal.scss */
+.modal section:last-child {
+  margin-bottom: 0;
+}
+/* line 38, ../../sass/layout/modal.scss */
+.modal h3 {
+  margin: 0 0 10px;
+}
+/* line 42, ../../sass/layout/modal.scss */
+.modal p {
+  margin: 0 0 10px;
+}
+/* line 47, ../../sass/layout/modal.scss */
+.modal.credits .modal__inner {
+  width: 450px;
+}
+/* line 50, ../../sass/layout/modal.scss */
+.modal.credits span {
+  padding: 2px 5px;
+}

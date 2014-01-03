@@ -6,11 +6,25 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <link rel="stylesheet" href="dist/css/styles.css" media="all"/>
+    <!-- build:css css/styles.css -->
+    <link href="css/vendor/normalize.css" rel="stylesheet" media="all" />
+    <link href="css/vendor/tooltip.css" rel="stylesheet" media="all" />
+    <link href="css/layout.css" rel="stylesheet" media="all" />
+    <link href="css/skin.css" rel="stylesheet" media="all" />
+    <link href="css/layout/button.css" rel="stylesheet" media="all" />
+    <link href="css/skin/button.css" rel="stylesheet" media="all" />
+    <link href="css/layout/checkbox.css" rel="stylesheet" media="all" />
+    <link href="css/skin/checkbox.css" rel="stylesheet" media="all" />
+    <link href="css/layout/items.css" rel="stylesheet" media="all" />
+    <link href="css/skin/items.css" rel="stylesheet" media="all" />
+    <link href="css/layout/modal.css" rel="stylesheet" media="all" />
+    <link href="css/skin/modal.css" rel="stylesheet" media="all" />
+    <link href="css/fonts.css" rel="stylesheet" media="all" />
+    <!-- endbuild -->
   </head>
   <body>
 
-    
+    <script src="//localhost:35729/livereload.js"></script>
 
     <div class="app-container">
       <div class="app-container__inner">
@@ -78,7 +92,17 @@
       </div>
     </div>
 
-    <script src="dist/js/app.js"></script>
+    <!-- build:js js/app.js -->
+    <script src="js/helpers.js"></script>
+    <script src="js/vendor/neon.js"></script>
+    <script src="js/vendor/custom_event_support.js"></script>
+    <script src="js/vendor/node_support.js"></script>
+    <script src="js/vendor/values.js"></script>
+    <script src="js/ui/widget.js"></script>
+    <script src="js/ui/colors_collection.js"></script>
+    <script src="js/ui/color.js"></script>
+    <script src="js/app.js"></script>
+    <!-- endbuild -->
     <script>var Shadowlord = new UI.App();</script>
   </body>
 </html>

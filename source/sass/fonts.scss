@@ -1,6 +1,7 @@
+@import "compass";
+
 @include font-face("Entypo", font-files("entypo/entypo.ttf", "entypo/entypo.otf"));
 @import url(//fonts.googleapis.com/css?family=Exo:100,300,400,500,700,800,900);
-
 
 .header__right .btn,
 .checkbox-wrapper span:after,

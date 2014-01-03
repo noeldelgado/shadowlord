@@ -1,3 +1,5 @@
+@import "compass", "vars";
+
 .btn {
     outline: none;
     @include transition(color 250ms ease);

@@ -1,0 +1,54 @@
+/* line 3, ../../sass/skin/checkbox.scss */
+.checkbox-wrapper {
+  cursor: pointer;
+}
+/* line 5, ../../sass/skin/checkbox.scss */
+.checkbox-wrapper label {
+  cursor: pointer;
+  opacity: .8;
+}
+/* line 9, ../../sass/skin/checkbox.scss */
+.checkbox-wrapper input[type="checkbox"] {
+  cursor: pointer;
+  opacity: 0;
+  z-index: 1;
+}
+/* line 14, ../../sass/skin/checkbox.scss */
+.checkbox-wrapper span {
+  cursor: pointer;
+  background-color: rgba(59, 74, 76, 0.2);
+  -webkit-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
+}
+/* line 19, ../../sass/skin/checkbox.scss */
+.checkbox-wrapper span:after {
+  content: "\2713";
+  opacity: 0;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: -webkit-transform 250ms ease, opacity 250ms ease;
+  transition: transform 250ms ease, opacity 250ms ease;
+}
+/* line 27, ../../sass/skin/checkbox.scss */
+.checkbox-wrapper:hover span {
+  background-color: rgba(59, 74, 76, 0.4);
+}
+/* line 31, ../../sass/skin/checkbox.scss */
+.checkbox-wrapper input[type="checkbox"]:checked + span {
+  background-color: rgba(59, 74, 76, 0.4);
+}
+/* line 33, ../../sass/skin/checkbox.scss */
+.checkbox-wrapper input[type="checkbox"]:checked + span:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+/* line 37, ../../sass/skin/checkbox.scss */
+.checkbox-wrapper input[type="checkbox"]:checked + span + label {
+  opacity: 1;
+}
