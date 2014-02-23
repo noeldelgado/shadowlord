@@ -129,16 +129,16 @@ header:after {
   margin-top: 15px;
 }
 
-/* line 90, ../sass/layout.scss */
+/* line 88, ../sass/layout.scss */
 .options-wrapper {
   margin-top: 20px;
 }
-/* line 92, ../sass/layout.scss */
+/* line 90, ../sass/layout.scss */
 .options-wrapper label {
   margin-right: 10px;
 }
 
-/* line 97, ../sass/layout.scss */
+/* line 95, ../sass/layout.scss */
 .main-container {
   position: absolute;
   top: 80px;
@@ -155,71 +155,77 @@ header:after {
   overflow-y: auto;
 }
 
-/* line 109, ../sass/layout.scss */
+/* line 107, ../sass/layout.scss */
 footer {
   width: 95%;
   margin: 15px auto 0;
   padding-right: 20px;
   font-size: .6em;
 }
-/* line 114, ../sass/layout.scss */
+/* line 112, ../sass/layout.scss */
 footer .separator {
   margin: 0 5px;
 }
 
-/* line 120, ../sass/layout.scss */
+/* line 118, ../sass/layout.scss */
 input[type="text"] {
   border-width: 1px;
 }
 
+/* line 122, ../sass/layout.scss */
+[type="color"] {
+  visibility: hidden;
+  position: absolute;
+}
+
 @media all and (max-width: 480px) {
-  /* line 127, ../sass/layout.scss */
+  /* line 130, ../sass/layout.scss */
   footer,
   .preview,
   .header__right {
     display: none;
   }
 
-  /* line 130, ../sass/layout.scss */
+  /* line 133, ../sass/layout.scss */
   .app-container__inner {
     width: 100%;
     height: 100%;
   }
 
-  /* line 135, ../sass/layout.scss */
+  /* line 138, ../sass/layout.scss */
   header,
   .logo {
     height: 60px;
   }
 
-  /* line 138, ../sass/layout.scss */
+  /* line 141, ../sass/layout.scss */
   .logo {
     width: 60px;
   }
 
-  /* line 141, ../sass/layout.scss */
+  /* line 144, ../sass/layout.scss */
   .header__left {
     width: 100%;
   }
 
-  /* line 144, ../sass/layout.scss */
+  /* line 147, ../sass/layout.scss */
   .main-container {
     top: 60px;
   }
 
-  /* line 147, ../sass/layout.scss */
+  /* line 150, ../sass/layout.scss */
   .input-wrapper {
     padding: 17px 10px 0;
   }
 
-  /* line 150, ../sass/layout.scss */
+  /* line 153, ../sass/layout.scss */
   .options-wrapper {
     margin-top: 0;
     font-size: 10px;
     padding: 20px 0 0;
   }
 
-  /* line 155, ../sass/layout.scss */
+  /* line 158, ../sass/layout.scss */
   [name="input"] {
     font-size: 10px;
     margin-top: 0;

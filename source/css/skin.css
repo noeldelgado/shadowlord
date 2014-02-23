@@ -60,7 +60,12 @@ header {
   text-align: center;
 }
 
-/* line 52, ../sass/skin.scss */
+/* line 50, ../sass/skin.scss */
+.preview {
+  cursor: pointer;
+}
+
+/* line 53, ../sass/skin.scss */
 .preview__color {
   border-color: rgba(243, 243, 243, 0.75);
   -webkit-border-radius: 50%;
@@ -72,45 +77,45 @@ header {
   transition: background-color 400ms ease;
 }
 
-/* line 58, ../sass/skin.scss */
+/* line 59, ../sass/skin.scss */
 [name="input"] {
   text-transform: uppercase;
 }
 
-/* line 61, ../sass/skin.scss */
+/* line 62, ../sass/skin.scss */
 .options-wrapper {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
 }
 
-/* line 65, ../sass/skin.scss */
+/* line 66, ../sass/skin.scss */
 .main-container {
   background-color: rgba(243, 243, 243, 0.2);
 }
 
-/* line 69, ../sass/skin.scss */
+/* line 70, ../sass/skin.scss */
 footer {
   text-align: right;
   color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
-/* line 74, ../sass/skin.scss */
+/* line 75, ../sass/skin.scss */
 footer a {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
 }
-/* line 77, ../sass/skin.scss */
+/* line 78, ../sass/skin.scss */
 footer a:hover {
   color: #fff;
 }
 
-/* line 83, ../sass/skin.scss */
+/* line 84, ../sass/skin.scss */
 .label {
   text-transform: uppercase;
 }
 
-/* line 87, ../sass/skin.scss */
+/* line 88, ../sass/skin.scss */
 input[type="text"] {
   outline: none;
   background-color: rgba(59, 74, 76, 0.2);
@@ -121,20 +126,20 @@ input[type="text"] {
   -ms-border-radius: 15px;
   border-radius: 15px;
 }
-/* line 94, ../sass/skin.scss */
+/* line 95, ../sass/skin.scss */
 input[type="text"].error {
   background-color: rgba(255, 31, 64, 0.5);
 }
 
 @media all and (max-width: 480px) {
-  /* line 100, ../sass/skin.scss */
+  /* line 101, ../sass/skin.scss */
   .app-container__inner {
     -webkit-border-radius: 0;
     -ms-border-radius: 0;
     border-radius: 0;
   }
 
-  /* line 103, ../sass/skin.scss */
+  /* line 104, ../sass/skin.scss */
   .header__left {
     background: #303C3E;
   }

@@ -80,8 +80,6 @@ header {
     padding: 10px 20px;
 }
 [name="input"] {
-    // font-size: 24px;
-    // height: 50px;
     width: 130px;
     width: 100px;
     padding: 5px 10px;
@@ -119,6 +117,11 @@ footer {
 
 input[type="text"] {
     border-width: 1px;
+}
+
+[type="color"] {
+    visibility: hidden;
+    position: absolute;
 }
 
 @media all and(max-width: 480px) {

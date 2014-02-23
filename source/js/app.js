@@ -8,6 +8,7 @@ Class(UI, 'App').inherits(Widget)({
 
         init : function init() {
             this.ui = {
+                colorPicker     : document.querySelector('[type="color"]'),
                 preview         : document.querySelector('.preview__color'),
                 checkboxes      : document.querySelectorAll('[type="checkbox"]'),
                 input           : document.querySelector('[name="input"]'),
@@ -28,6 +29,7 @@ Class(UI, 'App').inherits(Widget)({
             this.checkboxUpdated(this.ui.checkboxes[1]);
 
             var color = (this._isValidColorModel(this.hash)) ? this.hash : this.generateRandomColor();
+
             this.printValues(color);
 
             this.bindings();
@@ -39,19 +41,17 @@ Class(UI, 'App').inherits(Widget)({
         },
 
         bindings : function bindings() {
-            var checkboxesLength = this.ui.checkboxes.length,
-                i = 0;
-
-            for (; i < checkboxesLength; i++) {
-                this.ui.checkboxes[i].addEventListener('change', this.checkboxUpdated.bind(this, this.ui.checkboxes[i]), false);
-            }
-
             window.addEventListener('hashchange', this.checkHash.bind(this), false);
+            this.ui.preview.addEventListener("click", this.showColorPicker.bind(this), false);
+            this.ui.colorPicker.addEventListener("change", this.colorPickerUpdated.bind(this), false);
             this.ui.input.addEventListener("keypress", this.checkInput.bind(this), false);
             this.ui.randomColorBtn.addEventListener('click', this.randomColor.bind(this), false);
             this.ui.creditsBtn.addEventListener("click", this.showModal.bind(this), false);
             this.ui.creditsModal.addEventListener("click", this.checkBeforeCloseModal.bind(this), false);
             this.ui.closeModal.addEventListener('click', this.closeModal.bind(this), false);
+            for (var i = 0, cbl = this.ui.checkboxes.length; i < cbl; i++) {
+                this.ui.checkboxes[i].addEventListener('change', this.checkboxUpdated.bind(this, this.ui.checkboxes[i]), false);
+            }
         },
 
         _isValidColorModel : function _isValidColorModel(color) {
@@ -63,40 +63,50 @@ Class(UI, 'App').inherits(Widget)({
         checkHash : function checkHash(e) {
             var new_color = window.location.hash;
             if (this.hash !== new_color) {
-                if (this._isValidColorModel(new_color)) {
+                if (this._isValidColorModel(new_color))
                     this.printValues(new_color);
-                }
             }
             new_color = null;
         },
 
+        showColorPicker : function showColorPicker() {
+            this.ui.colorPicker.click();
+        },
+
+        colorPickerUpdated : function colorPickerUpdated() {
+            this.printValues(this.ui.colorPicker.value);
+        },
+
         checkInput : function checkInput(event) {
-            var new_color = this.ui.input.value;
             if (event.charCode === 13) {
+                var new_color = this.ui.input.value;
                 if (this._isValidColorModel(new_color)) {
                     this.printValues(new_color);
                     this.ui.input.classList.remove('error');
-                } else {
-                    this.ui.input.classList.add('error');
-                }
+                } else this.ui.input.classList.add('error');
+                new_color = null;
             }
-            new_color = null;
         },
+
         showModal : function showModal(event) {
             event.preventDefault();
             this.ui.creditsModal.classList.add('active');
         },
+
         closeModal : function closeModal() {
             this.ui.creditsModal.classList.remove('active');
         },
+
         checkBeforeCloseModal : function checkBeforeCloseModal(event) {
             if (event.target.classList.contains('modal__wrapper')) {
                 this.closeModal();
             }
         },
+
         randomColor : function randomColor(event) {
             this.printValues(this.generateRandomColor());
         },
+
         checkboxUpdated : function checkboxUpdated(element, event) {
             var classname = 'show--' + element.id;
             this.colors.element.classList[element.checked ? 'add' : 'remove'](classname);
@@ -133,13 +143,15 @@ Class(UI, 'App').inherits(Widget)({
             });
 
             this.colors.element.scrollTop = 0;
-            this.colors.element.scrollTop = (original.getBoundingClientRect().top - 225);
+            if (original !== undefined)
+                this.colors.element.scrollTop = (original.getBoundingClientRect().top - 225);
             values = original = null;
             return this;
         },
 
         updateUI : function updateUI() {
             this.ui.preview.style.backgroundColor = this.current_color;
+            this.ui.colorPicker.value = this.current_color;
             this.ui.input.value = this.current_color;
         },
 

@@ -48,6 +48,7 @@ header {
     text-align: center;
 }
 .preview {
+    cursor: pointer;
 }
 .preview__color {
     border-color: transparentize($light-color, 0.25);
