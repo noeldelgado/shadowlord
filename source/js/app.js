@@ -30,6 +30,7 @@ Class(UI, 'App').inherits(Widget)({
 
             var color = (this._isValidColorModel(this.hash)) ? this.hash : this.generateRandomColor();
 
+            this.values = new Values(color).setStep(this.step);
             this.printValues(color);
 
             this.bindings();
@@ -117,7 +118,7 @@ Class(UI, 'App').inherits(Widget)({
             var _this   = this,
                 original;
 
-            this.values = new Values(color).setStep(this.step);
+            this.values.setColor(color);
             this.current_color = this.values.hex;
 
             this.updateHash(this.values.hex.toUpperCase());
