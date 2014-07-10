@@ -1,14 +1,11 @@
-@import "compass";
+@import "mixins";
 
 .item {
-    @include translate3d(0,0,0);
+    transform: translate3d(0,0,0);
     display: table;
     float: left;
     width: 20%;
     height: 100px;
-    // &:last-child {
-    //     display: none;
-    // }
 }
 .item__inner {
     display: table-cell;

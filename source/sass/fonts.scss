@@ -1,6 +1,12 @@
-@import "compass";
+@import "mixins";
 
-@include font-face("Entypo", font-files("entypo/entypo.ttf", "entypo/entypo.otf"));
+@font-face {
+    font-family: "Entypo"; font-style: normal; font-weight: normal;
+          src: url('../../assets/fonts/entypo/entypo.eot');
+          src: url('../../assets/fonts/entypo/entypo.eot?') format('eot'),
+               url('../../assets/fonts/entypo/entypo.woff') format('woff'),
+               url('../../assets/fonts/entypo/entypo.ttf')  format('truetype');
+}
 @import url(//fonts.googleapis.com/css?family=Exo:100,300,400,500,700,800,900);
 
 .header__right .btn,

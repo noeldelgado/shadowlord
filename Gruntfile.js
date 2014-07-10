@@ -1,42 +1,46 @@
 module.exports = function(grunt) {
+
+    require('load-grunt-tasks')(grunt, {scope: 'devDependencies'});
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        compass : {
-            dev : {
-                options : {
-                    httpPath    : '',
-                    importPath  : 'source/sass/',
-                    sassDir     : 'source/sass/',
-                    cssDir      : 'source/css/',
-                    imagesDir   : 'assets/images/',
-                    fontsDir    : 'assets/fonts/',
-                    outputStyle : 'expanded',
-                    relativeAssets: true
-                }
+
+        sass: {
+            dev: {
+                files: [{
+                    expand: true,
+                    cwd: 'source/sass',
+                    src: ['*.scss'],
+                    dest: 'source/css',
+                    ext: '.css'
+                }]
             }
         },
 
+        autoprefixer: {
+            options: {
+            },
+            dev: {
+                expand: true,
+                flatten: true,
+                src: 'source/css/**/*.css',
+                dest: 'source/css/'
+            },
+        },
+
         watch : {
+            options : {livereload : 9000},
             doc: {
                 files: ['source/index.html'],
-                tasks: [],
-                options: {
-                    livereload: true
-                }
+                tasks: []
             },
             css: {
                 files: ['source/sass/**/*.scss'],
-                tasks: ['compass'],
-                options: {
-                    livereload: true
-                }
+                tasks: ['sass', 'autoprefixer']
             },
             js: {
                 files: 'source/js/**/*.js',
-                tasks: [],
-                options: {
-                    livereload: true
-                }
+                tasks: []
             }
         },
 
@@ -70,7 +74,7 @@ module.exports = function(grunt) {
                 src: ['index.html'],
                 overwrite: true,
                 replacements: [{
-                    from: /<link ((?:[-a-z]+="[^"]*"\s*)+)\/>/g,
+                    from: /<link ((?:[-a-z]+="[^"]*"\s*)+)\/?>/g,
                     to  : '<link rel="stylesheet" href="dist/css/styles.css" media="all"/>'
                 }]
             },
@@ -84,8 +88,6 @@ module.exports = function(grunt) {
             }
         }
     });
-
-    require('load-grunt-tasks')(grunt, {scope: 'devDependencies'});
 
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('dist', ['copy', 'useminPrepare', 'concat', 'cssmin', 'uglify', 'usemin', 'replace']);

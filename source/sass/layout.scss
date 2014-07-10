@@ -1,29 +1,25 @@
-@import "compass";
+@import "mixins";
 
-* {@include box-sizing(border-box)}
-@mixin clear() {
-    &:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0}
-}
+* {box-sizing: border-box}
 
 html,
 body {
     width: 100%;
     height: 100%;
-    display: table;
     overflow: hidden;
 }
 
+body {
+    padding: 1.5em 1.5em 2.5em 1.5em;
+}
+
 .app-container {
-    display: table-cell;
-    vertical-align: middle;
+    height: 100%;
 }
 
 .app-container__inner {
     position: relative;
-    width: 95%;
-    height: 90%;
-    margin: 0 auto;
-    overflow: hidden;
+    height: 100%;
 }
 
 header {
@@ -98,7 +94,7 @@ header {
     left: 0;
     right: 0;
     bottom: 0;
-    @include translate3d(0,0,0);
+    transform: translate3d(0,0,0);
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
     overflow-y: auto;

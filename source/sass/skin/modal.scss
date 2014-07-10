@@ -1,4 +1,4 @@
-@import "compass", "vars";
+@import "mixins", "vars";
 
 .modal {
     visibility: hidden;
@@ -6,9 +6,7 @@
     background-color: transparentize($dark-color, .5);
     color: $dark-color;
 
-    @include transition(
-        visibility 250ms ease,
-        opacity 250ms ease
+    transition: visibility 250ms ease, opacity 250ms ease
     );
 
     .modal__close {
@@ -20,18 +18,18 @@
         }
     }
     .modal__inner {
-        @include transition(transform 200ms ease);
-        @include transform(scale(.5));
+        transition: transform 200ms ease;
+        transform: scale(.5);
         background-color: transparentize(lighten($light-color, 10), .05);
-        @include border-radius(3px);
-        @include box-shadow(0 0 30px 5px rgba(0, 0, 0, 0.15));
+        border-radius: 3px;
+        box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.15);
     }
 
     &.active {
         visibility: visible;
         opacity: 1;
         .modal__inner {
-            @include transform(scale(1));
+            transform: scale(1);
         }
     }
 
@@ -39,7 +37,7 @@
         span {
             background-color: transparentize($dark-color, .95);
             color: transparentize($dark-color, .4);
-            @include border-radius(3px);
+            border-radius: 3px;
         }
     }
 }

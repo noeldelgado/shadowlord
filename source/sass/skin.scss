@@ -1,4 +1,4 @@
-@import "compass", "vars";
+@import "mixins", "vars";
 
 body {
     background-color: $dark-color;
@@ -23,16 +23,16 @@ body {
  }
 
 .app-container__inner {
-    @include box-shadow(0 0 30px 10px rgba(0, 0, 0, 0.15));
-    @include border-radius(5px);
+    box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
 }
 
 header {
     background-color: transparentize($light-color, 0.8);
-    @include box-shadow(
+    box-shadow:
         inset 0 1px 0 transparentize($light-color, 0.75),
-        inset 0 0 0 4px transparentize($light-color, 0.95)
-    );
+        inset 0 0 0 4px transparentize($light-color, 0.95);
+    border-radius: 4px 4px 0 0;
 }
 .header__right {
     text-align: right;
@@ -46,15 +46,16 @@ header {
     background-color: darken($dark-color, 5);
     color: $light-color;
     text-align: center;
+    border-radius: 4px 0 0 0;
 }
 .preview {
     cursor: pointer;
 }
 .preview__color {
     border-color: transparentize($light-color, 0.25);
-    @include border-radius(50%);
-    @include box-shadow(inset 0 2px 2px rgba(0, 0, 0, 0.25));
-    @include transition(background-color 400ms ease);
+    border-radius: 50%;
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.25);
+    transition: background-color 400ms ease;
 }
 [name="input"] {
     text-transform: uppercase;
@@ -91,7 +92,7 @@ input[type="text"] {
     color: $light-color;
     border-style: none;
     border-color: transparentize($light-color, 0.6);
-    @include border-radius(15px);
+    border-radius: 15px;
     &.error {
         background-color: rgba(255, 31, 64, .5);
     }
@@ -99,7 +100,7 @@ input[type="text"] {
 
 @media all and(max-width: 480px) {
     .app-container__inner {
-        @include border-radius(0);
+        border-radius: 0;
     }
     .header__left {
         background: #303C3E;

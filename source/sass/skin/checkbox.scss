@@ -1,4 +1,4 @@
-@import "compass", "vars";
+@import "mixins", "vars";
 
 .checkbox-wrapper {
     cursor: pointer;
@@ -14,13 +14,13 @@
     span {
         cursor: pointer;
         background-color: transparentize($dark-color, 0.8);
-        @include border-radius(8px);
-        @include transition(background-color 250ms ease);
+        border-radius: 8px;
+        transition: background-color 250ms ease;
         &:after {
             content: "\2713";
             opacity: 0;
-            @include transform(scale(0));
-            @include transition(transform 250ms ease, opacity 250ms ease);
+            transform: scale(0);
+            transition: transform 250ms ease, opacity 250ms ease;
         }
     }
     &:hover {
@@ -32,9 +32,9 @@
         background-color: transparentize($dark-color, 0.6);
         &:after {
             opacity: 1;
-            @include transform(scale(1));
+            transform: scale(1);
         }
-        + label {
+        & + label {
             opacity: 1;
         }
     }

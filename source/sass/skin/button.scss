@@ -1,8 +1,8 @@
-@import "compass", "vars";
+@import "mixins", "vars";
 
 .btn {
     outline: none;
-    @include transition(color 250ms ease);
+    transition: color 250ms ease;
     &.dark {
         background-color: transparentize($dark-color, 0.5);
         color: $light-color;
@@ -10,7 +10,7 @@
         &:active {
             background-color: darken($light-color, 5);
             color: darken($light-color, 20);
-            @include box-shadow(inset 0 2px 2px rgba(0, 0, 0, 0.25));
+            box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.25);
         }
     }
     &.light {

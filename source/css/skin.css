@@ -1,146 +1,94 @@
-/* line 3, ../sass/skin.scss */
 body {
   background-color: #3b4a4c;
-  background-image: url('../../assets/images/lightining.jpg?1388551623');
-  background-size: cover;
+  background-image: url(../../assets/images/lightining.jpg);
+  -webkit-background-size: cover cover;
+          background-size: cover;
   background-position: 50%;
-  color: #f3f3f3;
-}
+  color: #f3f3f3; }
 
-/* line 11, ../sass/skin.scss */
 .scroll::-webkit-scrollbar {
-  width: 8px;
-}
+  width: 8px; }
 
-/* line 14, ../sass/skin.scss */
 .scroll::-webkit-scrollbar-thumb {
-  background-color: #3b4a4c;
-}
+  background-color: #3b4a4c; }
 
-/* line 18, ../sass/skin.scss */
 a {
-  color: #09f;
-}
-/* line 20, ../sass/skin.scss */
-a:hover {
-  color: #33adff;
-}
+  color: #09f; }
+  a:hover {
+    color: #33adff; }
 
-/* line 25, ../sass/skin.scss */
 .app-container__inner {
   -webkit-box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.15);
-  box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.15);
-  -webkit-border-radius: 5px;
-  -ms-border-radius: 5px;
-  border-radius: 5px;
-}
+          box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 5px; }
 
-/* line 30, ../sass/skin.scss */
 header {
   background-color: rgba(243, 243, 243, 0.2);
   -webkit-box-shadow: inset 0 1px 0 rgba(243, 243, 243, 0.25), inset 0 0 0 4px rgba(243, 243, 243, 0.05);
-  box-shadow: inset 0 1px 0 rgba(243, 243, 243, 0.25), inset 0 0 0 4px rgba(243, 243, 243, 0.05);
-}
+          box-shadow: inset 0 1px 0 rgba(243, 243, 243, 0.25), inset 0 0 0 4px rgba(243, 243, 243, 0.05);
+  border-radius: 4px 4px 0 0; }
 
-/* line 37, ../sass/skin.scss */
 .header__right {
-  text-align: right;
-}
-/* line 39, ../sass/skin.scss */
-.header__right .btn {
-  width: 60px;
-  height: 60px;
-  margin-left: 10px;
-}
+  text-align: right; }
+  .header__right .btn {
+    width: 60px;
+    height: 60px;
+    margin-left: 10px; }
 
-/* line 45, ../sass/skin.scss */
 .logo {
   background-color: #303c3e;
   color: #f3f3f3;
   text-align: center;
-}
+  border-radius: 4px 0 0 0; }
 
-/* line 50, ../sass/skin.scss */
 .preview {
-  cursor: pointer;
-}
+  cursor: pointer; }
 
-/* line 53, ../sass/skin.scss */
 .preview__color {
   border-color: rgba(243, 243, 243, 0.75);
-  -webkit-border-radius: 50%;
-  -ms-border-radius: 50%;
   border-radius: 50%;
   -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.25);
   -webkit-transition: background-color 400ms ease;
-  transition: background-color 400ms ease;
-}
+          transition: background-color 400ms ease; }
 
-/* line 59, ../sass/skin.scss */
 [name="input"] {
-  text-transform: uppercase;
-}
+  text-transform: uppercase; }
 
-/* line 62, ../sass/skin.scss */
 .options-wrapper {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  text-transform: uppercase;
-}
+  text-transform: uppercase; }
 
-/* line 66, ../sass/skin.scss */
 .main-container {
-  background-color: rgba(243, 243, 243, 0.2);
-}
+  background-color: rgba(243, 243, 243, 0.2); }
 
-/* line 70, ../sass/skin.scss */
 footer {
   text-align: right;
   color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-}
-/* line 75, ../sass/skin.scss */
-footer a {
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.8);
-}
-/* line 78, ../sass/skin.scss */
-footer a:hover {
-  color: #fff;
-}
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); }
+  footer a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8); }
+    footer a:hover {
+      color: #fff; }
 
-/* line 84, ../sass/skin.scss */
 .label {
-  text-transform: uppercase;
-}
+  text-transform: uppercase; }
 
-/* line 88, ../sass/skin.scss */
 input[type="text"] {
   outline: none;
   background-color: rgba(59, 74, 76, 0.2);
   color: #f3f3f3;
   border-style: none;
   border-color: rgba(243, 243, 243, 0.4);
-  -webkit-border-radius: 15px;
-  -ms-border-radius: 15px;
-  border-radius: 15px;
-}
-/* line 95, ../sass/skin.scss */
-input[type="text"].error {
-  background-color: rgba(255, 31, 64, 0.5);
-}
+  border-radius: 15px; }
+  input[type="text"].error {
+    background-color: rgba(255, 31, 64, 0.5); }
 
 @media all and (max-width: 480px) {
-  /* line 101, ../sass/skin.scss */
   .app-container__inner {
-    -webkit-border-radius: 0;
-    -ms-border-radius: 0;
-    border-radius: 0;
-  }
+    border-radius: 0; }
 
-  /* line 104, ../sass/skin.scss */
   .header__left {
-    background: #303C3E;
-  }
-}
+    background: #303C3E; } }

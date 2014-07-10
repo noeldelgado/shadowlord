@@ -1,0 +1,48 @@
+/* line 3, ../../sass/skin/modal.scss */
+.modal {
+  visibility: hidden;
+  opacity: 0;
+  background-color: rgba(59, 74, 76, 0.5);
+  color: #3b4a4c;
+  -webkit-transition: visibility 250ms ease, opacity 250ms ease;
+  transition: visibility 250ms ease, opacity 250ms ease;
+}
+/* line 14, ../../sass/skin/modal.scss */
+.modal .modal__close {
+  background-color: transparent;
+  color: #ff1f3f;
+  opacity: .5;
+}
+/* line 18, ../../sass/skin/modal.scss */
+.modal .modal__close:hover {
+  opacity: .8;
+}
+/* line 22, ../../sass/skin/modal.scss */
+.modal .modal__inner {
+  -webkit-transition: -webkit-transform 200ms ease;
+  transition: transform 200ms ease;
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.15);
+}
+/* line 30, ../../sass/skin/modal.scss */
+.modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+/* line 33, ../../sass/skin/modal.scss */
+.modal.active .modal__inner {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+/* line 39, ../../sass/skin/modal.scss */
+.modal.credits span {
+  background-color: rgba(59, 74, 76, 0.05);
+  color: rgba(59, 74, 76, 0.6);
+  border-radius: 3px;
+}
