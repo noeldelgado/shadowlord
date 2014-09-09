@@ -1,7 +1,0 @@
-@mixin clear() {
-  &:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0}
-}
-
-@function image-url($content) {
-    @return url(../../assets/images/#{$content});
-}

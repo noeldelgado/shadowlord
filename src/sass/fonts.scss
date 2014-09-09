@@ -1,0 +1,53 @@
+@font-face {
+    font-family: "Entypo";
+    font-style: normal;
+    font-weight: normal;
+    src: url('../../assets/fonts/entypo/entypo.eot');
+    src: url('../../assets/fonts/entypo/entypo.eot?') format('eot'),
+      url('../../assets/fonts/entypo/entypo.woff') format('woff'),
+      url('../../assets/fonts/entypo/entypo.ttf')  format('truetype');
+}
+
+@import url(//fonts.googleapis.com/css?family=Exo:100,300,400,500,700,800,900);
+
+.entypo,
+.header__right .btn,
+.checkbox-wrapper span:after,
+.modal__close {
+  font-family: 'Entypo', sans-serif;
+}
+
+.logo,
+.input-wrapper input,
+.options-wrapper,
+.item__inner,
+footer,
+.modal {
+  font-family: 'Exo', sans-serif;
+}
+
+.logo__inner span {
+  font-weight: 100;
+}
+
+.item__inner {
+  .original & {
+    font-weight: 600;
+  }
+}
+
+.input-wrapper input {
+  font-weight: bold;
+}
+
+.checkbox-wrapper label {
+  font-weight: 100;
+}
+
+footer {
+  font-weight: 300;
+}
+
+.logo {
+  font-weight: 700;
+}

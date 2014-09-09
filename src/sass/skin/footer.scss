@@ -1,0 +1,19 @@
+footer {
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+
+  a {
+    text-decoration: none;
+    background-color: #000;
+    color: #fff;
+    border-radius: 3px;
+    opacity: .8;
+    transition: opacity 250ms;
+
+    &:hover {
+      color: #fff;
+      opacity: 1;
+    }
+  }
+}
+

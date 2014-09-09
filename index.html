@@ -7,81 +7,53 @@
     <meta name="description" content="A tints and shades generator tool that allows you get lighter and darker variations of any colors. (HEX, RGBA and HSLA color values).">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <link rel="stylesheet" href="dist/css/styles.css" media="all"/>
+    <link rel="stylesheet" href="dist/css/app.css" media="all"/>
   </head>
   <body>
 
-    
+    <input type="color" value="#17b159">
 
-<input type="color" value="#17b159">
-
-    <div class="app-container">
-      <div class="app-container__inner">
-        <header>
-          <div class="header__left">
-            <div class="logo">
-              <div class="logo__inner">Sl</div>
-            </div>
-            <div class="preview">
-              <div class="preview__color"></div>
-            </div>
-            <div class="input-wrapper">
-              <input type="text" name="input" value="#0099cc">
-            </div>
-            <div class="options-wrapper">
-              <div class="checkbox-wrapper">
-                <input type="checkbox" id="hex">
-                <span></span>
-                <label for="hex">Hex</label>
-              </div>
-              <div class="checkbox-wrapper">
-                <input type="checkbox" id="rgb">
-                <span></span>
-                <label for="rgb">RGBA</label>
-              </div>
-              <div class="checkbox-wrapper">
-                <input type="checkbox" id="hsl">
-                <span></span>
-                <label for="hsl">HSLA</label>
-              </div>
-            </div>
-          </div>
-          <div class="header__right">
-            <button class="btn light random-color-btn">&#128256;</button>
-          </div>
-        </header>
-
-        <div class="main-container scroll" role="main-content">
+    <header>
+      <div class="header__left">
+        <div class="logo">
+          <div class="logo__inner">Sl</div>
         </div>
-
-      </div>
-
-      <footer>
-        <a href="#" class="credits-btn">Info</a>
-      </footer>
-
-    </div>
-
-    <div class="modal credits">
-      <div class="modal__wrapper">
-        <div class="modal__inner">
-          <button class="btn modal__close">&#10062;</button>
-          <section>
-            <h3>About</h3>
-            <p>Tints and shades generator made by Noel Delgado <a href="http://twitter.com/pixelia_me" target="_blank">@pixelia_me</a>.</p>
-          </section>
-          <section>
-            <h3>Credits</h3>
-            <p>Neon.js by Fernando Trasvi&ntilde;a – <span>https://github.com/azendal/neon</span></p>
-            <p>Entypo pictograms by Daniel Bruce – <span>www.entypo.com</span></p>
-            <p>Background Image by Cat Noone – <span>http://dribbble.com/imcatnoone</span></p>
-            <p>Values.js – <span>https://github.com/noeldegado/values.js</span></p>
-          </section>
+        <div class="preview">
+          <div class="preview__color"></div>
+        </div>
+        <div class="input-wrapper">
+          <input type="text" name="input" value="#0099cc">
+        </div>
+        <div class="options-wrapper">
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="hex">
+            <span></span>
+            <label for="hex">Hex</label>
+          </div>
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="rgb">
+            <span></span>
+            <label for="rgb">RGBA</label>
+          </div>
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="hsl">
+            <span></span>
+            <label for="hsl">HSLA</label>
+          </div>
         </div>
       </div>
+      <div class="header__right">
+        <button class="btn light random-color-btn">&#128256;</button>
+      </div>
+    </header>
+
+    <div class="main-container scroll" role="main-content">
     </div>
+
+    <footer>
+      <a href="#" class="credits-btn">Info</a>
+    </footer>
 
     <script src="dist/js/app.js"></script>
-    <script>Shadowlord = new UI.App();</script>
   </body>
 </html>
