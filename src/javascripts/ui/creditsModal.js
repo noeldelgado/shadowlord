@@ -3,7 +3,7 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
         <div class="modal credits">\
           <div class="modal__wrapper">\
             <div class="modal__inner">\
-              <button class="btn modal__close">&#10062;</button>\
+              <button class="btn borderless modal__close">&#10062;</button>\
               <section>\
                 <h3>About</h3>\
                 <p>\

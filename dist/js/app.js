@@ -10308,6 +10308,7 @@ Class(Sl.UI, 'Color').inherits(Widget)({
         /**
          * Change the background-color of the element.
          * @property setBackgroundColor <public> [Function]
+         * @argument color <required> [String]
          * @return Sl.UI.Color
          */
         setBackgroundColor : function setBackgroundColor(color) {
@@ -10319,6 +10320,7 @@ Class(Sl.UI, 'Color').inherits(Widget)({
         /**
          * Change the color of the element.
          * @property setColor <public> [Function]
+         * @argument color <required> [String]
          * @return Sl.UI.Color
          */
         setColor : function setColor(color) {
@@ -10360,7 +10362,7 @@ Class(Sl.UI, 'ColorsCollection').inherits(Widget)({
         /**
          * Store color instances in variables.
          * @property _storeInMemory <private> [Function]
-         * @argument number_items <require> [Number]
+         * @argument number_items <require> [Number] How many items to create.
          * @return Sl.UI.ColorsCollection
          */
         _storeInMemory : function _storeInMemory(number_items) {
@@ -10402,7 +10404,7 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
         <div class="modal credits">\
           <div class="modal__wrapper">\
             <div class="modal__inner">\
-              <button class="btn modal__close">&#10062;</button>\
+              <button class="btn borderless modal__close">&#10062;</button>\
               <section>\
                 <h3>About</h3>\
                 <p>\
@@ -10507,6 +10509,7 @@ Class(Sl.UI, 'Paragraph').inherits(Widget)({
         /**
          * Change the text of the element.
          * @property setText <public> [Function]
+         * @argument text <optional> [String]
          * @return Sl.UI.Paragraph
          */
         setText : function setText(text) {

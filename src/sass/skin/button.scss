@@ -4,6 +4,10 @@
   border-radius: 2px;
   transition: color 250ms ease, background-color 250ms ease;
 
+  &.borderless {
+    border-style: none;
+  }
+
   &.light {
     background-color: transparent;
     color: transparentize($dark-color, 0.3);

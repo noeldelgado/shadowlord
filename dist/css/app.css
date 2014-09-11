@@ -714,6 +714,9 @@ footer a:hover {
   -webkit-transition: color 250ms ease, background-color 250ms ease;
           transition: color 250ms ease, background-color 250ms ease;
 }
+.btn.borderless {
+  border-style: none;
+}
 .btn.light {
   background-color: transparent;
   color: rgba(59, 74, 76, 0.7);
