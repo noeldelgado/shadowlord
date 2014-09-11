@@ -5,11 +5,14 @@ header {
 }
 
 .header__right {
-    text-align: right;
-    .btn {
-        width: 60px;
-        height: 60px;
-        margin-left: 10px;
-    }
+  text-align: right;
+
+  .text {
+    text-transform: uppercase;
+  }
+}
+
+.preview__color {
+  border-style: solid;
 }
 

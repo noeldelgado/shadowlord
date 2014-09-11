@@ -3,7 +3,6 @@
 
   label {
     cursor: pointer;
-    opacity: .8;
   }
 
   input[type="checkbox"] {
@@ -12,9 +11,10 @@
     z-index: 1;
   }
 
-  span {
+  .checkbox-ui {
     cursor: pointer;
     background-color: transparentize($dark-color, 0.9);
+    color: transparentize($dark-color, 0.3);
     border-radius: 3px;
     transition: background-color 250ms ease;
 
@@ -26,20 +26,22 @@
     }
   }
 
+  .checkbox-label {
+    color: lighten($dark-color, 20);
+  }
+
   &:hover {
-    span {
+    .checkbox-ui {
       background-color: transparentize($dark-color, 0.8);
     }
   }
 
-  input[type="checkbox"]:checked + span {
+  input[type="checkbox"]:checked + .checkbox-ui {
     background-color: transparentize($dark-color, 0.8);
+
     &:after {
       opacity: 1;
       transform: scale(1);
-    }
-    & + label {
-      opacity: 1;
     }
   }
 }

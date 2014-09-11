@@ -1,20 +1,27 @@
-@import "mixins",
-        "vars",
-        "vendor/normalize",
-        "layout",
-        "skin",
-        "fonts",
-        "layout/header",
-        "skin/header",
-        "layout/footer",
-        "skin/footer",
-        "layout/button",
-        "skin/button",
-        "layout/checkbox",
-        "skin/checkbox",
-        "layout/items",
-        "skin/items",
-        "layout/modal",
-        "skin/modal";
+@import "vendor/normalize";
 
+@import "mixins";
+@import "vars";
 
+@import "layout";
+@import "skin";
+
+@import "fonts";
+
+@import "layout/header";
+@import "skin/header";
+
+@import "layout/footer";
+@import "skin/footer";
+
+@import "layout/button";
+@import "skin/button";
+
+@import "layout/checkbox";
+@import "skin/checkbox";
+
+@import "layout/items";
+@import "skin/items";
+
+@import "layout/modal";
+@import "skin/modal";

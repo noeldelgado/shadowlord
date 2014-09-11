@@ -1,5 +1,4 @@
 .item {
-  transform: translate3d(0,0,0);
   display: table;
   float: left;
   width: 20%;
@@ -22,9 +21,12 @@
   opacity: 0;
 }
 
-.show--hex .hex--label {font-size: .7em; opacity: 1}
-.show--rgb .rgb--label {font-size: .7em; opacity: 1}
-.show--hsl .hsl--label {font-size: .7em; opacity: 1}
+.show--hex .hex--label,
+.show--rgb .rgb--label,
+.show--hsl .hsl--label {
+  font-size: .7em;
+  opacity: 1;
+}
 
 @media all and(max-width: 768px) {
   .item {

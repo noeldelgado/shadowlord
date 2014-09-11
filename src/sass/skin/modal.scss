@@ -3,7 +3,6 @@
   visibility: hidden;
   opacity: 0;
   background-color: transparentize(#000, .5);
-  color: $dark-color;
   transition: visibility 250ms ease, opacity 250ms ease;
 
   .modal__close {

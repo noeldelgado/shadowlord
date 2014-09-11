@@ -2,60 +2,6 @@
   box-sizing: border-box;
 }
 
-.logo,
-.preview,
-.input-wrapper,
-.options-wrapper {
-  float: left;
-}
-
-.logo,
-.preview {
-  width: 80px;
-  height: 80px;
-}
-
-.logo {
-  display: table;
-}
-
-.logo__inner {
-  display: table-cell;
-  vertical-align: middle;
-  font-size: 24px;
-}
-
-.preview {
-  padding: 29px 0;
-  width: auto;
-}
-
-.preview__color {
-  height: 100%;
-  padding: 10px;
-  border-width: 1px;
-  border-style: solid;
-}
-
-.input-wrapper,
-.options-wrapper {
-  padding: 10px 20px;
-}
-
-[name="input"] {
-  width: 130px;
-  width: 100px;
-  padding: 5px 10px 3px;
-  margin-top: 15px;
-}
-
-.options-wrapper {
-  margin-top: 20px;
-  label {
-    margin-right: 10px;
-  }
-}
-
 .main-container {
   @include clear;
   padding: 80px 0 0 0;

@@ -10097,7 +10097,9 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
 });
 /* values.js -v 0.1.3 - http://noeldelgado.github.io/Values.js/ - Licensed under the MIT lincese */ 
 !function(){"use strict";var a=function(a){this.hex="#000000",this.rgb="rgb(0, 0, 0)",this.rgba="rgba(0, 0, 0, 0)",this.hsl="hsl(0, 0%, 0%)",this.hsla="hsla(0, 0%, 0%, 0)",this.brightness=0,this.step=1,this.tints=[],this.shades=[],this.all=[],this._rgb={r:0,g:0,b:0},this._rgba={r:0,g:0,b:0,a:0},this._hsl={h:0,s:0,l:0},this._hsla={h:0,s:0,l:0,a:0},"string"==typeof a&&this.setColor(a)};a.Utils={isHEX:function(a){return/^(#)?([0-9a-fA-F]{3})([0-9a-fA-F]{3})?$/.test(a)},isRGB:function(a){return/^\s*rgba?\s*\((\d+)\,\s*(\d+)\,\s*(\d+)(,\s*(\d+(\.\d+)?))?\)\s*$/.test(a)},RGBA:function(a,c){var d=b(a);return"rgba("+d.r+", "+d.g+", "+d.b+", "+c+")"}};var b=function(a){var b,c,d;return a=a.replace("#",""),6===a.length?(b=parseInt(a.slice(0,2),16),c=parseInt(a.slice(2,4),16),d=parseInt(a.slice(4,6),16)):(b=parseInt(a.slice(0,1)+a.slice(0,1),16),c=parseInt(a.slice(1,2)+a.slice(1,2),16),d=parseInt(a.slice(2,3)+a.slice(2,3),16)),{r:b,g:c,b:d}},c=function(a,b,c){return a=parseInt(a).toString(16),b=parseInt(b).toString(16),c=parseInt(c).toString(16),a=1===a.length?"0"+a:a,b=1===b.length?"0"+b:b,c=1===c.length?"0"+c:c,"#"+a+b+c},d=function(a,b,c){var d,e,a=a/255,b=b/255,c=c/255,f=Math.max(a,b,c),g=Math.min(a,b,c),h=(f+g)/2;if(f===g)d=e=0;else{var i=f-g;switch(e=h>.5?i/(2-f-g):i/(f+g),f){case a:d=(b-c)/i+(c>b?6:0);break;case b:d=(c-a)/i+2;break;case c:d=(a-b)/i+4}d/=6}return{h:d,s:e,l:h}},e=function(a,b,c){return 0>c&&(c+=1),c>1&&(c-=1),1>6*c?a+6*(b-a)*c:1>2*c?b:2>3*c?a+(b-a)*(2/3-c)*6:a},f=function(a,b,c){var d,f,g;if(0==b)d=f=g=c;else{var h=.5>c?c*(1+b):c+b-c*b,i=2*c-h;d=e(i,h,a+1/3),f=e(i,h,a),g=e(i,h,a-1/3)}return{r:255*d,g:255*f,b:255*g}},g=function(a){var b=a.r+a.g+a.b;return Math.round(b/765*100)},h=function(a,b,d,e,f){var h=Math.round(b.r),i=Math.round(b.g),j=Math.round(b.b);return a._rgb={r:h,g:i,b:j},a._hsl={h:d,s:e,l:f},a.hex=c(h,i,j),a._rgba=a._rgb.a=1,a._hsla=a._hsl.a=1,a.rgb="rgb("+h+", "+i+", "+j+")",a.rgba="rgba("+h+", "+i+", "+j+", 1)",a.hsl="hsl("+d+", "+e+"%, "+f+"%)",a.hsla="hsla("+d+", "+e+"%, "+f+"%, 1)",a.brightness=g(a._rgb),a};a.prototype.setColor=function(e){var f,g,i,j,k,l;if(a.Utils.isHEX(e)&&(/^#/.test(e)||(e="#"+e),f=e),a.Utils.isRGB(e)){var m=e.replace(/[^\d,]/g,"").split(",");f=c(m[0],m[1],m[2])}return g=b(f),i=d(g.r,g.g,g.b),j=Math.round(360*i.h),k=Math.round(100*i.s),l=Math.round(100*i.l),h(this,g,j,k,l),this.step=1,this.__updateValues(),this},a.prototype.setStep=function(a){return this.step=a,this.__updateValues(),this},a.prototype.getTints=function(a){var b=this.tints;return a&&(b=b.concat(this.__getCurrent())),b},a.prototype.getShades=function(a){var b=this.shades;return a&&(b=[this.__getCurrent()].concat(b)),b},a.prototype.getAll=function(){return this.all},a.prototype.lightness=function i(a){if("number"==typeof a){var b=this._hsl.h,c=this._hsl.s,d=this._hsl.l,e=d+a;0>e&&(i=0),e>100&&(i=100);var g=f(b/360,c/100,e/100),j=h({},g,b,c,e);return j}console.error("lightness expects a number")},a.prototype.__updateValues=function(){this.tints=this.__getTints(),this.shades=this.__getShades(),this.all=this.tints.concat(this.__getCurrent(),this.shades)},a.prototype.__getCurrent=function(){return h({},this._rgb,this._hsl.h,this._hsl.s,this._hsl.l)},a.prototype.__getTints=function(){for(var a=this._hsl.h,b=this._hsl.s,c=this._hsl.l,d=100,e=[];d>parseInt(c,10);){var g=f(a/360,b/100,d/100);e[e.length]=h({},g,a,b,d),d-=this.step}return e},a.prototype.__getShades=function(){for(var a=this._hsl.h,b=this._hsl.s,c=this._hsl.l,d=0,e=[];d<parseInt(c,10);){var g=f(a/360,b/100,d/100);e[e.length]=h({},g,a,b,d),d+=this.step}return e.reverse()},"undefined"!=typeof module&&"undefined"!=typeof module.exports?module.exports=a:window.Values=a}();
-window.UI = {};
+window.Sl = {};
+Sl.UI = {};
+
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 if (!Function.prototype.bind) {
@@ -10123,54 +10125,270 @@ if (!Function.prototype.bind) {
     return fBound;
   };
 }
+// https://github.com/remy/polyfills/blob/master/classList.js
+(function () {
 
+if (typeof window.Element === "undefined" || "classList" in document.documentElement) return;
 
-Class(UI, 'Color').inherits(Widget)({
+var prototype = Array.prototype,
+    push = prototype.push,
+    splice = prototype.splice,
+    join = prototype.join;
+
+function DOMTokenList(el) {
+  this.el = el;
+  // The className needs to be trimmed and split on whitespace
+  // to retrieve a list of classes.
+  var classes = el.className.replace(/^\s+|\s+$/g,'').split(/\s+/);
+  for (var i = 0; i < classes.length; i++) {
+    push.call(this, classes[i]);
+  }
+};
+
+DOMTokenList.prototype = {
+  add: function(token) {
+    if(this.contains(token)) return;
+    push.call(this, token);
+    this.el.className = this.toString();
+  },
+  contains: function(token) {
+    return this.el.className.indexOf(token) != -1;
+  },
+  item: function(index) {
+    return this[index] || null;
+  },
+  remove: function(token) {
+    if (!this.contains(token)) return;
+    for (var i = 0; i < this.length; i++) {
+      if (this[i] == token) break;
+    }
+    splice.call(this, i, 1);
+    this.el.className = this.toString();
+  },
+  toString: function() {
+    return join.call(this, ' ');
+  },
+  toggle: function(token) {
+    if (!this.contains(token)) {
+      this.add(token);
+    } else {
+      this.remove(token);
+    }
+
+    return this.contains(token);
+  }
+};
+
+window.DOMTokenList = DOMTokenList;
+
+function defineElementGetter (obj, prop, getter) {
+    if (Object.defineProperty) {
+        Object.defineProperty(obj, prop,{
+            get : getter
+        });
+    } else {
+        obj.__defineGetter__(prop, getter);
+    }
+}
+
+defineElementGetter(Element.prototype, 'classList', function () {
+  return new DOMTokenList(this);
+});
+
+})();
+Class(Sl.UI, 'Checkbox').inherits(Widget)({
+    HTML : '\
+        <div class="checkbox-wrapper">\
+            <label>\
+                <input type="checkbox">\
+                <span class="checkbox-ui"></span>\
+                <span class="checkbox-label"></span>\
+            </label>\
+        </div>\
+        ',
+    prototype : {
+        el : null,
+        id : null,
+        checkbox : null,
+        label : null,
+        init : function init(config) {
+            Widget.prototype.init.call(this, config);
+            this.el = this.element[0];
+            this.checkbox = this.element.find('[type="checkbox"]');
+            this.label = this.element.find('label');
+            this.text = this.element.find('.checkbox-label');
+
+            this.checkbox[0].setAttribute('id', this.id);
+            this.label[0].setAttribute('for', this.id);
+            this.text[0].textContent = this.id;
+
+            this._bindEvents();
+        },
+
+        _bindEvents : function _bindEvents() {
+            this.checkbox.on('change', this._checkboxChangeHandler.bind(this));
+
+            return this;
+        },
+
+        /*
+         * Dispatch the 'change' event.
+         * @property _checkboxChangeHandler <private> [Function]
+         * @return undefined
+         */
+        _checkboxChangeHandler : function _checkboxChangeHandler() {
+            this.constructor.dispatch('change', this);
+        },
+
+        /**
+         * Toggle the status of the checkbox and dispatch it's 'change' event.
+         * @property toggle <pubilc> [Function]
+         * @return Sl.UI.Checkbox
+         */
+        toggle : function toggle() {
+            this.checkbox.click();
+
+            return this;
+        },
+
+        destroy : function destroy() {
+            this.checkbox.off('change');
+            this.el = null;
+            this.id = null;
+            this.checkbox = null;
+            this.label = null;
+            Widget.prototype.destroy.call(this);
+
+            return null;
+        }
+    }
+})
+
+Class(Sl.UI, 'Color').inherits(Widget)({
     HTML : '\
         <div class="item">\
             <div class="item__inner">\
-                <p class="hex--label">#000</p>\
-                <p class="rgb--label">rgb(0, 0, 0)</p>\
-                <p class="hsl--label">hsl(0, 100%, 0%)</p>\
             </div>\
         </div>\
     ',
 
     prototype : {
+        el : null,
+        inner : null,
         init : function init(config) {
             Widget.prototype.init.call(this, config);
-            this.inner      = this.element.find('.item__inner');
-            this.hexLabel   = this.element.find('.hex--label');
-            this.rgbLabel   = this.element.find('.rgb--label');
-            this.hslLabel   = this.element.find('.hsl--label');
+            this.el = this.element[0];
+            this.inner = this.element.find('.item__inner');
+
+            this.appendChild(new Sl.UI.Paragraph({
+                name : 'hexLabel',
+                className : 'hex--label'
+            })).render(this.inner);
+
+            this.appendChild(new Sl.UI.Paragraph({
+                name : 'rgbLabel',
+                className : 'rgb--label'
+            })).render(this.inner);
+
+            this.appendChild(new Sl.UI.Paragraph({
+                name : 'hslLabel',
+                className : 'hsl--label'
+            })).render(this.inner);
+        },
+
+        /**
+         * Return the DOM element reference.
+         * @property getElement <public> [Function]
+         * @return this.el [Object]
+         */
+        getElement : function getElement() {
+            return this.el;
+        },
+
+        /**
+         * Change the background-color of the element.
+         * @property setBackgroundColor <public> [Function]
+         * @return Sl.UI.Color
+         */
+        setBackgroundColor : function setBackgroundColor(color) {
+            this.el.style.backgroundColor = color;
+
+            return this;
+        },
+
+        /**
+         * Change the color of the element.
+         * @property setColor <public> [Function]
+         * @return Sl.UI.Color
+         */
+        setColor : function setColor(color) {
+            this.el.style.color = color;
+
+            return this;
+        },
+
+        destroy : function destroy() {
+            this.el = null;
+            this.inner = null;
+            Widget.prototype.destroy.call(this);
+
+            return null;
         }
     }
 })
 
-Class(UI, 'ColorsCollection').inherits(Widget)({
+Class(Sl.UI, 'ColorsCollection').inherits(Widget)({
     HTML : '\
-        <div class="main-container scroll" role="main-content">\
+        <div class="main-container" role="main-content">\
         </div>\
     ',
     prototype : {
+        el : null,
+        /**
+         * Array to hold references to Sl.UI.Color instances.
+         * @property _cached <private> [Array]
+         */
+        _cached : null,
         init : function init(config) {
             Widget.prototype.init.call(this, config);
 
-            this.cached = [];
-
+            this._cached = [];
+            this.el = this.element[0];
             this._storeInMemory(100);
-            this._bindEvents();
         },
 
+        /**
+         * Store color instances in variables.
+         * @property _storeInMemory <private> [Function]
+         * @argument number_items <require> [Number]
+         * @return Sl.UI.ColorsCollection
+         */
         _storeInMemory : function _storeInMemory(number_items) {
-            var i = 0;
-            for (; i < number_items; i++)
-                this.cached.push(new UI.Color());
-            i = number_items = null;
+            var i;
+
+            for (i = 0; i < number_items; i++) {
+                this._cached.push(new Sl.UI.Color());
+            }
+
+            return this;
         },
 
-        _bindEvents : function _bindEvents() {
-            this.cached.forEach(function(child) {
+        /**
+         * Return the DOM element reference.
+         * @property getElement <public> [Function]
+         * @return this.el [Object]
+         */
+        getElement : function getElement() {
+            return this.el;
+        },
+
+        /**
+         * Append and render Sl.UI.Color instances.
+         * @property renderColors <public> [Function]
+         * @return Sl.UI.ColorsCollection
+         */
+        renderColors : function renderColors() {
+            this._cached.forEach(function(child) {
                 this.appendChild(child).render(this.element);
             }, this);
 
@@ -10179,7 +10397,7 @@ Class(UI, 'ColorsCollection').inherits(Widget)({
     }
 })
 
-Class(UI, 'CreditsModal').inherits(Widget)({
+Class(Sl.UI, 'CreditsModal').inherits(Widget)({
     HTML : '\
         <div class="modal credits">\
           <div class="modal__wrapper">\
@@ -10208,23 +10426,36 @@ Class(UI, 'CreditsModal').inherits(Widget)({
           </div>\
         </div>\
         ',
-
     prototype : {
+        _doc : null,
         init : function init(config) {
             Widget.prototype.init.call(this, config);
+            this._doc = $(document);
             this.closeModal = this.element.find('.modal__close');
 
             this._bindEvents();
         },
 
         _bindEvents : function _bindEvents() {
+            this.bind('render', this._renderHandler.bind(this));
+
             this.element.on('click', function(event) {
                 this._checkBeforeClose(event);
             }.bind(this));
 
             this.closeModal.on('click', this.deactivate.bind(this));
 
-            this.bind('deactivate', this._detach.bind(this));
+            this.bind('deactivate', this._deactivateHandler.bind(this));
+
+            return this;
+        },
+
+        _renderHandler : function _renderHandler() {
+            this._doc.on('keydown.modal', function(e) {
+                if (e.which === 27) {
+                    this.deactivate();
+                }
+            }.bind(this));
 
             return this;
         },
@@ -10237,84 +10468,148 @@ Class(UI, 'CreditsModal').inherits(Widget)({
             return this;
         },
 
-        _detach : function _detach() {
+        _deactivateHandler : function _deactivateHandler() {
             var modal = this;
 
             setTimeout(function() {
+                modal._doc.off('keydown.modal');
                 modal.element.detach();
             }, 300);
 
             return this;
+        },
+
+        destroy : function destroy() {
+            this.closeModal = null;
+            Widget.prototype.destroy.call(this);
         }
     }
 })
 
-Class(UI, 'App').includes(CustomEventSupport, NodeSupport)({
+Class(Sl.UI, 'Paragraph').inherits(Widget)({
+    HTML : '<p></p>',
     prototype : {
-        body : null,
-        values : null,
-        current_color : null,
-        step : null,
-        hash : null,
-        ui : null,
+        el : null,
+        init : function init(config) {
+            Widget.prototype.init.call(this, config);
+            this.el = this.element[0];
+        },
+
+        /**
+         * Return the DOM element reference.
+         * @property getElement <public> [Function]
+         * @return this.el [Object]
+         */
+        getElement : function getElement() {
+            return this.el;
+        },
+
+        /**
+         * Change the text of the element.
+         * @property setText <public> [Function]
+         * @return Sl.UI.Paragraph
+         */
+        setText : function setText(text) {
+            this.el.textContent = text;
+
+            return this;
+        },
+
+        destroy : function destroy() {
+            this.el = null;
+            Widget.prototype.destroy.call(this);
+
+            return null;
+        }
+    }
+})
+
+Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
+    prototype : {
+        _body : null,
+        _values : null,
+        _step : null,
+        _hash : null,
+        _ui : null,
         init : function init() {
-            this.body = $(document.body);
-            this.step = 1;
-            this.hash = window.location.hash;
-            this.ui = {
-                colorPicker     : $(document.querySelector('[type="color"]')),
-                preview         : $(document.querySelector('.preview__color')),
-                checkboxes      : $(document.querySelectorAll('[type="checkbox"]')),
-                input           : $(document.querySelector('[name="input"]')),
-                randomColorBtn  : $(document.querySelector('.random-color-btn')),
-                creditsBtn      : $(document.querySelector('.credits-btn')),
+            this._body = $(document.body);
+            this._step = 1;
+            this._hash = window.location.hash;
+            this._ui = {
+                colorPicker : $(document.querySelector('[type="color"]')),
+                preview : $(document.querySelector('.preview__color')),
+                optionsWrapper : $(document.querySelector('.options-wrapper')),
+                input : $(document.querySelector('[name="input"]')),
+                randomColorBtn : $(document.querySelector('.random-color-btn')),
+                creditsBtn : $(document.querySelector('.credits-btn')),
             }
         },
 
         /**
+         * Boot the little app.
          * @property run <public> [Function]
-         * @return UI.App
+         * @return Sl.App [Object]
          */
         run : function run() {
             var color;
 
-            this.appendChild(new UI.ColorsCollection({
-                name : 'colors',
-                element : $(document.querySelector('.main-container'))
+            this._values = new Values(color).setStep(this._step);
+
+            this.appendChild(new Sl.UI.Checkbox({
+                name : 'checkboxHex',
+                id : 'hex'
             }));
 
-            this.appendChild(new UI.CreditsModal({
+            this.appendChild(new Sl.UI.Checkbox({
+                name : 'checkboxRgb',
+                id : 'rgb'
+            }));
+
+            this.appendChild(new Sl.UI.Checkbox({
+                name : 'checkboxHsl',
+                id : 'hsl'
+            }));
+
+            this.appendChild(new Sl.UI.ColorsCollection({
+                name : 'colorsContainer'
+            }));
+
+            this.appendChild(new Sl.UI.CreditsModal({
                 name : 'creditsModal'
             }));
 
-            this.ui.checkboxes[0].checked = true; // hex
-            this.ui.checkboxes[1].checked = true; // rgba
-            this.checkboxUpdated(this.ui.checkboxes[0]);
-            this.checkboxUpdated(this.ui.checkboxes[1]);
-
-            if (this._isValidColorModel(this.hash)) {
-                color = this.hash;
+            if (this._isValidColorModel(this._hash)) {
+                color = this._hash;
             } else {
-                color = this.getRandomColor();
+                color = this._getRandomHexColor();
             }
 
-            this.values = new Values(color).setStep(this.step);
-            this.printValues(color);
-
+            this.checkboxHex.render(this._ui.optionsWrapper);
+            this.checkboxRgb.render(this._ui.optionsWrapper);
+            this.checkboxHsl.render(this._ui.optionsWrapper);
+            this.colorsContainer.renderColors().render(this._body, $('footer'));
+            this.updateUI(color);
             this._bindEvents();
+
+            this.checkboxHex.toggle();
+            this.checkboxRgb.toggle();
 
             return this;
         },
 
         _bindEvents : function _bindEvents() {
-            $(window).on('hashchange', this.checkHash.bind(this));
-            this.ui.preview.on("click", this.showColorPicker.bind(this));
-            this.ui.colorPicker.on("change", this.colorPickerUpdated.bind(this));
-            this.ui.input.on("keypress", this.checkInput.bind(this));
-            this.ui.randomColorBtn.on('click', this.randomColor.bind(this));
-            this.ui.creditsBtn.on("click", this.showModal.bind(this));
-            this.ui.checkboxes.on('change', function(event) {
-                this.checkboxUpdated.call(this, event.target);
+            $(window).on('hashchange', this._hashChangeHandler.bind(this));
+            this._ui.preview.on("click", this._previewClickHandler.bind(this));
+            this._ui.colorPicker.on("change", this._colorPickerChangeHandler.bind(this));
+            this._ui.input.on("keypress", this._keypressInputHandler.bind(this));
+            this._ui.input.on("click", function(event) {
+                event.target.select();
+            }.bind(this));
+            this._ui.randomColorBtn.on('click', this._randomColorClickHandler.bind(this));
+            this._ui.creditsBtn.on("click", this._creditsClickHandler.bind(this));
+
+            Sl.UI.Checkbox.bind('change', function(data) {
+                this._checkboxChangeHandler.call(this, data.checkbox[0]);
             }.bind(this));
 
             this.creditsModal.bind('render', function() {
@@ -10328,6 +10623,119 @@ Class(UI, 'App').includes(CustomEventSupport, NodeSupport)({
             return this;
         },
 
+        /**
+         * Compare the current color vs the hexadecimal color code represented
+         * by the hash. If they are different then the ui is updated with the
+         * color holded on the hash.
+         * @property _hashChangeHandler <private> [Function]
+         * @return Sl.App [Object]
+         */
+        _hashChangeHandler : function _hashChangeHandler(e) {
+            var new_color = window.location.hash;
+
+            if (this._hash !== new_color) {
+                if (this._isValidColorModel(new_color)) {
+                    this.updateUI(new_color);
+                }
+            }
+
+            return this;
+        },
+
+        /**
+         * For browser that support the color input type, a native color picker
+         * will be displayed so we can select a color.
+         * @property _previewClickHandler <private> [Function]
+         * @return Sl.App [Object]
+         */
+        _previewClickHandler : function _previewClickHandler() {
+            this._ui.colorPicker.click();
+
+            return this;
+        },
+
+        /**
+         * Get the current color holded as value on the color-picker an update
+         * the ui using that color as new value.
+         * @property _colorPickerChangeHandler <private> [Function]
+         * @return Sl.App [Object]
+         */
+        _colorPickerChangeHandler : function _colorPickerChangeHandler() {
+            this.updateUI(this._ui.colorPicker[0].value);
+
+            return this;
+        },
+
+        /*
+         * Checks if the text typed on the input is a valid hex or rgb color.
+         * If so the ui is updated with that color, otherwhise an 'error'
+         * css-class is added to the input to show feedback.
+         * @property _keypressInputHandler <private> [Function]
+         * @return Sl.App [Object]
+         */
+        _keypressInputHandler : function _keypressInputHandler(event) {
+            if (event.charCode === 13) {
+                var new_color = this._ui.input[0].value;
+
+                if (this._isValidColorModel(new_color)) {
+                    this.updateUI(new_color);
+                    this._ui.input[0].classList.remove('error');
+                } else {
+                    this._ui.input[0].classList.add('error');
+                }
+            }
+
+            return this;
+        },
+
+        /**
+         * Render the creditsModal.
+         * @property _creditsClickHandler <private> [Function]
+         * @return Sl.App [Object]
+         */
+        _creditsClickHandler : function _creditsClickHandler(event) {
+            event.preventDefault();
+            this.creditsModal.render(this._body);
+
+            return this;
+        },
+
+        /**
+         * Update the ui with a new random color.
+         * @property _randomColorClickHandler <private> [Function]
+         * @return Sl.App [Object]
+         */
+        _randomColorClickHandler : function _randomColorClickHandler(event) {
+            this.updateUI(this._getRandomHexColor());
+
+            return this;
+        },
+
+        /**
+         * Handle the change event dispached by the checkbox widgets.
+         * @property _checkboxChangeHandler <private> [Function]
+         * @argument element <required> [DOMElement]
+         * @return Sl.App [Object]
+         */
+        _checkboxChangeHandler : function _checkboxChangeHandler(element) {
+            var className, isChecked, action;
+
+            className = 'show--' + element.id;
+            isChecked = element.checked;
+            action = isChecked ? 'add' : 'remove';
+
+            this.colorsContainer.getElement().classList[action](className);
+
+            return this;
+        },
+
+        /**
+         * Checks if the String is a valid hex or rgb color model using
+         * the helper methods provided by Values.js
+         * @property _isValidColorModel <private> [Function]
+         * @argument color <required> [String]
+         * @return true|false [Boolean]
+         */
         _isValidColorModel : function _isValidColorModel(color) {
             if (Values.Utils.isHEX(color)) return true;
             if (Values.Utils.isRGB(color)) return true;
@@ -10335,127 +10743,82 @@ Class(UI, 'App').includes(CustomEventSupport, NodeSupport)({
             return false;
         },
 
-        checkHash : function checkHash(e) {
-            var new_color = window.location.hash;
-
-            if (this.hash !== new_color) {
-                if (this._isValidColorModel(new_color)) {
-                    this.printValues(new_color);
-                }
-            }
-
-            return this;
-        },
-
-        showColorPicker : function showColorPicker() {
-            this.ui.colorPicker.click();
-
-            return this;
-        },
-
-        colorPickerUpdated : function colorPickerUpdated() {
-            this.printValues(this.ui.colorPicker[0].value);
-
-            return this;
-        },
-
-        checkInput : function checkInput(event) {
-            if (event.charCode === 13) {
-                var new_color = this.ui.input[0].value;
-
-                if (this._isValidColorModel(new_color)) {
-                    this.printValues(new_color);
-                    this.ui.input.removeClass('error');
-                } else {
-                    this.ui.input.addClass('error');
-                }
-            }
-
-            return this;
-        },
-
-        showModal : function showModal(event) {
-            event.preventDefault();
-            this.creditsModal.render(this.body);
-
-            return this;
-        },
-
-        randomColor : function randomColor(event) {
-            this.printValues(this.getRandomColor());
-
-            return this;
-        },
-
-        checkboxUpdated : function checkboxUpdated(element) {
-            var classname = 'show--' + element.id;
-            this.colors.element[0].classList[element.checked ? 'add' : 'remove'](classname);
-
-            return this;
-        },
-
-        printValues : function printValues(color) {
-            var original;
-
-            this.values.setColor(color);
-            this.current_color = this.values.hex;
-
-            this.updateHash(this.values.hex.toUpperCase());
-            this.updateUI();
-
-            this.colors.children.forEach(function(child, i) {
-                var value = this.values.all[i],
-                    tc = (value.brightness > 50) ? '#000' : '#fff';
-
-                child.element.removeClass("original");
-
-                if (value.hex === this.values.hex) {
-                    child.element.addClass("original");
-                    original = child.element[0];
-                }
-
-                child.element[0].style.backgroundColor = value.hex;
-                child.inner[0].style.color = tc;
-                child.hexLabel[0].textContent = value.hex;
-                child.rgbLabel[0].textContent = value.rgba;
-                child.hslLabel[0].textContent = value.hsla;
-            }, this);
-
-            this.body[0].scrollTop = 0;
-
-            if (original !== undefined) {
-                this.body[0].scrollTop = (original.getBoundingClientRect().top - 225);
-            }
-
-            return this;
-        },
-
-        updateUI : function updateUI() {
-            this.ui.preview[0].style.backgroundColor = this.current_color;
-            this.ui.colorPicker[0].value = this.current_color;
-            this.ui.input[0].value = this.current_color;
-
-            return this;
-        },
-
-        updateHash : function updateHash(hash) {
+        /**
+         * Updates the hash with the passed argument.
+         * @property _updateHash <private> [Function]
+         * @argument hash <required> [String]
+         * @return Sl.App [Object]
+         */
+        _updateHash : function _updateHash(hash) {
             window.location.hash = hash;
-            this.hash = hash;
+            this._hash = hash;
 
             return this;
         },
 
         /**
-         * @property getRandomColor <public> [Function]
-         * @return #000 [String]
+         * Return a valid random hexadecimal color code.
+         * @property _getRandomHexColor <public> [Function]
+         * @return #000000 [String]
          */
-        getRandomColor : function getRandomColor() {
+        _getRandomHexColor : function _getRandomHexColor() {
             return "#" +  Math.random().toString(16).slice(2, 8);
+        },
+
+        /**
+         * Update the whole UI with a the passed color as param.
+         * @property updateUI <public> [Function]
+         * @argument color <required> [String] A valid hexadecimal color code.
+         * @return Sl.App [Object]
+         */
+        updateUI : function updateUI(color) {
+            this._values.setColor(color);
+            this._updateHash(this._values.hex.toUpperCase());
+            this._ui.preview[0].style.backgroundColor = this._values.hex;
+            this._ui.colorPicker[0].value = this._values.hex;
+            this._ui.input[0].value = this._values.hex;
+
+            this.colorsContainer.children.forEach(function(child, index) {
+                var value, textColor, element;
+
+                value = this._values.all[index];
+                textColor = (value.brightness > 50) ? '#000' : '#fff';
+                element = child.getElement();
+
+                element.classList.remove("original");
+
+                if (value.hex === this._values.hex) {
+                    element.classList.add("original");
+                    original = element;
+                }
+
+                child.setBackgroundColor(value.hex).setColor(textColor);
+                child.hexLabel.setText(value.hex);
+                child.rgbLabel.setText(value.rgb);
+                child.hslLabel.setText(value.hsl);
+            }, this);
+
+            this._body[0].scrollTop = 0;
+
+            if (original !== undefined) {
+                this._body[0].scrollTop = (original.getBoundingClientRect().top - 80);
+            }
+
+            return this;
+        },
+
+        destroy : function destroy() {
+            this._body = null;
+            this._values = null;
+            this._step = null;
+            this._hash = null;
+            this._ui = null;
+            Widget.prototype.destroy.call(this);
         }
     }
 });
 
 (function() {
-    Shadowlord = new UI.App();
+    Shadowlord = new Sl.App();
     Shadowlord.run();
 })();

@@ -1,4 +1,4 @@
-Class(UI, 'CreditsModal').inherits(Widget)({
+Class(Sl.UI, 'CreditsModal').inherits(Widget)({
     HTML : '\
         <div class="modal credits">\
           <div class="modal__wrapper">\
@@ -27,23 +27,36 @@ Class(UI, 'CreditsModal').inherits(Widget)({
           </div>\
         </div>\
         ',
-
     prototype : {
+        _doc : null,
         init : function init(config) {
             Widget.prototype.init.call(this, config);
+            this._doc = $(document);
             this.closeModal = this.element.find('.modal__close');
 
             this._bindEvents();
         },
 
         _bindEvents : function _bindEvents() {
+            this.bind('render', this._renderHandler.bind(this));
+
             this.element.on('click', function(event) {
                 this._checkBeforeClose(event);
             }.bind(this));
 
             this.closeModal.on('click', this.deactivate.bind(this));
 
-            this.bind('deactivate', this._detach.bind(this));
+            this.bind('deactivate', this._deactivateHandler.bind(this));
+
+            return this;
+        },
+
+        _renderHandler : function _renderHandler() {
+            this._doc.on('keydown.modal', function(e) {
+                if (e.which === 27) {
+                    this.deactivate();
+                }
+            }.bind(this));
 
             return this;
         },
@@ -56,14 +69,20 @@ Class(UI, 'CreditsModal').inherits(Widget)({
             return this;
         },
 
-        _detach : function _detach() {
+        _deactivateHandler : function _deactivateHandler() {
             var modal = this;
 
             setTimeout(function() {
+                modal._doc.off('keydown.modal');
                 modal.element.detach();
             }, 300);
 
             return this;
+        },
+
+        destroy : function destroy() {
+            this.closeModal = null;
+            Widget.prototype.destroy.call(this);
         }
     }
 })

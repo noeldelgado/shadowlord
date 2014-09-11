@@ -1,4 +1,4 @@
 (function() {
-    Shadowlord = new UI.App();
+    Shadowlord = new Sl.App();
     Shadowlord.run();
 })();
