@@ -213,6 +213,7 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
         _isValidColorModel : function _isValidColorModel(color) {
             if (Values.Utils.isHEX(color)) return true;
             if (Values.Utils.isRGB(color)) return true;
+            if (Values.Utils.isHSL(color)) return true;
 
             return false;
         },
