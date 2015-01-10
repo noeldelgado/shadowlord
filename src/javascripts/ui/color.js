@@ -7,12 +7,10 @@ Class(Sl.UI, 'Color').inherits(Widget)({
     ',
 
     prototype : {
-        el : null,
         inner : null,
         init : function init(config) {
             Widget.prototype.init.call(this, config);
-            this.el = this.element[0];
-            this.inner = this.element.find('.item__inner');
+            this.inner = this.element.querySelector('.item__inner');
 
             this.appendChild(new Sl.UI.Paragraph({
                 name : 'hexLabel',
@@ -36,7 +34,7 @@ Class(Sl.UI, 'Color').inherits(Widget)({
          * @return this.el [Object]
          */
         getElement : function getElement() {
-            return this.el;
+            return this.element;
         },
 
         /**
@@ -46,7 +44,7 @@ Class(Sl.UI, 'Color').inherits(Widget)({
          * @return Sl.UI.Color
          */
         setBackgroundColor : function setBackgroundColor(color) {
-            this.el.style.backgroundColor = color;
+            this.element.style.backgroundColor = color;
 
             return this;
         },
@@ -58,13 +56,12 @@ Class(Sl.UI, 'Color').inherits(Widget)({
          * @return Sl.UI.Color
          */
         setColor : function setColor(color) {
-            this.el.style.color = color;
+            this.element.style.color = color;
 
             return this;
         },
 
         destroy : function destroy() {
-            this.el = null;
             this.inner = null;
             Widget.prototype.destroy.call(this);
 

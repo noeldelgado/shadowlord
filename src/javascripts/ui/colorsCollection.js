@@ -4,7 +4,6 @@ Class(Sl.UI, 'ColorsCollection').inherits(Widget)({
         </div>\
     ',
     prototype : {
-        el : null,
         /**
          * Array to hold references to Sl.UI.Color instances.
          * @property _cached <private> [Array]
@@ -14,7 +13,6 @@ Class(Sl.UI, 'ColorsCollection').inherits(Widget)({
             Widget.prototype.init.call(this, config);
 
             this._cached = [];
-            this.el = this.element[0];
             this._storeInMemory(100);
         },
 
@@ -40,7 +38,7 @@ Class(Sl.UI, 'ColorsCollection').inherits(Widget)({
          * @return this.el [Object]
          */
         getElement : function getElement() {
-            return this.el;
+            return this.element;
         },
 
         /**

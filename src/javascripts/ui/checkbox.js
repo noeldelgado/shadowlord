@@ -9,26 +9,25 @@ Class(Sl.UI, 'Checkbox').inherits(Widget)({
         </div>\
         ',
     prototype : {
-        el : null,
         id : null,
         checkbox : null,
         label : null,
         init : function init(config) {
             Widget.prototype.init.call(this, config);
-            this.el = this.element[0];
-            this.checkbox = this.element.find('[type="checkbox"]');
-            this.label = this.element.find('label');
-            this.text = this.element.find('.checkbox-label');
 
-            this.checkbox[0].setAttribute('id', this.id);
-            this.label[0].setAttribute('for', this.id);
-            this.text[0].textContent = this.id;
+            this.checkbox = this.element.querySelector('[type="checkbox"]');
+            this.label = this.element.querySelector('label');
+            this.text = this.element.querySelector('.checkbox-label');
+
+            this.checkbox.setAttribute('id', this.id);
+            this.label.setAttribute('for', this.id);
+            this.text.appendChild(document.createTextNode(this.id));
 
             this._bindEvents();
         },
 
         _bindEvents : function _bindEvents() {
-            this.checkbox.on('change', this._checkboxChangeHandler.bind(this));
+            this.checkbox.addEventListener('change', this._checkboxChangeHandler.bind(this), false);
 
             return this;
         },
@@ -54,14 +53,11 @@ Class(Sl.UI, 'Checkbox').inherits(Widget)({
         },
 
         destroy : function destroy() {
-            this.checkbox.off('change');
-            this.el = null;
             this.id = null;
             this.checkbox = null;
             this.label = null;
-            Widget.prototype.destroy.call(this);
 
-            return null;
+            Widget.prototype.destroy.call(this);
         }
     }
 })

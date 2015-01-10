@@ -31,51 +31,34 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
         _doc : null,
         init : function init(config) {
             Widget.prototype.init.call(this, config);
-            this._doc = $(document);
-            this.closeModal = this.element.find('.modal__close');
+            this._doc = document;
+            this.closeModal = this.element.querySelector('.modal__close');
 
             this._bindEvents();
         },
 
         _bindEvents : function _bindEvents() {
-            this.bind('render', this._renderHandler.bind(this));
+            this._doc.addEventListener('keydown', this._keyDownHandler.bind(this), false);
 
-            this.element.on('click', function(event) {
+            this.element.addEventListener('click', function(event) {
                 this._checkBeforeClose(event);
-            }.bind(this));
+            }.bind(this), false);
 
-            this.closeModal.on('click', this.deactivate.bind(this));
-
-            this.bind('deactivate', this._deactivateHandler.bind(this));
+            this.closeModal.addEventListener('click', this.deactivate.bind(this), false);
 
             return this;
         },
 
-        _renderHandler : function _renderHandler() {
-            this._doc.on('keydown.modal', function(e) {
-                if (e.which === 27) {
-                    this.deactivate();
-                }
-            }.bind(this));
-
-            return this;
+        _keyDownHandler : function _keyDownHandler(e) {
+            if (e.which === 27) {
+                this.deactivate();
+            }
         },
 
         _checkBeforeClose : function _checkBeforeClose(event) {
             if (event.target.classList.contains('modal__wrapper')) {
                 this.deactivate();
             }
-
-            return this;
-        },
-
-        _deactivateHandler : function _deactivateHandler() {
-            var modal = this;
-
-            setTimeout(function() {
-                modal._doc.off('keydown.modal');
-                modal.element.detach();
-            }, 300);
 
             return this;
         },

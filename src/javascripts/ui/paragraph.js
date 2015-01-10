@@ -1,10 +1,8 @@
 Class(Sl.UI, 'Paragraph').inherits(Widget)({
     HTML : '<p></p>',
     prototype : {
-        el : null,
         init : function init(config) {
             Widget.prototype.init.call(this, config);
-            this.el = this.element[0];
         },
 
         /**
@@ -13,7 +11,7 @@ Class(Sl.UI, 'Paragraph').inherits(Widget)({
          * @return this.el [Object]
          */
         getElement : function getElement() {
-            return this.el;
+            return this.element;
         },
 
         /**
@@ -23,13 +21,12 @@ Class(Sl.UI, 'Paragraph').inherits(Widget)({
          * @return Sl.UI.Paragraph
          */
         setText : function setText(text) {
-            this.el.textContent = text;
+            this.element.textContent = text;
 
             return this;
         },
 
         destroy : function destroy() {
-            this.el = null;
             Widget.prototype.destroy.call(this);
 
             return null;

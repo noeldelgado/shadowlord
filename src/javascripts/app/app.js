@@ -2,20 +2,18 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
     prototype : {
         _body : null,
         _values : null,
-        _step : null,
         _hash : null,
         _ui : null,
         init : function init() {
-            this._body = $(document.body);
-            this._step = 1;
+            this._body = document.body;
             this._hash = window.location.hash;
             this._ui = {
-                colorPicker : $(document.querySelector('[type="color"]')),
-                preview : $(document.querySelector('.preview__color')),
-                optionsWrapper : $(document.querySelector('.options-wrapper')),
-                input : $(document.querySelector('[name="input"]')),
-                randomColorBtn : $(document.querySelector('.random-color-btn')),
-                creditsBtn : $(document.querySelector('.credits-btn')),
+                colorPicker : document.querySelector('[type="color"]'),
+                preview : document.querySelector('.preview__color'),
+                optionsWrapper : document.querySelector('.options-wrapper'),
+                input : document.querySelector('[name="input"]'),
+                randomColorBtn : document.querySelector('.random-color-btn'),
+                creditsBtn : document.querySelector('.credits-btn'),
             }
         },
 
@@ -27,7 +25,13 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
         run : function run() {
             var color;
 
-            this._values = new Values(color).setStep(this._step);
+            if (this._isValidColorModel(this._hash)) {
+                color = this._hash;
+            } else {
+                color = this._getRandomHexColor();
+            }
+
+            this._values = new Values();
 
             this.appendChild(new Sl.UI.Checkbox({
                 name : 'checkboxHex',
@@ -52,16 +56,11 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
                 name : 'creditsModal'
             }));
 
-            if (this._isValidColorModel(this._hash)) {
-                color = this._hash;
-            } else {
-                color = this._getRandomHexColor();
-            }
-
             this.checkboxHex.render(this._ui.optionsWrapper);
             this.checkboxRgb.render(this._ui.optionsWrapper);
             this.checkboxHsl.render(this._ui.optionsWrapper);
-            this.colorsContainer.renderColors().render(this._body, $('footer'));
+            this.colorsContainer.renderColors().render(this._body, this._body.querySelector('footer'));
+            this.creditsModal.render(this._body);
             this.updateUI(color);
             this._bindEvents();
 
@@ -72,18 +71,18 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
         },
 
         _bindEvents : function _bindEvents() {
-            $(window).on('hashchange', this._hashChangeHandler.bind(this));
-            this._ui.preview.on("click", this._previewClickHandler.bind(this));
-            this._ui.colorPicker.on("change", this._colorPickerChangeHandler.bind(this));
-            this._ui.input.on("keypress", this._keypressInputHandler.bind(this));
-            this._ui.input.on("click", function(event) {
+            window.addEventListener('hashchange', this._hashChangeHandler.bind(this), false);
+            this._ui.preview.addEventListener("click", this._previewClickHandler.bind(this));
+            this._ui.colorPicker.addEventListener("change", this._colorPickerChangeHandler.bind(this));
+            this._ui.input.addEventListener("keypress", this._inputKeypressHandler.bind(this), false);
+            this._ui.input.addEventListener("click", function(event) {
                 event.target.select();
             }.bind(this));
-            this._ui.randomColorBtn.on('click', this._randomColorClickHandler.bind(this));
-            this._ui.creditsBtn.on("click", this._creditsClickHandler.bind(this));
+            this._ui.randomColorBtn.addEventListener('click', this._randomColorClickHandler.bind(this));
+            this._ui.creditsBtn.addEventListener("click", this._creditsClickHandler.bind(this));
 
             Sl.UI.Checkbox.bind('change', function(data) {
-                this._checkboxChangeHandler.call(this, data.checkbox[0]);
+                this._checkboxChangeHandler.call(this, data.checkbox);
             }.bind(this));
 
             this.creditsModal.bind('render', function() {
@@ -104,14 +103,16 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
          * @property _hashChangeHandler <private> [Function]
          * @return Sl.App [Object]
          */
-        _hashChangeHandler : function _hashChangeHandler(e) {
-            var new_color = window.location.hash;
+        _hashChangeHandler : function _hashChangeHandler() {
+            var newColor = window.location.hash;
 
-            if (this._hash !== new_color) {
-                if (this._isValidColorModel(new_color)) {
-                    this.updateUI(new_color);
+            if (this._hash !== newColor) {
+                if (this._isValidColorModel(newColor)) {
+                    this.updateUI(newColor);
                 }
             }
+
+            newColor = null;
 
             return this;
         },
@@ -135,7 +136,7 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
          * @return Sl.App [Object]
          */
         _colorPickerChangeHandler : function _colorPickerChangeHandler() {
-            this.updateUI(this._ui.colorPicker[0].value);
+            this.updateUI(this._ui.colorPicker.value);
 
             return this;
         },
@@ -144,20 +145,26 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
          * Checks if the text typed on the input is a valid hex or rgb color.
          * If so the ui is updated with that color, otherwhise an 'error'
          * css-class is added to the input to show feedback.
-         * @property _keypressInputHandler <private> [Function]
+         * @property _inputKeypressHandler <private> [Function]
          * @return Sl.App [Object]
          */
-        _keypressInputHandler : function _keypressInputHandler(event) {
-            if (event.charCode === 13) {
-                var new_color = this._ui.input[0].value;
+        _inputKeypressHandler : function _inputKeypressHandler(e) {
+            var charCode, newColor;
 
-                if (this._isValidColorModel(new_color)) {
-                    this.updateUI(new_color);
-                    this._ui.input[0].classList.remove('error');
+           charCode = (typeof e.which === "number") ? e.which : e.keyCode;
+
+            if (charCode === 13) {
+                newColor = this._ui.input.value;
+
+                if (this._isValidColorModel(newColor)) {
+                    this.updateUI(newColor);
+                    this._ui.input.classList.remove('error');
                 } else {
-                    this._ui.input[0].classList.add('error');
+                    this._ui.input.classList.add('error');
                 }
             }
+
+            charCode = newColor = null;
 
             return this;
         },
@@ -167,9 +174,9 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
          * @property _creditsClickHandler <private> [Function]
          * @return Sl.App [Object]
          */
-        _creditsClickHandler : function _creditsClickHandler(event) {
-            event.preventDefault();
-            this.creditsModal.render(this._body);
+        _creditsClickHandler : function _creditsClickHandler(ev) {
+            ev.preventDefault();
+            this.creditsModal.activate();
 
             return this;
         },
@@ -180,16 +187,14 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
          * @return Sl.App [Object]
          */
         _randomColorClickHandler : function _randomColorClickHandler(event) {
-            this.updateUI(this._getRandomHexColor());
-
-            return this;
+            return this.updateUI(this._getRandomHexColor());
         },
 
         /**
          * Handle the change event dispached by the checkbox widgets.
          * @property _checkboxChangeHandler <private> [Function]
          * @argument element <required> [DOMElement]
-         * @return Sl.App [Object]
+         * @return undefined
          */
         _checkboxChangeHandler : function _checkboxChangeHandler(element) {
             var className, isChecked, action;
@@ -200,7 +205,7 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
 
             this.colorsContainer.getElement().classList[action](className);
 
-            return this;
+            className = isChecked = action = null;
         },
 
         /**
@@ -225,8 +230,7 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
          * @return Sl.App [Object]
          */
         _updateHash : function _updateHash(hash) {
-            window.location.hash = hash;
-            this._hash = hash;
+            this._hash = window.location.hash = hash;
 
             return this;
         },
@@ -247,11 +251,13 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
          * @return Sl.App [Object]
          */
         updateUI : function updateUI(color) {
+            var baseColor;
+
             this._values.setColor(color);
             this._updateHash(this._values.hex.toUpperCase());
-            this._ui.preview[0].style.backgroundColor = this._values.hex;
-            this._ui.colorPicker[0].value = this._values.hex;
-            this._ui.input[0].value = this._values.hex;
+            this._ui.preview.style.backgroundColor = this._values.hex;
+            this._ui.colorPicker.value = this._values.hex;
+            this._ui.input.value = this._values.hex;
 
             this.colorsContainer.children.forEach(function(child, index) {
                 var value, textColor, element;
@@ -264,20 +270,24 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
 
                 if (value.hex === this._values.hex) {
                     element.classList.add("original");
-                    original = element;
+                    baseColor = element;
                 }
 
                 child.setBackgroundColor(value.hex).setColor(textColor);
                 child.hexLabel.setText(value.hex);
                 child.rgbLabel.setText(value.rgb);
                 child.hslLabel.setText(value.hsl);
+
+                value = textColor = element = null;
             }, this);
 
-            this._body[0].scrollTop = 0;
+            this._body.scrollTop = 0;
 
-            if (original !== undefined) {
-                this._body[0].scrollTop = (original.getBoundingClientRect().top - 80);
+            if (baseColor !== undefined) {
+                this._body.scrollTop = (baseColor.getBoundingClientRect().top - 80);
             }
+
+            baseColor = null;
 
             return this;
         },
@@ -285,9 +295,9 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
         destroy : function destroy() {
             this._body = null;
             this._values = null;
-            this._step = null;
             this._hash = null;
             this._ui = null;
+
             Widget.prototype.destroy.call(this);
         }
     }

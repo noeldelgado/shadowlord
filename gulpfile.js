@@ -24,7 +24,6 @@ gulp.task('styles', function() {
 
 gulp.task('scripts', function() {
     return gulp.src([
-        'src/javascripts/vendor/jquery.js',
         'src/javascripts/vendor/neon.js',
         'src/javascripts/vendor/neon-stdlib/**',
         'src/javascripts/vendor/values.min.js',
