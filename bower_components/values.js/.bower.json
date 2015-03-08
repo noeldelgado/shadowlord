@@ -1,0 +1,39 @@
+{
+  "name": "values.js",
+  "version": "1.0.1",
+  "main": "index.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "gulpfile.js",
+    "package.json",
+    "bower.json"
+  ],
+  "homepage": "https://github.com/noeldelgado/Values.js",
+  "authors": [
+    "Noel Delgado <auhcsei@gmail.com>"
+  ],
+  "description": "JS libraryet the tints and shades of a color",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "tints",
+    "shades",
+    "color"
+  ],
+  "license": "MIT",
+  "_release": "1.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.1",
+    "commit": "d90882868e73f147b7fe2dc50284bbd00a75cd98"
+  },
+  "_source": "git://github.com/noeldelgado/Values.js.git",
+  "_target": "~1.0.1",
+  "_originalSource": "values.js",
+  "_direct": true
+}

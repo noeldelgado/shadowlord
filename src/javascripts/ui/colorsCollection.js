@@ -13,7 +13,7 @@ Class(Sl.UI, 'ColorsCollection').inherits(Widget)({
             Widget.prototype.init.call(this, config);
 
             this._cached = [];
-            this._storeInMemory(100);
+            this._storeInMemory(67);
         },
 
         /**

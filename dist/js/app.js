@@ -909,13 +909,293 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
     }
 });
 
-/**
- * values.js - Get the tints and shades of a color
- * @version v0.1.5
- * @link http://noeldelgado.github.io/Values.js/
- * @license MIT
- */
-!function(){"use strict";var t=function(t){this.hex="#000000",this.rgb="rgb(0, 0, 0)",this.rgba="rgba(0, 0, 0, 0)",this.hsl="hsl(0, 0%, 0%)",this.hsla="hsla(0, 0%, 0%, 0)",this.brightness=0,this.step=1,this.tints=[],this.shades=[],this.all=[],this._rgb={r:0,g:0,b:0},this._rgba={r:0,g:0,b:0,a:0},this._hsl={h:0,s:0,l:0},this._hsla={h:0,s:0,l:0,a:0},"string"==typeof t&&this.setColor(t)};t.Utils={_reHEX:new RegExp("^(#)?([0-9a-fA-F]{3})([0-9a-fA-F]{3})?$"),_reRGB:new RegExp("rgba?\\s*\\((\\d+)\\,\\s*(\\d+)\\,\\s*(\\d+)(,\\s*(\\d+(\\.\\d+)?))?\\)","i"),_reHSL:new RegExp("hsla?\\((\\d+),\\s*([\\d.]+)%,\\s*([\\d.]+)%,?\\s*(?:0(\\.\\d+)?|1(\\.0)?)?\\)","i"),isHEX:function(t){return this._reHEX.test(t)},isRGB:function(t){var s,r,e,i,n;return s=!1,this._reRGB.test(t)&&(r=t.match(this._reRGB),e=r[1],i=r[2],n=r[3],255>=e&&255>=i&&255>=n&&(s=!0)),s},isHSL:function(t){var s,r,e,i,n;return s=!1,this._reHSL.test(t)&&(r=t.match(this._reHSL),e=r[1],i=r[2],n=r[3],360>=e&&100>=i&&100>=n&&(s=!0)),s},RGBA:function(t,r){var e=s(t);return"rgba("+e.r+", "+e.g+", "+e.b+", "+r+")"}};var s=function(t){var s,r,e;return t=t.replace("#",""),6===t.length?(s=parseInt(t.slice(0,2),16),r=parseInt(t.slice(2,4),16),e=parseInt(t.slice(4,6),16)):(s=parseInt(t.slice(0,1)+t.slice(0,1),16),r=parseInt(t.slice(1,2)+t.slice(1,2),16),e=parseInt(t.slice(2,3)+t.slice(2,3),16)),{r:s,g:r,b:e}},r=function(t,s,r){return t=parseInt(t).toString(16),s=parseInt(s).toString(16),r=parseInt(r).toString(16),t=1===t.length?"0"+t:t,s=1===s.length?"0"+s:s,r=1===r.length?"0"+r:r,"#"+t+s+r},e=function(t,s,r){var e,i,t=t/255,s=s/255,r=r/255,n=Math.max(t,s,r),h=Math.min(t,s,r),a=(n+h)/2;if(n===h)e=i=0;else{var l=n-h;switch(i=a>.5?l/(2-n-h):l/(n+h),n){case t:e=(s-r)/l+(r>s?6:0);break;case s:e=(r-t)/l+2;break;case r:e=(t-s)/l+4}e/=6}return{h:e,s:i,l:a}},i=function(t,s,r){return 0>r&&(r+=1),r>1&&(r-=1),1>6*r?t+6*(s-t)*r:1>2*r?s:2>3*r?t+(s-t)*(2/3-r)*6:t},n=function(t,s,r){var e,n,h;if(0==s)e=n=h=r;else{var a=.5>r?r*(1+s):r+s-r*s,l=2*r-a;e=i(l,a,t+1/3),n=i(l,a,t),h=i(l,a,t-1/3)}return{r:255*e,g:255*n,b:255*h}},h=function(t){var s=t.r+t.g+t.b;return Math.round(s/765*100)},a=function(t,s,e,i,n){var a=Math.round(s.r),l=Math.round(s.g),o=Math.round(s.b);return t._rgb={r:a,g:l,b:o},t._hsl={h:e,s:i,l:n},t.hex=r(a,l,o),t._rgba=t._rgb.a=1,t._hsla=t._hsl.a=1,t.rgb="rgb("+a+", "+l+", "+o+")",t.rgba="rgba("+a+", "+l+", "+o+", 1)",t.hsl="hsl("+e+", "+i+"%, "+n+"%)",t.hsla="hsla("+e+", "+i+"%, "+n+"%, 1)",t.brightness=h(t._rgb),t};t.prototype.setColor=function(i){var h,l,o,u,g,_,p,c;if(t.Utils.isHEX(i))/^#/.test(i)||(i="#"+i),h=i;else if(t.Utils.isRGB(i))p=i.replace(/[^\d,]/g,"").split(","),h=r(p[0],p[1],p[2]);else{if(!t.Utils.isHSL(i))return console.error(i+" is not a valid color"),null;c=i.match(t.Utils._reHSL),p=n(c[1]/360,c[2]/100,c[3]/100),h=r(p.r,p.g,p.b)}return l=s(h),o=e(l.r,l.g,l.b),u=Math.round(360*o.h),g=Math.round(100*o.s),_=Math.round(100*o.l),a(this,l,u,g,_),this.step=1,this.__updateValues(),this},t.prototype.setStep=function(t){return this.step=t,this.__updateValues(),this},t.prototype.getTints=function(t){var s=this.tints;return t&&(s=s.concat(this.__getCurrent())),s},t.prototype.getShades=function(t){var s=this.shades;return t&&(s=[this.__getCurrent()].concat(s)),s},t.prototype.getAll=function(){return this.all},t.prototype.lightness=function l(t){if("number"==typeof t){var s=this._hsl.h,r=this._hsl.s,e=this._hsl.l,i=e+t;0>i&&(l=0),i>100&&(l=100);var h=n(s/360,r/100,i/100),o=a({},h,s,r,i);return o}console.error("lightness expects a number")},t.prototype.__updateValues=function(){this.tints=this.__getTints(),this.shades=this.__getShades(),this.all=this.tints.concat(this.__getCurrent(),this.shades)},t.prototype.__getCurrent=function(){return a({},this._rgb,this._hsl.h,this._hsl.s,this._hsl.l)},t.prototype.__getTints=function(){for(var t=this._hsl.h,s=this._hsl.s,r=this._hsl.l,e=100,i=[];e>parseInt(r,10);){var h=n(t/360,s/100,e/100);i[i.length]=a({},h,t,s,e),e-=this.step}return i},t.prototype.__getShades=function(){for(var t=this._hsl.h,s=this._hsl.s,r=this._hsl.l,e=0,i=[];e<parseInt(r,10);){var h=n(t/360,s/100,e/100);i[i.length]=a({},h,t,s,e),e+=this.step}return i.reverse()},"undefined"!=typeof module&&"undefined"!=typeof module.exports?module.exports=t:window.Values=t}();
+(function() {
+    var Utils = {
+        reHash : new RegExp("^#"),
+        reHEX : new RegExp("^(#)?([0-9a-fA-F]{3})([0-9a-fA-F]{3})?$"),
+        reRGB : new RegExp("rgba?\\s*\\((\\d+)\\,\\s*(\\d+)\\,\\s*(\\d+)(,\\s*((\\d+)?(\\.\\d+)?))?\\)","i"),
+        reHSL : new RegExp("hsla?\\((\\d+),\\s*([\\d.]+)%,\\s*([\\d.]+)%,?\\s*(?:0?(\\.\\d+)?|1(\\.0)?)?\\)","i"),
+
+        isHEX : function isHEX(value) {
+            return this.reHEX.test(value);
+        },
+
+        isRGB : function isRGB(value) {
+            var rgb = value.match(this.reRGB);
+
+            if (rgb) {
+                if ((rgb[1] <= 255) && (rgb[2] <= 255) && (rgb[3] <= 255)) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
+
+        isHSL : function isHSL(value) {
+            var hsl = value.match(this.reHSL);
+
+            if (hsl) {
+                if ((hsl[1] <= 360) && (hsl[2] <= 100) && (hsl[3] <= 100)) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
+
+        HEXtoRGB : function HEXtoRGB(hex) {
+            hex = hex.replace('#', '');
+
+            if (hex.length === 3) {
+                var h1 = hex.charAt(0), h2 = hex.charAt(1), h3 = hex.charAt(2);
+                hex = h1 + h1 + h2 + h2 + h3 + h3;
+            }
+            var bw = parseInt(hex, 16);
+
+            return {r: (bw >> 16) & 255, g: (bw >> 8) & 255, b: bw & 255};
+        },
+
+        RGBtoHEX : function RGBtoHEX(r, g, b) {
+            return (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        },
+
+        RGBtoHSL : function RGBtoHSL(r, g, b) {
+            var min, max, h, s, l;
+
+            r = (r / 255);
+            g = (g / 255);
+            b = (b / 255);
+
+            max = Math.max(r, g, b);
+            min = Math.min(r, g, b);
+            l = ((max + min) / 2);
+
+            if (max === min) h = s = 0;
+            else {
+                var d = (max - min);
+                s = (l > 0.5) ? (d / (2 - max - min)) : (d / (max + min));
+
+                if (max === r)      h = ((g - b) / d + (g < b ? 6 : 0));
+                else if (max === g) h = ((b - r) / d + 2);
+                else if (max === b) h = ((r - g) / d + 4);
+
+                h /= 6;
+            }
+
+            return {h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100)};
+        },
+
+        HUEtoRGB : function HUEtoRGB(v1, v2, vh) {
+            if (vh < 0) vh += 1;
+            if (vh > 1) vh -= 1;
+
+            if ((6 * vh) < 1) return (v1 + (v2 - v1) * 6 * vh);
+            if ((2 * vh) < 1) return v2;
+            if ((3 * vh) < 2) return (v1 + (v2 - v1) * ((2/3) - vh) * 6);
+            return v1;
+        },
+
+        HSLtoRGB : function HSLtoRGB(h, s, l) {
+            var r, g, b;
+
+            h /= 360;
+            s /= 100;
+            l /= 100;
+
+            if (s == 0) r = g = b = l;
+            else {
+                var q = (l < 0.5) ? (l * (1 + s)) : (l + s - l * s);
+                var p = (2 * l - q);
+                r = this.HUEtoRGB(p, q, h + 1/3);
+                g = this.HUEtoRGB(p, q, h);
+                b = this.HUEtoRGB(p, q, h - 1/3);
+            }
+
+            return {r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255)};
+        },
+
+        mix : function mix(color1, color2, percentage) {
+            percentage = percentage || 50;
+
+            var weight = (percentage / 100.0);
+            var w = (weight * 2 - 1);
+            var a = 0;
+
+            var w1 = (((w * a == -1) ? w : (w + a) / (1 + w * a)) + 1) / 2.0;
+            var w2 = (1 - w1);
+
+            var r = Math.round(color1.rgb.r * w1 + color2.rgb.r * w2);
+            var g = Math.round(color1.rgb.g * w1 + color2.rgb.g * w2);
+            var b = Math.round(color1.rgb.b * w1 + color2.rgb.b * w2);
+
+            return new Values(Utils.RGBtoHEX(r,g,b));
+        }
+    };
+
+    function Values(color) {
+        this.hex = '';
+        this.hsl = {};
+        this.rgb = {};
+
+        if (color) return this.setColor(color);
+
+        return this;
+    }
+
+    Values.Utils = {};
+    Values.Utils = Utils;
+
+    /**
+    @return Values instance || Error [Object]
+    */
+    Values.prototype.setColor = function(color) {
+        if (Utils.isHEX(color)) {
+            return this._setFromHexString(color);
+        } else if (Utils.isRGB(color)) {
+            return this._setFromRGBString(color);
+        } else if (Utils.isHSL(color)) {
+            return this._setFromHSLString(color);
+        }
+
+        return new Error('Invalid Color Format');
+    };
+
+    /**
+    Lightens the instance by mixing it with white as specified by @percentage.
+    @method tint <public> [Function]
+    @param percentage <optional> [Number] (0)
+    @return new Values instance [Object]
+    */
+    Values.prototype.tint = function tint(percentage) {
+        return Utils.mix({rgb:{r:255, g:255, b:255}}, this, percentage);
+    };
+
+    /**
+    Darkens the instance color by mixing it with black as specified by @percentage.
+    @method shade <public> [Function]
+    @param percentage <optional> [Number] (0)
+    @return new Values instance [Object]
+    */
+    Values.prototype.shade = function shade(percentage) {
+        return Utils.mix({rgb:{r:0, g:0, b:0}}, this, percentage);
+    };
+
+    /**
+    Darkens the instance color by mixing it with black as specified by @percentage.
+    @method tints <public> [Function]
+    @param percentage <optional> [Number] (1)
+    @return Array of Values instances [Array]
+    */
+    Values.prototype.tints = function tint(percentage) {
+        percentage = percentage || 1;
+
+        var i = percentage;
+        var tints = [];
+
+        while (i <= 100) {
+            tints.push(this.tint(i));
+            i += percentage;
+        };
+
+        return tints;
+    };
+
+    /**
+    Darkens the instance color by mixing it with black as specified by @percentage.
+    @method shades <public> [Function]
+    @param percentage <optional> [Number] (1)
+    @return Array of Values instances [Array]
+    */
+    Values.prototype.shades = function tint(percentage) {
+        percentage = percentage || 1;
+
+        var i = percentage;
+        var shades = [];
+
+        while (i <= 100) {
+            shades.push(this.shade(i));
+            i += percentage;
+        };
+
+        return shades;
+    };
+
+    Values.prototype.all = function all(percentage) {
+        percentage = percentage || 1;
+
+        var tints = this.tints(percentage).reverse();
+        var shades = this.shades(percentage);
+        tints.push(this);
+
+        return tints.concat(shades);
+    };
+
+    Values.prototype.getBrightness = function getBrightness() {
+        var sum = (this.rgb.r + this.rgb.g + this.rgb.b);
+
+        return Math.round(sum / (255 * 3) * 100);
+    };
+
+    /**
+    Returns the instance color in hex format.
+    @returns '#000000' [String]
+    */
+    Values.prototype.hexString = function() {
+        return '#' + this.hex;
+    };
+
+    Values.prototype.rgbString = function() {
+        return 'rgb(' + this.rgb.r + ', ' + this.rgb.g + ', ' + this.rgb.b + ')';
+    };
+
+    Values.prototype.hslString = function() {
+        return 'hsl(' + this.hsl.h + ', ' + this.hsl.s + '%, ' + this.hsl.l + '%)';
+    };
+
+
+    /**
+        @private methods
+    */
+
+    Values.prototype._setFromHexString = function _setFromHexString(color) {
+        this.hex = (Utils.reHash.test(color)) ? color.replace('#','') : color;
+        this.rgb = Utils.HEXtoRGB(color);
+        this.hsl = Utils.RGBtoHSL(this.rgb.r, this.rgb.g, this.rgb.b);
+
+        return this
+    };
+
+    Values.prototype._setFromRGBString = function _setFromRGBString(color) {
+        var rgb = color.replace(/[^\d,]/g, '').split(','),
+            r = parseInt(rgb[0], 10),
+            g = parseInt(rgb[1], 10),
+            b = parseInt(rgb[2], 10);
+
+        this.rgb = {r: r, g: g, b: b};
+        this.hex = Utils.RGBtoHEX(r, g, b);
+        this.hsl = Utils.RGBtoHSL(this.rgb.r, this.rgb.g, this.rgb.b);
+
+        return this;
+    };
+
+    Values.prototype._setFromHSLString = function _setFromHSLString(color) {
+        var hsl = color.match(Utils.reHSL),
+            h = Math.round(hsl[1]),
+            s = Math.round(hsl[2]),
+            l = Math.round(hsl[3]);
+
+        this.hsl = {h: h, s: s, l: l};
+        this.rgb = Utils.HSLtoRGB(h, s, l);
+        this.hex = Utils.RGBtoHEX(this.rgb.r, this.rgb.g, this.rgb.b);
+
+        return this;
+    };
+
+    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+        module.exports = Values;
+    } else window.Values = Values;
+})()
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 if (!Function.prototype.bind) {
   Function.prototype.bind = function (oThis) {
@@ -1166,7 +1446,7 @@ Class(Sl.UI, 'ColorsCollection').inherits(Widget)({
             Widget.prototype.init.call(this, config);
 
             this._cached = [];
-            this._storeInMemory(100);
+            this._storeInMemory(67);
         },
 
         /**
@@ -1574,15 +1854,15 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
 
             this._values.setColor(color);
             this._updateHash(this._values.hex.toUpperCase());
-            this._ui.preview.style.backgroundColor = this._values.hex;
-            this._ui.colorPicker.value = this._values.hex;
-            this._ui.input.value = this._values.hex;
+            this._ui.preview.style.backgroundColor = this._values.hexString();
+            this._ui.colorPicker.value = this._values.hexString();
+            this._ui.input.value = this._values.hexString();
 
             this.colorsContainer.children.forEach(function(child, index) {
                 var value, textColor, element;
 
-                value = this._values.all[index];
-                textColor = (value.brightness > 50) ? '#000' : '#fff';
+                value = this._values.all(3)[index];
+                textColor = (value.getBrightness() > 50) ? '#000' : '#fff';
                 element = child.getElement();
 
                 element.classList.remove("original");
@@ -1592,10 +1872,10 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
                     baseColor = element;
                 }
 
-                child.setBackgroundColor(value.hex).setColor(textColor);
-                child.hexLabel.setText(value.hex);
-                child.rgbLabel.setText(value.rgb);
-                child.hslLabel.setText(value.hsl);
+                child.setBackgroundColor(value.hexString()).setColor(textColor);
+                child.hexLabel.setText(value.hexString());
+                child.rgbLabel.setText(value.rgbString());
+                child.hslLabel.setText(value.hslString());
 
                 value = textColor = element = null;
             }, this);

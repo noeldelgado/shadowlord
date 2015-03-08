@@ -135,7 +135,6 @@ dfn {
  * Address differences between Firefox and other browsers.
  */
 hr {
-  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
@@ -317,8 +316,7 @@ html input[disabled] {
  */
 input[type="checkbox"],
 input[type="radio"] {
-  -moz-box-sizing: border-box;
-       box-sizing: border-box;
+  box-sizing: border-box;
   /* 1 */
   padding: 0;
   /* 2 */
@@ -332,7 +330,6 @@ input[type="radio"] {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  -moz-box-sizing: content-box;
   /* 2 */
   box-sizing: content-box;
 }
@@ -377,21 +374,29 @@ table {
   border-spacing: 0;
 }
 
-* {
-  -moz-box-sizing: border-box;
-       box-sizing: border-box;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 .main-container {
   padding: 80px 0 0 0;
-}
-.main-container:after {
-  content: "";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-content: flex-start;
+      -ms-flex-line-pack: start;
+          align-content: flex-start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 input[type="text"] {
@@ -436,8 +441,7 @@ a:hover {
 .preview__color {
   border-color: rgba(243, 243, 243, 0.75);
   border-radius: 4px;
-  -webkit-transition: background-color 400ms ease;
-          transition: background-color 400ms ease;
+  transition: background-color 400ms ease;
 }
 
 [name="input"] {
@@ -695,8 +699,7 @@ footer a {
   color: #fff;
   border-radius: 3px;
   opacity: .8;
-  -webkit-transition: opacity 250ms;
-          transition: opacity 250ms;
+  transition: opacity 250ms;
 }
 footer a:hover {
   color: #fff;
@@ -711,8 +714,7 @@ footer a:hover {
   outline: none;
   border-style: solid;
   border-radius: 2px;
-  -webkit-transition: color 250ms ease, background-color 250ms ease;
-          transition: color 250ms ease, background-color 250ms ease;
+  transition: color 250ms ease, background-color 250ms ease;
 }
 .btn.borderless {
   border-style: none;
@@ -773,8 +775,7 @@ footer a:hover {
   background-color: rgba(59, 74, 76, 0.1);
   color: rgba(59, 74, 76, 0.7);
   border-radius: 3px;
-  -webkit-transition: background-color 250ms ease;
-          transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
 }
 .checkbox-wrapper .checkbox-ui:after {
   content: "\2713";
@@ -782,8 +783,8 @@ footer a:hover {
   -webkit-transform: scale(0);
       -ms-transform: scale(0);
           transform: scale(0);
-  -webkit-transition: -webkit-transform 250ms ease, opacity 250ms ease;
-          transition: transform 250ms ease, opacity 250ms ease;
+  transition: -webkit-transform 250ms ease, opacity 250ms ease;
+  transition: transform 250ms ease, opacity 250ms ease;
 }
 .checkbox-wrapper .checkbox-label {
   color: #688285;
@@ -802,16 +803,21 @@ footer a:hover {
 }
 
 .item {
-  display: table;
-  float: left;
-  width: 20%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1 0 20%;
+      -ms-flex: 1 0 20%;
+          flex: 1 0 20%;
   height: 100px;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.item__inner {
-  display: table-cell;
-  vertical-align: middle;
-}
 .item__inner p {
   margin: .3em 0;
 }
@@ -832,36 +838,39 @@ footer a:hover {
 
 @media all and (max-width: 768px) {
   .item {
-    width: 25%;
+    -webkit-flex: 1 0 25%;
+        -ms-flex: 1 0 25%;
+            flex: 1 0 25%;
   }
 }
 @media all and (max-width: 600px) {
   .item {
-    width: 50%;
+    -webkit-flex: 1 0 50%;
+        -ms-flex: 1 0 50%;
+            flex: 1 0 50%;
   }
 }
 @media all and (max-width: 480px) {
   .item {
-    float: none;
+    -webkit-flex: none;
+        -ms-flex: none;
+            flex: none;
     width: 100%;
     height: 70px;
   }
 }
 .item {
   background-color: transparent;
-  -webkit-transition: background-color 400ms ease;
-          transition: background-color 400ms ease;
+  transition: background-color 400ms ease;
 }
 
 .item__inner {
   text-align: center;
   text-transform: uppercase;
-  -webkit-transition: color 400ms ease;
-          transition: color 400ms ease;
+  transition: color 400ms ease;
 }
 .item__inner p {
-  -webkit-transition: font-size 250ms ease, opacity 200ms linear;
-          transition: font-size 250ms ease, opacity 200ms linear;
+  transition: font-size 250ms ease, opacity 200ms linear;
 }
 
 .original {
@@ -914,8 +923,7 @@ footer a:hover {
   visibility: hidden;
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  -webkit-transition: visibility 250ms ease, opacity 250ms ease;
-          transition: visibility 250ms ease, opacity 250ms ease;
+  transition: visibility 250ms ease, opacity 250ms ease;
 }
 .modal .modal__close {
   background-color: transparent;
@@ -926,8 +934,8 @@ footer a:hover {
   opacity: .8;
 }
 .modal .modal__inner {
-  -webkit-transition: -webkit-transform 200ms ease;
-          transition: transform 200ms ease;
+  transition: -webkit-transform 200ms ease;
+  transition: transform 200ms ease;
   -webkit-transform: scale(0.5);
       -ms-transform: scale(0.5);
           transform: scale(0.5);

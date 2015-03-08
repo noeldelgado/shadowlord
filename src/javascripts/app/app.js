@@ -255,15 +255,15 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
 
             this._values.setColor(color);
             this._updateHash(this._values.hex.toUpperCase());
-            this._ui.preview.style.backgroundColor = this._values.hex;
-            this._ui.colorPicker.value = this._values.hex;
-            this._ui.input.value = this._values.hex;
+            this._ui.preview.style.backgroundColor = this._values.hexString();
+            this._ui.colorPicker.value = this._values.hexString();
+            this._ui.input.value = this._values.hexString();
 
             this.colorsContainer.children.forEach(function(child, index) {
                 var value, textColor, element;
 
-                value = this._values.all[index];
-                textColor = (value.brightness > 50) ? '#000' : '#fff';
+                value = this._values.all(3)[index];
+                textColor = (value.getBrightness() > 50) ? '#000' : '#fff';
                 element = child.getElement();
 
                 element.classList.remove("original");
@@ -273,10 +273,10 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
                     baseColor = element;
                 }
 
-                child.setBackgroundColor(value.hex).setColor(textColor);
-                child.hexLabel.setText(value.hex);
-                child.rgbLabel.setText(value.rgb);
-                child.hslLabel.setText(value.hsl);
+                child.setBackgroundColor(value.hexString()).setColor(textColor);
+                child.hexLabel.setText(value.hexString());
+                child.rgbLabel.setText(value.rgbString());
+                child.hslLabel.setText(value.hslString());
 
                 value = textColor = element = null;
             }, this);

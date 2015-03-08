@@ -2,7 +2,7 @@
 Base Class from which almost all widgets are based overall the project
 
 The main idea behind constructing a new widget toolkit instead of using one of the many high quality widget
-toolkits avaliable is that we considered that currently, no widget system provides all the features that were
+toolkits avaliable is that we considered that currently, no widget system provides all the features that where
 required for this project.
 
 Features of the widget system
@@ -27,17 +27,18 @@ Usage Example.
 
 The most basic usage of a widget is to simply create an instance and render it at a target element
 in this case body
-var myWidgetInstance = new Widget();
+var myWidgetInstance = new Breezi.Widget();
 myWidgetInstance.render(document.body);
 
 like this widget does renders does not display anything so lets give it something to display first
-var myWidgetInstance = new Widget();
-myWidgetInstance.element.innerHTML('Im a simple widget');
+var myWidgetInstance = new Breezi.Widget();
+myWidgetInstance.element.html('Im a simple widget');
 myWidgetInstance.render(document.body);
 
-this reveals that internally every widget has an element property that is initialized by default to a HTMLElement,
-this allow easy DOM manipulation.
+this reveals that internally every widget has an element property that is initialized by default to a jQuery Instance
+this allow easy DOM manipulation, animation and operations handled by a high quality third party library.
 @class Widget
+@namespace Breezi
 @inlcudes CustomEventSupport
 @includes NodeSupport
 @dependency Neon
@@ -86,22 +87,19 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
         __destroyed : false,
 
         init : function init(config) {
-            var property, temporalElement;
+            var property;
 
             Object.keys(config || {}).forEach(function (propertyName) {
                 this[propertyName] = config[propertyName];
             }, this);
 
             if (this.element == null) {
-                temporalElement = document.createElement('div');
-                temporalElement.innerHTML = this.constructor.HTML.replace(/\s\s+/g, '');
-                this.element = temporalElement.firstChild;
-                this.element.classList.add(this.constructor.ELEMENT_CLASS);
-                temporalElement = null;
+                this.element = $(this.constructor.HTML.replace(/\s\s+/g, ''));
+                this.element.addClass(this.constructor.ELEMENT_CLASS);
             }
 
             if (this.hasOwnProperty('className') === true) {
-                this.element.classList.add(this.className);
+                this.element.addClass(this.className);
             }
         },
 
@@ -113,7 +111,7 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
         **/
         _activate : function _activate() {
             this.active = true;
-            this.element.classList.add('active');
+            this.element.addClass('active');
         },
 
         /**
@@ -148,7 +146,7 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
         **/
         _deactivate : function _deactivate() {
             this.active = false;
-            this.element.classList.remove('active');
+            this.element.removeClass('active');
         },
 
         /**
@@ -183,7 +181,7 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
         **/
         _enable : function _enable() {
             this.disabled = false;
-            this.element.classList.remove('disable');
+            this.element.removeClass('disable');
         },
 
         /**
@@ -211,7 +209,7 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
         **/
         _disable : function _disable() {
             this.disabled = true;
-            this.element.classList.add('disable');
+            this.element.addClass('disable');
         },
 
         /**
@@ -250,9 +248,7 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
             var childrenLength;
 
             if (this.element) {
-                if (this.element.parentNode) {
-                    this.element.parentNode.removeChild(el);
-                }
+                this.element.remove();
             }
 
             if (this.children !== null){
@@ -270,8 +266,8 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
                 this.parent.removeChild(this);
             }
 
-            this.children = null;
-            this.element = null;
+            this.children       = null;
+            this.element        = null;
         },
 
         /**
@@ -307,7 +303,7 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
         @method
         @argument element <required> [JQuery] (undefined) This is the element
         into which the widget will be appended.
-        @argument beforeElement <optional> [HTMLDOMElement] (undefined) this is the element
+        @argument beforeElement <optional> [jQuery] (undefined) this is the element
         that will be used as a reference to insert the widgets element. this argument
         must be a child of the "element" argument.
         @return this [Widget]
@@ -321,9 +317,9 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
                 beforeElement : beforeElement
             });
             if (beforeElement) {
-                element.insertBefore(this.element, beforeElement);
+                this.element.insertBefore(beforeElement);
             } else {
-                element.appendChild(this.element);
+                this.element.appendTo(element);
             }
             this.dispatch('render');
             return this;

@@ -1,10 +1,16 @@
-* {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
 .main-container {
-  @include clear;
   padding: 80px 0 0 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
 }
 
 input[type="text"] {
