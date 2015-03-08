@@ -233,6 +233,130 @@ global.Class = function Class(classNameOrNameSpace, className) {
 
 };
 
+Module('NodeSupport')({
+    prototype : {
+        parent      : null,
+
+        children    : [],
+
+        appendChild : function(child) {
+            if(child.parent) {
+                child.parent.removeChild(child);
+            }
+
+            if(!this.hasOwnProperty('children')) {
+                this.children = [];
+            }
+
+            this.children.push(child);
+            this[child.name] = child;
+            child.setParent(this);
+            return child;
+        },
+
+        insertBefore : function (child, beforeChild) {
+            var position;
+
+            if (child.parent) {
+                child.parent.removeChild(child);
+            }
+
+            if (!this.hasOwnProperty('children')) {
+                this.children = [];
+            }
+
+            if (typeof beforeChild === 'undefined') {
+                this.appendChild(child);
+            } else {
+                position = this.children.indexOf(beforeChild);
+                this.children.splice(position, 0, child);
+
+                this[child.name] = child;
+                child.setParent(this);
+            }
+
+            return child;
+
+        },
+
+        insertChild : function(child, position) {
+            console.warn('NodeSupport insertChild method is deprecated, try insertBefore');
+
+            if (child.parent) {
+                child.parent.removeChild(child);
+            }
+
+            if (!this.hasOwnProperty('children')) {
+                this.children = [];
+            }
+
+            if (typeof position == 'undefined') {
+                this.children.push(child);
+                this[child.name] = child;
+                child.setParent(this);
+                return child;
+            }
+
+            this.children.splice(position, 0, child);
+            this[child.name] = child;
+            child.setParent(this);
+            return child;
+        },
+
+        removeChild : function (child) {
+            var position = this.children.indexOf(child);
+
+            if (position !== -1) {
+                this.children.splice(position, 1);
+                delete this[child.name];
+                child.parent = null;
+            }
+
+            return child;
+        },
+
+        setParent   : function (parent) {
+            this.parent = parent;
+            return this;
+        },
+
+        getDescendants : function () {
+            var nodes = [];
+            this.children.forEach(function (node) {
+                nodes.push(node);
+            });
+            this.children.forEach(function (node) {
+                nodes = nodes.concat(node.getDescendants());
+            });
+            return nodes;
+        },
+
+        getPreviousSibling : function () {
+            if (typeof this.parent === 'undefined') {
+                return;
+            }
+
+            if (this.parent.children[0] === this) {
+                return;
+            }
+
+            return this.parent.children[ this.parent.children.indexOf(this) - 1 ];
+        },
+
+        getNextSibling : function () {
+            if (typeof this.parent === 'undefined') {
+                return;
+            }
+
+            if (this.parent.children[ this.parent.children.length - 1 ] === this) {
+                return;
+            }
+
+            return this.parent.children[ this.parent.children.indexOf(this) + 1 ];
+        }
+    }
+});
+
 Class('CustomEvent')({
     prototype : {
         bubbles                       : true,
@@ -452,176 +576,329 @@ Module('CustomEventSupport')({
     }
 });
 
-Module('NodeSupport')({
-    prototype : {
-        parent      : null,
-
-        children    : [],
-
-        appendChild : function(child) {
-            if(child.parent) {
-                child.parent.removeChild(child);
-            }
-
-            if(!this.hasOwnProperty('children')) {
-                this.children = [];
-            }
-
-            this.children.push(child);
-            this[child.name] = child;
-            child.setParent(this);
-            return child;
-        },
-
-        insertBefore : function (child, beforeChild) {
-            var position;
-
-            if (child.parent) {
-                child.parent.removeChild(child);
-            }
-
-            if (!this.hasOwnProperty('children')) {
-                this.children = [];
-            }
-
-            if (typeof beforeChild === 'undefined') {
-                this.appendChild(child);
-            } else {
-                position = this.children.indexOf(beforeChild);
-                this.children.splice(position, 0, child);
-
-                this[child.name] = child;
-                child.setParent(this);
-            }
-
-            return child;
-
-        },
-
-        insertChild : function(child, position) {
-            console.warn('NodeSupport insertChild method is deprecated, try insertBefore');
-
-            if (child.parent) {
-                child.parent.removeChild(child);
-            }
-
-            if (!this.hasOwnProperty('children')) {
-                this.children = [];
-            }
-
-            if (typeof position == 'undefined') {
-                this.children.push(child);
-                this[child.name] = child;
-                child.setParent(this);
-                return child;
-            }
-
-            this.children.splice(position, 0, child);
-            this[child.name] = child;
-            child.setParent(this);
-            return child;
-        },
-
-        removeChild : function (child) {
-            var position = this.children.indexOf(child);
-
-            if (position !== -1) {
-                this.children.splice(position, 1);
-                delete this[child.name];
-                child.parent = null;
-            }
-
-            return child;
-        },
-
-        setParent   : function (parent) {
-            this.parent = parent;
-            return this;
-        },
-
-        getDescendants : function () {
-            var nodes = [];
-            this.children.forEach(function (node) {
-                nodes.push(node);
-            });
-            this.children.forEach(function (node) {
-                nodes = nodes.concat(node.getDescendants());
-            });
-            return nodes;
-        },
-
-        getPreviousSibling : function () {
-            if (typeof this.parent === 'undefined') {
-                return;
-            }
-
-            if (this.parent.children[0] === this) {
-                return;
-            }
-
-            return this.parent.children[ this.parent.children.indexOf(this) - 1 ];
-        },
-
-        getNextSibling : function () {
-            if (typeof this.parent === 'undefined') {
-                return;
-            }
-
-            if (this.parent.children[ this.parent.children.length - 1 ] === this) {
-                return;
-            }
-
-            return this.parent.children[ this.parent.children.indexOf(this) + 1 ];
-        }
-    }
-});
-
 /**
-Base Class from which almost all widgets are based overall the project
+ * values.js - Get the tints and shades of a color
+ * @version v1.0.1
+ * @link http://noeldelgado.github.io/Values.js/
+ * @license MIT
+ */
+ (function() {
+    var Utils = {
+        reHash : new RegExp("^#"),
+        reHEX : new RegExp("^(#)?([0-9a-fA-F]{3})([0-9a-fA-F]{3})?$"),
+        reRGB : new RegExp("rgba?\\s*\\((\\d+)\\,\\s*(\\d+)\\,\\s*(\\d+)(,\\s*((\\d+)?(\\.\\d+)?))?\\)","i"),
+        reHSL : new RegExp("hsla?\\((\\d+),\\s*([\\d.]+)%,\\s*([\\d.]+)%,?\\s*(?:0?(\\.\\d+)?|1(\\.0)?)?\\)","i"),
 
-The main idea behind constructing a new widget toolkit instead of using one of the many high quality widget
-toolkits avaliable is that we considered that currently, no widget system provides all the features that were
-required for this project.
+        isHEX : function isHEX(value) {
+            return this.reHEX.test(value);
+        },
 
-Features of the widget system
-* A custom and easy to handle event binding, dispatching and manipulation, with some sort of bubbling support
-* A module system which we can use to include specific behaviour to any widget and reuse the code where needed
-* A tree structure support for the widgets that the event system could bubble, and that also serves as
-* A navigation system.
-* The widgets must be able to be grouped to form more complex widgets
-* Remove the complexity of DOM manipulation and handling
-* A way to wrap widgets at our convenience to reuse widgets avaliable and make them comly to our needs
-without the need to hack those widgets, that would force us to maintain the new versions of those widgets
-and that is a very complex task when widgets become so complex.
-* A widget system that would allow us to start wrapping some widgets for a fast start and later code our own widgets
-at will.
-* expose a consistent API that allow us to choose the use of widgets by API calls and user interaction at will and with the same
-clearance and capacity
-* an easy way to allow subclasing widgets
-* an easy way to provide new html, class, and css for a specific instance of a widget that would remove us the need
-to create complex inheritance structures that are hard to maintain.
+        isRGB : function isRGB(value) {
+            var rgb = value.match(this.reRGB);
 
-Usage Example.
+            if (rgb) {
+                if ((rgb[1] <= 255) && (rgb[2] <= 255) && (rgb[3] <= 255)) {
+                    return true;
+                }
+            }
 
-The most basic usage of a widget is to simply create an instance and render it at a target element
-in this case body
-var myWidgetInstance = new Widget();
-myWidgetInstance.render(document.body);
+            return false;
+        },
 
-like this widget does renders does not display anything so lets give it something to display first
-var myWidgetInstance = new Widget();
-myWidgetInstance.element.innerHTML('Im a simple widget');
-myWidgetInstance.render(document.body);
+        isHSL : function isHSL(value) {
+            var hsl = value.match(this.reHSL);
 
-this reveals that internally every widget has an element property that is initialized by default to a HTMLElement,
-this allow easy DOM manipulation.
-@class Widget
-@inlcudes CustomEventSupport
-@includes NodeSupport
-@dependency Neon
-@dependency CustomEventSupport
-@dependency NodeSupport
-**/
+            if (hsl) {
+                if ((hsl[1] <= 360) && (hsl[2] <= 100) && (hsl[3] <= 100)) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
+
+        HEXtoRGB : function HEXtoRGB(hex) {
+            hex = hex.replace('#', '');
+
+            if (hex.length === 3) {
+                var h1 = hex.charAt(0), h2 = hex.charAt(1), h3 = hex.charAt(2);
+                hex = h1 + h1 + h2 + h2 + h3 + h3;
+            }
+            var bw = parseInt(hex, 16);
+
+            return {r: (bw >> 16) & 255, g: (bw >> 8) & 255, b: bw & 255};
+        },
+
+        RGBtoHEX : function RGBtoHEX(r, g, b) {
+            return (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        },
+
+        RGBtoHSL : function RGBtoHSL(r, g, b) {
+            var min, max, h, s, l;
+
+            r = (r / 255);
+            g = (g / 255);
+            b = (b / 255);
+
+            max = Math.max(r, g, b);
+            min = Math.min(r, g, b);
+            l = ((max + min) / 2);
+
+            if (max === min) {
+                h = s = 0;
+            } else {
+                var d = (max - min);
+                s = (l > 0.5) ? (d / (2 - max - min)) : (d / (max + min));
+
+                if (max === r)      h = ((g - b) / d + (g < b ? 6 : 0));
+                else if (max === g) h = ((b - r) / d + 2);
+                else if (max === b) h = ((r - g) / d + 4);
+
+                h /= 6;
+            }
+
+            return {h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100)};
+        },
+
+        HUEtoRGB : function HUEtoRGB(v1, v2, vh) {
+            if (vh < 0) vh += 1;
+            if (vh > 1) vh -= 1;
+
+            if ((6 * vh) < 1) return (v1 + (v2 - v1) * 6 * vh);
+            if ((2 * vh) < 1) return v2;
+            if ((3 * vh) < 2) return (v1 + (v2 - v1) * ((2/3) - vh) * 6);
+            return v1;
+        },
+
+        HSLtoRGB : function HSLtoRGB(h, s, l) {
+            var r, g, b;
+
+            h /= 360;
+            s /= 100;
+            l /= 100;
+
+            if (s == 0) r = g = b = l;
+            else {
+                var q = (l < 0.5) ? (l * (1 + s)) : (l + s - l * s);
+                var p = (2 * l - q);
+                r = this.HUEtoRGB(p, q, h + 1/3);
+                g = this.HUEtoRGB(p, q, h);
+                b = this.HUEtoRGB(p, q, h - 1/3);
+            }
+
+            return {r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255)};
+        },
+
+        mix : function mix(color1, color2, percentage) {
+            percentage = percentage || 50;
+
+            var weight = (percentage / 100.0);
+            var w = (weight * 2 - 1);
+            var a = 0;
+
+            var w1 = (((w * a == -1) ? w : (w + a) / (1 + w * a)) + 1) / 2.0;
+            var w2 = (1 - w1);
+
+            var r = Math.round(color1.rgb.r * w1 + color2.rgb.r * w2);
+            var g = Math.round(color1.rgb.g * w1 + color2.rgb.g * w2);
+            var b = Math.round(color1.rgb.b * w1 + color2.rgb.b * w2);
+
+            return new Values(Utils.RGBtoHEX(r,g,b));
+        }
+    };
+
+    function Values(color) {
+        this.hex = '';
+        this.hsl = {};
+        this.rgb = {};
+
+        if (color) {
+            return this.setColor(color);
+        }
+
+        return this;
+    }
+
+    Values.Utils = Utils;
+
+    /**
+    Sets the base color for which all operations are based. Updates the instance's properties.
+    @method setColor <public> [Function]
+    @param color <required> [String] A valid color format (#000, rgb(0,0,0), hsl(0,0%,0%))
+    @return Values instance || Error [Object]
+    */
+    Values.prototype.setColor = function(color) {
+        if (Utils.isHEX(color)) {
+            return this._setFromHexString(color);
+        } else if (Utils.isRGB(color)) {
+            return this._setFromRGBString(color);
+        } else if (Utils.isHSL(color)) {
+            return this._setFromHSLString(color);
+        }
+
+        return new Error('Invalid Color Format');
+    };
+
+    /**
+    Lightens the instance by mixing it with white as specified by @percentage.
+    @method tint <public> [Function]
+    @param percentage <optional> [Number] {50}
+    @return new Values instance [Object]
+    */
+    Values.prototype.tint = function tint(percentage) {
+        return Utils.mix({rgb:{r:255, g:255, b:255}}, this, percentage);
+    };
+
+    /**
+    Darkens the instance color by mixing it with black as specified by @percentage.
+    @method shade <public> [Function]
+    @param percentage <optional> [Number] {50}
+    @return new Values instance [Object]
+    */
+    Values.prototype.shade = function shade(percentage) {
+        return Utils.mix({rgb:{r:0, g:0, b:0}}, this, percentage);
+    };
+
+    /**
+    Generates the tints of the instance color as specified by @percentage.
+    @method tints <public> [Function]
+    @param percentage <optional> [Number] {10}
+    @return Array of Values instances [Array]
+    */
+    Values.prototype.tints = function tint(percentage) {
+        var i = percentage = (percentage || 10), tints = [];
+
+        while (i <= 100) {
+            tints.push(this.tint(i));
+            i += percentage;
+        }
+
+        return tints;
+    };
+
+    /**
+    Generates the shades of the instance color as specified by @percentage.
+    @method shades <public> [Function]
+    @param percentage <optional> [Number] {10}
+    @return Array of Values instances [Array]
+    */
+    Values.prototype.shades = function tint(percentage) {
+        var i = percentage = (percentage || 10), shades = [];
+
+        while (i <= 100) {
+            shades.push(this.shade(i));
+            i += percentage;
+        }
+
+        return shades;
+    };
+
+    /**
+    Generates the tints and shades of the instance color as specified by @percentage.
+    @method all <public> [Function]
+    @param percentage <optional> [Number] {10}
+    @return Array of Values instances [Array]
+    */
+    Values.prototype.all = function all(percentage) {
+        percentage = percentage;
+
+        var tints = this.tints(percentage).reverse();
+        var shades = this.shades(percentage);
+        tints.push(this);
+
+        return tints.concat(shades);
+    };
+
+    /**
+    Calculates and returns the brightness of the instance base-color.
+    @return brightness [Number]
+    */
+    Values.prototype.getBrightness = function getBrightness() {
+        var sum = (this.rgb.r + this.rgb.g + this.rgb.b);
+        return Math.round(sum / (255 * 3) * 100);
+    };
+
+    /**
+    Returns the instance color in hexadecimal string form.
+    @returns '#000000' [String]
+    */
+    Values.prototype.hexString = function() {
+        return '#' + this.hex;
+    };
+
+    /**
+    Returns the instance color in rgb string form.
+    @returns 'rgb(0, 0, 0)' [String]
+    */
+    Values.prototype.rgbString = function() {
+        return 'rgb(' + this.rgb.r + ', ' + this.rgb.g + ', ' + this.rgb.b + ')';
+    };
+
+    /**
+    Returns the instance color in hsl string form.
+    @returns 'hsl(0, 0%, 0%)' [String]
+    */
+    Values.prototype.hslString = function() {
+        return 'hsl(' + this.hsl.h + ', ' + this.hsl.s + '%, ' + this.hsl.l + '%)';
+    };
+
+    /**
+    Updates the instance base-color properties from a valid hex string.
+    @method _setFromHexString <private> [Function]
+    @param color <required> [String]
+    */
+    Values.prototype._setFromHexString = function _setFromHexString(color) {
+        this.hex = (Utils.reHash.test(color)) ? color.replace('#','') : color;
+        this.rgb = Utils.HEXtoRGB(color);
+        this.hsl = Utils.RGBtoHSL(this.rgb.r, this.rgb.g, this.rgb.b);
+
+        return this
+    };
+
+    /**
+    Updates the instance base-color properties from a valid rgb string.
+    @method _setFromRGBString <private> [Function]
+    @param color <required> [String]
+    */
+    Values.prototype._setFromRGBString = function _setFromRGBString(color) {
+        var rgb = color.replace(/[^\d,]/g, '').split(','),
+            r = parseInt(rgb[0], 10),
+            g = parseInt(rgb[1], 10),
+            b = parseInt(rgb[2], 10);
+
+        this.rgb = {r: r, g: g, b: b};
+        this.hex = Utils.RGBtoHEX(r, g, b);
+        this.hsl = Utils.RGBtoHSL(this.rgb.r, this.rgb.g, this.rgb.b);
+
+        return this;
+    };
+
+    /**
+    Updates the instance base-color properties from a valid hsl string.
+    @method _setFromHSLString <private> [Function]
+    @param color <required> [String]
+    */
+    Values.prototype._setFromHSLString = function _setFromHSLString(color) {
+        var hsl = color.match(Utils.reHSL),
+            h = Math.round(hsl[1]),
+            s = Math.round(hsl[2]),
+            l = Math.round(hsl[3]);
+
+        this.hsl = {h: h, s: s, l: l};
+        this.rgb = Utils.HSLtoRGB(h, s, l);
+        this.hex = Utils.RGBtoHEX(this.rgb.r, this.rgb.g, this.rgb.b);
+
+        return this;
+    };
+
+    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+        module.exports = Values;
+    } else window.Values = Values;
+})();
+window.Sl = {};
+Sl.UI = {};
+
+
 Class('Widget').includes(CustomEventSupport, NodeSupport)({
 
     /**
@@ -674,12 +951,18 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
                 temporalElement = document.createElement('div');
                 temporalElement.innerHTML = this.constructor.HTML.replace(/\s\s+/g, '');
                 this.element = temporalElement.firstChild;
-                this.element.classList.add(this.constructor.ELEMENT_CLASS);
+
+                this.constructor.ELEMENT_CLASS.split(' ').forEach(function(className) {
+                    this.element.classList.add(className);
+                }, this);
+
                 temporalElement = null;
             }
 
             if (this.hasOwnProperty('className') === true) {
-                this.element.classList.add(this.className);
+                this.className.split(' ').forEach(function(className) {
+                    this.element.classList.add(className);
+                }, this);
             }
         },
 
@@ -829,7 +1112,7 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
 
             if (this.element) {
                 if (this.element.parentNode) {
-                    this.element.parentNode.removeChild(el);
+                    this.element.parentNode.removeChild(this.element);
                 }
             }
 
@@ -909,293 +1192,6 @@ Class('Widget').includes(CustomEventSupport, NodeSupport)({
     }
 });
 
-(function() {
-    var Utils = {
-        reHash : new RegExp("^#"),
-        reHEX : new RegExp("^(#)?([0-9a-fA-F]{3})([0-9a-fA-F]{3})?$"),
-        reRGB : new RegExp("rgba?\\s*\\((\\d+)\\,\\s*(\\d+)\\,\\s*(\\d+)(,\\s*((\\d+)?(\\.\\d+)?))?\\)","i"),
-        reHSL : new RegExp("hsla?\\((\\d+),\\s*([\\d.]+)%,\\s*([\\d.]+)%,?\\s*(?:0?(\\.\\d+)?|1(\\.0)?)?\\)","i"),
-
-        isHEX : function isHEX(value) {
-            return this.reHEX.test(value);
-        },
-
-        isRGB : function isRGB(value) {
-            var rgb = value.match(this.reRGB);
-
-            if (rgb) {
-                if ((rgb[1] <= 255) && (rgb[2] <= 255) && (rgb[3] <= 255)) {
-                    return true;
-                }
-            }
-
-            return false;
-        },
-
-        isHSL : function isHSL(value) {
-            var hsl = value.match(this.reHSL);
-
-            if (hsl) {
-                if ((hsl[1] <= 360) && (hsl[2] <= 100) && (hsl[3] <= 100)) {
-                    return true;
-                }
-            }
-
-            return false;
-        },
-
-        HEXtoRGB : function HEXtoRGB(hex) {
-            hex = hex.replace('#', '');
-
-            if (hex.length === 3) {
-                var h1 = hex.charAt(0), h2 = hex.charAt(1), h3 = hex.charAt(2);
-                hex = h1 + h1 + h2 + h2 + h3 + h3;
-            }
-            var bw = parseInt(hex, 16);
-
-            return {r: (bw >> 16) & 255, g: (bw >> 8) & 255, b: bw & 255};
-        },
-
-        RGBtoHEX : function RGBtoHEX(r, g, b) {
-            return (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
-        },
-
-        RGBtoHSL : function RGBtoHSL(r, g, b) {
-            var min, max, h, s, l;
-
-            r = (r / 255);
-            g = (g / 255);
-            b = (b / 255);
-
-            max = Math.max(r, g, b);
-            min = Math.min(r, g, b);
-            l = ((max + min) / 2);
-
-            if (max === min) h = s = 0;
-            else {
-                var d = (max - min);
-                s = (l > 0.5) ? (d / (2 - max - min)) : (d / (max + min));
-
-                if (max === r)      h = ((g - b) / d + (g < b ? 6 : 0));
-                else if (max === g) h = ((b - r) / d + 2);
-                else if (max === b) h = ((r - g) / d + 4);
-
-                h /= 6;
-            }
-
-            return {h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100)};
-        },
-
-        HUEtoRGB : function HUEtoRGB(v1, v2, vh) {
-            if (vh < 0) vh += 1;
-            if (vh > 1) vh -= 1;
-
-            if ((6 * vh) < 1) return (v1 + (v2 - v1) * 6 * vh);
-            if ((2 * vh) < 1) return v2;
-            if ((3 * vh) < 2) return (v1 + (v2 - v1) * ((2/3) - vh) * 6);
-            return v1;
-        },
-
-        HSLtoRGB : function HSLtoRGB(h, s, l) {
-            var r, g, b;
-
-            h /= 360;
-            s /= 100;
-            l /= 100;
-
-            if (s == 0) r = g = b = l;
-            else {
-                var q = (l < 0.5) ? (l * (1 + s)) : (l + s - l * s);
-                var p = (2 * l - q);
-                r = this.HUEtoRGB(p, q, h + 1/3);
-                g = this.HUEtoRGB(p, q, h);
-                b = this.HUEtoRGB(p, q, h - 1/3);
-            }
-
-            return {r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255)};
-        },
-
-        mix : function mix(color1, color2, percentage) {
-            percentage = percentage || 50;
-
-            var weight = (percentage / 100.0);
-            var w = (weight * 2 - 1);
-            var a = 0;
-
-            var w1 = (((w * a == -1) ? w : (w + a) / (1 + w * a)) + 1) / 2.0;
-            var w2 = (1 - w1);
-
-            var r = Math.round(color1.rgb.r * w1 + color2.rgb.r * w2);
-            var g = Math.round(color1.rgb.g * w1 + color2.rgb.g * w2);
-            var b = Math.round(color1.rgb.b * w1 + color2.rgb.b * w2);
-
-            return new Values(Utils.RGBtoHEX(r,g,b));
-        }
-    };
-
-    function Values(color) {
-        this.hex = '';
-        this.hsl = {};
-        this.rgb = {};
-
-        if (color) return this.setColor(color);
-
-        return this;
-    }
-
-    Values.Utils = {};
-    Values.Utils = Utils;
-
-    /**
-    @return Values instance || Error [Object]
-    */
-    Values.prototype.setColor = function(color) {
-        if (Utils.isHEX(color)) {
-            return this._setFromHexString(color);
-        } else if (Utils.isRGB(color)) {
-            return this._setFromRGBString(color);
-        } else if (Utils.isHSL(color)) {
-            return this._setFromHSLString(color);
-        }
-
-        return new Error('Invalid Color Format');
-    };
-
-    /**
-    Lightens the instance by mixing it with white as specified by @percentage.
-    @method tint <public> [Function]
-    @param percentage <optional> [Number] (0)
-    @return new Values instance [Object]
-    */
-    Values.prototype.tint = function tint(percentage) {
-        return Utils.mix({rgb:{r:255, g:255, b:255}}, this, percentage);
-    };
-
-    /**
-    Darkens the instance color by mixing it with black as specified by @percentage.
-    @method shade <public> [Function]
-    @param percentage <optional> [Number] (0)
-    @return new Values instance [Object]
-    */
-    Values.prototype.shade = function shade(percentage) {
-        return Utils.mix({rgb:{r:0, g:0, b:0}}, this, percentage);
-    };
-
-    /**
-    Darkens the instance color by mixing it with black as specified by @percentage.
-    @method tints <public> [Function]
-    @param percentage <optional> [Number] (1)
-    @return Array of Values instances [Array]
-    */
-    Values.prototype.tints = function tint(percentage) {
-        percentage = percentage || 1;
-
-        var i = percentage;
-        var tints = [];
-
-        while (i <= 100) {
-            tints.push(this.tint(i));
-            i += percentage;
-        };
-
-        return tints;
-    };
-
-    /**
-    Darkens the instance color by mixing it with black as specified by @percentage.
-    @method shades <public> [Function]
-    @param percentage <optional> [Number] (1)
-    @return Array of Values instances [Array]
-    */
-    Values.prototype.shades = function tint(percentage) {
-        percentage = percentage || 1;
-
-        var i = percentage;
-        var shades = [];
-
-        while (i <= 100) {
-            shades.push(this.shade(i));
-            i += percentage;
-        };
-
-        return shades;
-    };
-
-    Values.prototype.all = function all(percentage) {
-        percentage = percentage || 1;
-
-        var tints = this.tints(percentage).reverse();
-        var shades = this.shades(percentage);
-        tints.push(this);
-
-        return tints.concat(shades);
-    };
-
-    Values.prototype.getBrightness = function getBrightness() {
-        var sum = (this.rgb.r + this.rgb.g + this.rgb.b);
-
-        return Math.round(sum / (255 * 3) * 100);
-    };
-
-    /**
-    Returns the instance color in hex format.
-    @returns '#000000' [String]
-    */
-    Values.prototype.hexString = function() {
-        return '#' + this.hex;
-    };
-
-    Values.prototype.rgbString = function() {
-        return 'rgb(' + this.rgb.r + ', ' + this.rgb.g + ', ' + this.rgb.b + ')';
-    };
-
-    Values.prototype.hslString = function() {
-        return 'hsl(' + this.hsl.h + ', ' + this.hsl.s + '%, ' + this.hsl.l + '%)';
-    };
-
-
-    /**
-        @private methods
-    */
-
-    Values.prototype._setFromHexString = function _setFromHexString(color) {
-        this.hex = (Utils.reHash.test(color)) ? color.replace('#','') : color;
-        this.rgb = Utils.HEXtoRGB(color);
-        this.hsl = Utils.RGBtoHSL(this.rgb.r, this.rgb.g, this.rgb.b);
-
-        return this
-    };
-
-    Values.prototype._setFromRGBString = function _setFromRGBString(color) {
-        var rgb = color.replace(/[^\d,]/g, '').split(','),
-            r = parseInt(rgb[0], 10),
-            g = parseInt(rgb[1], 10),
-            b = parseInt(rgb[2], 10);
-
-        this.rgb = {r: r, g: g, b: b};
-        this.hex = Utils.RGBtoHEX(r, g, b);
-        this.hsl = Utils.RGBtoHSL(this.rgb.r, this.rgb.g, this.rgb.b);
-
-        return this;
-    };
-
-    Values.prototype._setFromHSLString = function _setFromHSLString(color) {
-        var hsl = color.match(Utils.reHSL),
-            h = Math.round(hsl[1]),
-            s = Math.round(hsl[2]),
-            l = Math.round(hsl[3]);
-
-        this.hsl = {h: h, s: s, l: l};
-        this.rgb = Utils.HSLtoRGB(h, s, l);
-        this.hex = Utils.RGBtoHEX(this.rgb.r, this.rgb.g, this.rgb.b);
-
-        return this;
-    };
-
-    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-        module.exports = Values;
-    } else window.Values = Values;
-})()
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 if (!Function.prototype.bind) {
   Function.prototype.bind = function (oThis) {
@@ -1291,10 +1287,6 @@ defineElementGetter(Element.prototype, 'classList', function () {
 });
 
 })();
-window.Sl = {};
-Sl.UI = {};
-
-
 Class(Sl.UI, 'Checkbox').inherits(Widget)({
     HTML : '\
         <div class="checkbox-wrapper">\
