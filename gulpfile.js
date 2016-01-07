@@ -2,6 +2,7 @@ var gulp            = require('gulp'),
     sass            = require('gulp-ruby-sass'),
     autoprefixer    = require('gulp-autoprefixer'),
     concat          = require('gulp-concat'),
+    uglify          = require('gulp-uglify')
     livereload      = require('gulp-livereload'),
     connect         = require('gulp-connect')
 
@@ -15,7 +16,7 @@ gulp.task('connect', function() {
 gulp.task('styles', function() {
     return gulp.src('src/sass/app.scss')
         .pipe(sass({
-            style: 'expanded'
+            style: 'compressed'
         }))
         .pipe(autoprefixer('last 2 version'))
         .pipe(gulp.dest('dist/css'))
@@ -36,6 +37,7 @@ gulp.task('scripts', function() {
         'src/javascripts/app.js'
         ])
         .pipe(concat('app.js'))
+        .pipe(uglify())
         .pipe(gulp.dest('dist/js'))
         .pipe(connect.reload());
 });
