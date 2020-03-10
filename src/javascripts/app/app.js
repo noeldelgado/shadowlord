@@ -307,7 +307,8 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
                 if (value.isTint) {
                     child.element.classList.add('-is-tint');
                 }
-                else if (value.isShade) {
+
+                if (value.isShade) {
                     child.element.classList.add('-is-shade');
                 }
 
@@ -317,14 +318,15 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
                 else {
                     child.percentage.setText();
                 }
-                child.hexLabel.setText(value.hexString());
-                // child.rgbLabel.setText(value.rgbString());
-                // child.hslLabel.setText(value.hslString());
 
-                if ((value.hex === this._values.hex) && (!value.isTint && !value.isShade)) {
+                if (value.isBaseColor) {
                     element.classList.add("current-color");
                     baseColor = element;
                 }
+
+                child.hexLabel.setText(value.hexString());
+                // child.rgbLabel.setText(value.rgbString());
+                // child.hslLabel.setText(value.hslString());
 
                 value = element = null;
             }, this);
