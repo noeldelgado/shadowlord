@@ -4,13 +4,27 @@
   box-sizing: border-box;
 }
 
+body {
+  font-size: 16px;
+  line-height: 1.618;
+  font-family: 'Roboto Mono', monospace;
+}
+
 .main-container {
   padding: 80px 0 0 0;
+  height: 100vh;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-content: flex-start;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  // align-items: justify;
+
+  // display: grid;
+  // grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  // grid-gap: 1.2rem;
+
+  // flex-flow: row wrap;
+  // justify-content: center;
+  // align-content: flex-start;
+  // align-items: flex-start;
 }
 
 input[type="text"] {

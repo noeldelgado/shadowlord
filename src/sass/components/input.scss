@@ -1,0 +1,23 @@
+input {
+  height: $input-height;
+  padding: 0 0.5rem;
+  border: 0;
+  border-bottom: 2px solid $border-color;
+  border-radius: 0;
+  color: inherit;
+  font-size: 1.1rem;
+  outline: none;
+  background: transparent;
+  --webkit-appearance: none;
+
+  &:focus {
+    border-color: #09f;
+  }
+
+  &.-error {
+    border-color: $danger-color;
+    background-color: rgba($danger-color, 0.1);
+    color: rgba($danger-color, 0.8);
+  }
+}
+

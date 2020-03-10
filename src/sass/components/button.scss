@@ -1,0 +1,39 @@
+.btn {
+  height: $input-height;
+  padding: 0 1rem;
+  border: 1px solid transparentize($dark-color, 0.7);
+  border-radius: $border-radius;
+  transition: all 250ms ease;
+  transition-property: color, background-color;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    background-color: transparentize($dark-color, 0.95);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba($focus-color, 0.5);
+  }
+
+  &:active {
+    background-color: transparentize($dark-color, 0.9);
+  }
+
+  &.btn-ghost {
+    border-style: none;
+    // background-color: transparent;
+    // outline: none;
+  }
+
+  &.btn-icon {
+    width: $input-height;
+    border-radius: $input-height / 2;
+    padding: 0;
+
+    & > svg {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}

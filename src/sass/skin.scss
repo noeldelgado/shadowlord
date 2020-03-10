@@ -2,6 +2,10 @@ body {
   color: $dark-color;
 }
 
+svg {
+  fill: currentColor;
+}
+
 a {
   color: #09f;
 
