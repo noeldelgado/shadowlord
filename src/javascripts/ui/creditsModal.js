@@ -3,25 +3,23 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
         <div class="modal credits">\
           <div class="modal__wrapper">\
             <div class="modal__inner">\
-              <button class="btn borderless modal__close">&#10062;</button>\
+                <button class="btn btn-icon btn-ghost modal__close">\
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">\
+                        <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />\
+                    </svg>\
+                </button>\
               <section>\
                 <h3>About</h3>\
-                <p>\
-                    Tints and shades generator made by Noel Delgado –&nbsp;\
-                    <a href="http://twitter.com/pixelia_me" target="_blank">\
-                        @pixelia_me\
-                    </a>.\
-                </p>\
-                <p>\
-                    Build using <a href="https://github.com/azendal/neon" target="_blank">Neon<a/>&nbsp;\
-                    by Fernando Trasviña and&nbsp;\
-                    <a href="https://github.com/noeldelgado/values.js" target="_blank">Values.js</a>\
-                <p>\
-                    Entypo pictograms by Daniel Bruce –&nbsp;\
-                    <a href="http://www.entypo.com" target="_blank">\
-                        http://www.entypo.com\
-                    </a>\
-                </p>\
+                <p>Color tints and shades generator tool.</p>\
+                <p>Color input only accepts hex color values.</p>\
+                <p>The accepted percent factor range is from 1 to 100.</p>\
+                <h3>Credits</h3>\
+                <ul>\
+                    <li><a href="https://github.com/azendal/neon" target="_blank">Neon</a> Class System by Fernando Trasviña.</li>\
+                    <li><a href="https://github.com/noeldelgado/values.js" target="_blank">values.js</a> — JS library to get the tints and shades of a color.</li>\
+                    <li>Material Design Icons by <a href="https://twitter.com/Google" target="_blank">@Google</a>.</li>\
+                    <li>“Percent” icon by Austin Andrews <a href="https://twitter.com/templarian" target="_blank">@templarian</a></li>\
+                </ul>\
               </section>\
             </div>\
           </div>\

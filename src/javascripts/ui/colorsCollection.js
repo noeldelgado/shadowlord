@@ -1,8 +1,5 @@
 Class(Sl.UI, 'ColorsCollection').inherits(Widget)({
-    HTML : '\
-        <div class="main-container" role="main-content">\
-        </div>\
-    ',
+    HTML : '<div class="colors-collection"></div>',
     prototype : {
         /**
          * Array to hold references to Sl.UI.Color instances.
@@ -13,7 +10,10 @@ Class(Sl.UI, 'ColorsCollection').inherits(Widget)({
             Widget.prototype.init.call(this, config);
 
             this._cached = [];
-            this._storeInMemory(67);
+            // this._storeInMemory(67);
+            // maximum number of items for 1% setting
+            // 100 tints, 100 shades and the input color
+            this._storeInMemory(201);
         },
 
         /**
