@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "neon": "^2.0.0",
-    "values.js": "^1.0.3"
+    "values.js": "^1.1.0"
   },
   "author": "Noel Delgado",
   "license": "MIT",
