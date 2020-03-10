@@ -1,27 +1,52 @@
 @import "vendor/normalize";
 
-@import "mixins";
 @import "vars";
+@import "utilities";
 
-@import "layout";
-@import "skin";
+@import "components/header";
+@import 'components/button';
+@import 'components/input';
+@import 'components/colors-collection';
+@import 'components/items';
+// @import "components/checkbox";
+// @import "components/modal";
 
-@import "fonts";
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-@import "layout/header";
-@import "skin/header";
+body {
+  font-size: 16px;
+  line-height: 1.618;
+  font-family: 'Roboto Mono', monospace;
+  color: $dark-color;
+}
 
-@import "layout/footer";
-@import "skin/footer";
+svg {
+  fill: currentColor;
+}
 
-@import "layout/button";
-@import "skin/button";
+a {
+  color: #09f;
 
-@import "layout/checkbox";
-@import "skin/checkbox";
+  &:hover {
+    color: #33adff;
+  }
+}
 
-@import "layout/items";
-@import "skin/items";
+main {
+  display: flex;
+  min-height: calc(100vh - #{$header-height});
+}
 
-@import "layout/modal";
-@import "skin/modal";
+input[type="color"] {
+  visibility: hidden;
+  position: absolute;
+}
+
+@media all and(max-width: 480px) {
+}
