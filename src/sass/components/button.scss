@@ -1,6 +1,7 @@
 .btn {
   height: $input-height;
   padding: 0 1rem;
+  background-color: transparent;
   border: 1px solid transparentize($dark-color, 0.7);
   border-radius: $border-radius;
   transition: all 250ms ease;
