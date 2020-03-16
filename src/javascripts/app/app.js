@@ -21,7 +21,7 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
                 // optionsWrapper : document.querySelector('.options-wrapper'),
                 input : document.querySelector('input[name="input"]'),
                 randomColorBtn : document.querySelector('.random-color-btn'),
-                // infoBtn : document.querySelector('button[data-info-btn]'),
+                infoBtn : document.querySelector('button[data-info-btn]')
             };
 
             this._ui.rangeInput.value = this.percentage;
@@ -62,9 +62,9 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
                 name : 'colorsContainer'
             })).renderColors().render(document.querySelector('main'));
 
-            // this.appendChild(new Sl.UI.CreditsModal({
-            //     name : 'creditsModal'
-            // })).render(this._body);
+            this.appendChild(new Sl.UI.CreditsModal({
+                name : 'creditsModal'
+            })).render(this._body);
 
             this.updateUI(color);
             this._bindEvents();
@@ -85,19 +85,19 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
                 event.target.select();
             }.bind(this));
             this._ui.randomColorBtn.addEventListener('click', this._randomColorClickHandler.bind(this));
-            // this._ui.infoBtn.addEventListener("click", this._creditsClickHandler.bind(this));
+            this._ui.infoBtn.addEventListener("click", this._creditsClickHandler.bind(this));
 
             // Sl.UI.Checkbox.bind('change', function(data) {
             //     this._checkboxChangeHandler.call(this, data.checkbox);
             // }.bind(this));
 
-            // this.creditsModal.bind('render', function() {
-            //     var app = this;
+            this.creditsModal.bind('render', function() {
+                var app = this;
 
-            //     setTimeout(function() {
-            //         app.creditsModal.activate();
-            //     }, 0);
-            // }.bind(this));
+                setTimeout(function() {
+                    app.creditsModal.activate();
+                }, 0);
+            }.bind(this));
 
             return this;
         },
@@ -277,9 +277,7 @@ Class(Sl, 'App').includes(CustomEventSupport, NodeSupport)({
          */
         updateUI : function updateUI(color) {
             var baseColor;
-            // log(color, Nercentage))
 
-            // this.percentage = percentage;
             this._values.setColor(color);
             this._updateHash(this._values.hex.toUpperCase());
             this._ui.preview.style.backgroundColor = this._values.hexString();

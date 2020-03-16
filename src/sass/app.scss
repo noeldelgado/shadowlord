@@ -9,7 +9,7 @@
 @import 'components/colors-collection';
 @import 'components/items';
 // @import "components/checkbox";
-// @import "components/modal";
+@import "components/modal";
 
 *,
 *:before,
@@ -23,6 +23,7 @@ body {
   font-size: 16px;
   line-height: 1.618;
   font-family: 'Roboto Mono', monospace;
+  font-weight: 700;
   color: $dark-color;
 }
 
@@ -41,6 +42,13 @@ a {
 main {
   display: flex;
   min-height: calc(100vh - #{$header-height});
+}
+
+code {
+  padding: 0.2rem 0.5em;
+  border-radius: $border-radius;
+  background-color: $border-color;
+  color: $light-color;
 }
 
 input[type="color"] {

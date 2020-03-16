@@ -20,14 +20,9 @@
   }
 
   .modal__close {
-    // font-size: 3em;
-    // line-height: .5em;
     position: absolute;
     top: 10px;
     right: 10px;
-    // background-color: transparent;
-    // color: #ff1f3f;
-    opacity: .5;
 
     &:hover {
       opacity: .8;
@@ -45,26 +40,22 @@
     padding: 25px 25px 22px;
     font-size: 0.9em;
     transition: transform 200ms ease;
-    // transform: scale(.5);
+    transform: scale(.5);
     background-color: transparentize(lighten($light-color, 10), .05);
-    // border-radius: 3px;
+    border-radius: $border-radius;
     box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.15);
   }
 
-  section {
-    margin-bottom: 20px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  h2, h3, p {
+  h2, h3, p, ul {
     margin-bottom: 1rem;
   }
 
+  ul {
+    padding-left: 2rem;
+  }
+
   &.credits {
-    font-family: system-ui;
+    font-weight: 400;
     .modal__inner {
       max-width: 600px;
     }
