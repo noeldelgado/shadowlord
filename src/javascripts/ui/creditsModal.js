@@ -11,12 +11,22 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
               <section>\
                 <h3>About</h3>\
                 <p>Color tints and shades generator tool.</p>\
-                <p>Color input only accepts hex color values.</p>\
-                <p>The accepted percent factor range is from 1 to 100.</p>\
+                <ul>\
+                    <li>Color input accepts hex, rgb and hsl CSS color strings.\
+                    <li>The accepted percent factor range goes from 1 to 100. The math is <code>round(100 / &lt;percent&gt;)</code>, so:\
+                    <ul>\
+                        <li>1 will produce 100 tints and 100 shades\
+                        <li>2 will produce 50 tints and 50 shades\
+                        <li>3 will produce 33 tints and 33 shades\
+                        <li>5 will produce 20 tints and 20 shades\
+                        <li>10 will produce 10 tints and 10 shades\
+                        <li>...\
+                    </ul>\
+                </ul>\
                 <h3>Credits</h3>\
                 <ul>\
                     <li><a href="https://github.com/azendal/neon" target="_blank">Neon</a> Class System by Fernando Trasviña.</li>\
-                    <li><a href="https://github.com/noeldelgado/values.js" target="_blank">values.js</a> — JS library to get the tints and shades of a color.</li>\
+                    <li><a href="https://github.com/noeldelgado/values.js" target="_blank">values.js</a> — JS library to get the tints and shades.</li>\
                     <li>Material Design Icons by <a href="https://twitter.com/Google" target="_blank">@Google</a>.</li>\
                     <li>“Percent” icon by Austin Andrews <a href="https://twitter.com/templarian" target="_blank">@templarian</a></li>\
                 </ul>\
@@ -27,6 +37,7 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
         ',
     prototype : {
         _doc : null,
+        _previousFocusedElement: null,
         init : function init(config) {
             Widget.prototype.init.call(this, config);
             this._doc = document;
@@ -58,6 +69,30 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
                 this.deactivate();
             }
 
+            return this;
+        },
+
+        activate: function activate() {
+            var modal = this;
+
+            Widget.prototype.activate.call(modal);
+
+            modal._previousFocusedElement = document.activeElement;
+
+            modal.element.addEventListener('transitionend', function () {
+                modal.closeModal.focus();
+            }, { once: true });
+
+            return modal;
+        },
+
+        deactivate: function deactivate() {
+            Widget.prototype.deactivate.call(this);
+
+            if (this._previousFocusedElement) {
+                this._previousFocusedElement.focus();
+            }
+            this._previousFocusedElement = null;
             return this;
         },
 
