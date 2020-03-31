@@ -56,5 +56,16 @@ input[type="color"] {
   position: absolute;
 }
 
+.crdts {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.75rem;
+
+  a {
+    color: #fff;
+  }
+}
+
 @media all and(max-width: 480px) {
 }

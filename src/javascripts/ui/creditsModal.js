@@ -3,33 +3,38 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
         <div class="modal credits">\
           <div class="modal__wrapper">\
             <div class="modal__inner">\
-                <button class="btn btn-icon btn-ghost modal__close">\
+                <button class="btn btn-icon btn-ghost modal__close" type="button" aria-label="close modal">\
                     <svg style="width:24px;height:24px" viewBox="0 0 24 24">\
                         <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />\
                     </svg>\
                 </button>\
               <section>\
                 <h3>About</h3>\
+                <p>\
+                    <a href="https://github.com/noeldelgado/shadowlord" class="flex" target="_blank" rel="noopener noreferrer">\
+                        <svg class="mr05 block" focusable="false" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"></path></svg>\
+                        <span>View source on GitHub</span>\
+                    </a>\
+                </p>\
                 <p>Color tints and shades generator tool.</p>\
                 <ul>\
-                    <li>Color input accepts hex, rgb and hsl CSS color strings.\
+                    <li>Color input accepts <b>hex</b>, <b>rgb/a</b> and <b>hsl/a</b> CSS color strings.\
                     <li>The accepted percent factor range goes from 1 to 100. The math is <code>round(100 / &lt;percent&gt;)</code>, so:\
                     <ul>\
                         <li>1 will produce 100 tints and 100 shades\
                         <li>2 will produce 50 tints and 50 shades\
-                        <li>3 will produce 33 tints and 33 shades\
-                        <li>5 will produce 20 tints and 20 shades\
-                        <li>10 will produce 10 tints and 10 shades\
-                        <li>...\
+                        <li>and so on...\
                     </ul>\
                 </ul>\
                 <h3>Credits</h3>\
                 <ul>\
-                    <li><a href="https://github.com/azendal/neon" target="_blank">Neon</a> Class System by Fernando Trasviña.</li>\
-                    <li><a href="https://github.com/noeldelgado/values.js" target="_blank">values.js</a> — JS library to get the tints and shades.</li>\
-                    <li>Material Design Icons by <a href="https://twitter.com/Google" target="_blank">@Google</a>.</li>\
-                    <li>“Percent” icon by Austin Andrews <a href="https://twitter.com/templarian" target="_blank">@templarian</a></li>\
+                    <li><a href="https://github.com/azendal/neon" target="_blank" rel="noopener noreferrer">Neon</a> Class System by Fernando Trasviña.</li>\
+                    <li><a href="https://github.com/noeldelgado/values.js" target="_blank" rel="noopener noreferrer">values.js</a> — JS library to get the tints and shades.</li>\
+                    <li>Material Design Icons by <a href="https://twitter.com/Google" target="_blank" rel="noopener noreferrer">@Google</a>.</li>\
+                    <li>“Percent” icon by Austin Andrews <a href="https://twitter.com/templarian" target="_blank" rel="noopener noreferrer">@templarian</a></li>\
                 </ul>\
+                <h3>License</h3>\
+                <p>MIT © <a href="https://github.com/noeldelgado" target="_blank" rel="noopener noreferrer">Noel Delgado</a></p>\
               </section>\
             </div>\
           </div>\
