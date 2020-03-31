@@ -3,7 +3,7 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
         <div class="modal credits">\
           <div class="modal__wrapper">\
             <div class="modal__inner">\
-                <button class="btn btn-icon btn-ghost modal__close">\
+                <button class="btn btn-icon btn-ghost modal__close" type="button" aria-label="close modal">\
                     <svg style="width:24px;height:24px" viewBox="0 0 24 24">\
                         <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />\
                     </svg>\
@@ -25,10 +25,10 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
                 </ul>\
                 <h3>Credits</h3>\
                 <ul>\
-                    <li><a href="https://github.com/azendal/neon" target="_blank">Neon</a> Class System by Fernando Trasviña.</li>\
-                    <li><a href="https://github.com/noeldelgado/values.js" target="_blank">values.js</a> — JS library to get the tints and shades.</li>\
-                    <li>Material Design Icons by <a href="https://twitter.com/Google" target="_blank">@Google</a>.</li>\
-                    <li>“Percent” icon by Austin Andrews <a href="https://twitter.com/templarian" target="_blank">@templarian</a></li>\
+                    <li><a href="https://github.com/azendal/neon" target="_blank" rel="noopener noreferrer">Neon</a> Class System by Fernando Trasviña.</li>\
+                    <li><a href="https://github.com/noeldelgado/values.js" target="_blank" rel="noopener noreferrer">values.js</a> — JS library to get the tints and shades.</li>\
+                    <li>Material Design Icons by <a href="https://twitter.com/Google" target="_blank" rel="noopener noreferrer">@Google</a>.</li>\
+                    <li>“Percent” icon by Austin Andrews <a href="https://twitter.com/templarian" target="_blank" rel="noopener noreferrer">@templarian</a></li>\
                 </ul>\
               </section>\
             </div>\
