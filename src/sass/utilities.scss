@@ -4,3 +4,16 @@
 .mx05 { margin-left: 0.5rem; margin-right: 0.5rem }
 .mr05 { margin-right: 0.5rem }
 .mr1 { margin-right: 1rem }
+.sr-only {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	-webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	white-space: nowrap;
+}
