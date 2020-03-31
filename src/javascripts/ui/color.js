@@ -2,10 +2,10 @@ Class(Sl.UI, 'Color').inherits(Widget)({
     HTML : '\
         <div class="item">\
             <div class="item_percent">\
-                <svg class="icon-shade" width="12" height="12" viewBox="0 0 24 24">\
+                <svg class="icon-shade" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">\
                     <path fill="currentColor" d="M12 2A10 10 0 1 1 2 12A10 10 0 0 1 12 2Z" />\
                 </svg>\
-                <svg class="icon-tint" width="12" height="12" viewBox="0 0 24 24">\
+                <svg class="icon-tint" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">\
                     <path d="M12 20A8 8 0 1 1 20 12A8 8 0 0 1 12 20M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Z" />\
                 </svg>\
             </div>\
