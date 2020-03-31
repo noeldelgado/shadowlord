@@ -3,7 +3,7 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
         <div class="modal credits">\
           <div class="modal__wrapper">\
             <div class="modal__inner">\
-                <button class="btn btn-icon btn-ghost modal__close">\
+                <button class="btn btn-icon btn-ghost modal__close" type="button" aria-label="close modal">\
                     <svg style="width:24px;height:24px" viewBox="0 0 24 24">\
                         <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />\
                     </svg>\
