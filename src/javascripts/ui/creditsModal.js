@@ -25,10 +25,10 @@ Class(Sl.UI, 'CreditsModal').inherits(Widget)({
                 </ul>\
                 <h3>Credits</h3>\
                 <ul>\
-                    <li><a href="https://github.com/azendal/neon" target="_blank">Neon</a> Class System by Fernando Trasviña.</li>\
-                    <li><a href="https://github.com/noeldelgado/values.js" target="_blank">values.js</a> — JS library to get the tints and shades.</li>\
-                    <li>Material Design Icons by <a href="https://twitter.com/Google" target="_blank">@Google</a>.</li>\
-                    <li>“Percent” icon by Austin Andrews <a href="https://twitter.com/templarian" target="_blank">@templarian</a></li>\
+                    <li><a href="https://github.com/azendal/neon" target="_blank" rel="noopener noreferrer">Neon</a> Class System by Fernando Trasviña.</li>\
+                    <li><a href="https://github.com/noeldelgado/values.js" target="_blank" rel="noopener noreferrer">values.js</a> — JS library to get the tints and shades.</li>\
+                    <li>Material Design Icons by <a href="https://twitter.com/Google" target="_blank" rel="noopener noreferrer">@Google</a>.</li>\
+                    <li>“Percent” icon by Austin Andrews <a href="https://twitter.com/templarian" target="_blank" rel="noopener noreferrer">@templarian</a></li>\
                 </ul>\
               </section>\
             </div>\
