@@ -6,6 +6,8 @@ var { src, dest, parallel, watch }= require('gulp'),
     livereload      = require('gulp-livereload'),
     connect         = require('gulp-connect')
 
+sass.compiler = require('sass');
+
 const serverTask = (done) => {
     connect.server({
         root: '',
