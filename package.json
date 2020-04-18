@@ -8,6 +8,7 @@
     "url": "https://github.com/noeldelgado/shadowlord.git"
   },
   "dependencies": {
+    "@simonwep/pickr": "^1.5.1",
     "neon": "^2.0.0",
     "values.js": "^1.1.1"
   },
