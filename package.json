@@ -34,6 +34,7 @@
   "main": "gulpfile.js",
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^1.0.0",
     "gulp-concat": "^2.4.0",
