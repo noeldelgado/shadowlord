@@ -8,6 +8,12 @@
     "url": "https://github.com/noeldelgado/shadowlord.git"
   },
   "dependencies": {
+    "@material/button": "^6.0.0",
+    "@material/dialog": "^5.1.0",
+    "@material/icon-button": "^5.1.0",
+    "@material/ripple": "^5.1.0",
+    "@material/snackbar": "^5.1.0",
+    "@material/textfield": "^5.1.0",
     "@simonwep/pickr": "^1.5.1",
     "copy-text-to-clipboard": "^2.2.0",
     "values.js": "^1.1.1"
