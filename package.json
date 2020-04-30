@@ -3,10 +3,20 @@
   "name": "Shadowlord",
   "version": "0.3.4",
   "description": "Shades and tints generator online.",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/noeldelgado/shadowlord.git"
   },
+  "bugs": {
+    "url": "https://github.com/noeldelgado/shadowlord/issues"
+  },
+  "homepage": "https://github.com/noeldelgado/shadowlord",
+  "license": "MIT",
+  "author": "Noel Delgado <pixelia.me@gmail.com> (https://pixelia.me/)",
   "dependencies": {
     "@material/button": "^6.0.0",
     "@material/dialog": "^5.1.0",
@@ -18,26 +28,6 @@
     "copy-text-to-clipboard": "^2.2.0",
     "values.js": "^1.1.1"
   },
-  "author": "Noel Delgado",
-  "license": "MIT",
-  "scripts": {
-    "start": "gulp",
-    "build": "gulp build"
-  },
-  "keywords": [
-    "javascript",
-    "colors",
-    "tints",
-    "shades",
-    "hex",
-    "hsl",
-    "rgb"
-  ],
-  "bugs": {
-    "url": "https://github.com/noeldelgado/shadowlord/issues"
-  },
-  "homepage": "https://github.com/noeldelgado/shadowlord",
-  "main": "gulpfile.js",
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
