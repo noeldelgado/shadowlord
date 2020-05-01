@@ -1,0 +1,37 @@
+@use '@material/textfield';
+
+:root {
+  --mdc-theme-error: #b00020;
+  --mdc-typography-font-family: 'Roboto Mono', monospace;
+  --mdc-typography-body1-font-family: var(--mdc-typography-font-family);
+  --mdc-typography-body1-font-size: 0.9rem;
+}
+
+/** button **/
+.mdc-button {
+  .mdc-button__ripple::before,
+  .mdc-button__ripple::after {
+    background-color: #000;
+  }
+}
+
+/** icon-button */
+.mdc-icon-button {
+  .mdc-icon-button__icon {
+    display: block;
+  }
+}
+
+/** text-field */
+.mdc-text-field {
+  @include textfield.density(-4);
+
+  &:not(.mdc-text-field--disabled) {
+    background-color: transparent;
+  }
+}
+
+/** dialiog */
+.mdc-dialog .mdc-dialog__content {
+  color: inherit;
+}
