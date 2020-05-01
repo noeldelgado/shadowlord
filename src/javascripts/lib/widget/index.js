@@ -9,7 +9,9 @@ export default class Widget extends NodeSupport {
   static ELEMENT_CLASS = 'widget'
 
   static defaults = {
-    el: null
+    el: null,
+    className: null,
+    attr: {}
   }
 
   active = false
@@ -24,6 +26,10 @@ export default class Widget extends NodeSupport {
       this.el = this.template() |> createElementFromString;
       this.children.forEach(this::replaceTemplateWidgets);
       this.element.classList.add(...this.constructor.ELEMENT_CLASS.split(' '));
+    }
+
+    for (let prop in this.attr) {
+      this.el.setAttribute(prop, this.attr[prop]);
     }
 
     this.element.classList.add(...this.className?.split(' ') ?? '');
@@ -86,7 +92,6 @@ export default class Widget extends NodeSupport {
   h(moduleName, options) {
     const uuid = Date.now();
     this.appendChild(new moduleName({ uuid, ...options }));
-
     return `<div id='${placeholderString(uuid)}'></div>`;
   }
 }
