@@ -1,19 +1,15 @@
-.item {
+.color-item {
   display: none;
   position: relative;
-  flex-direction: column;
   flex: 1 1 200px;
-  padding: 1.5rem 0;
-
-  justify-content: center;
-  align-items: center;
+  padding: 1.5rem;
   background-color: rgba(0,0,0,0);
 
   &.active {
     display: flex;
   }
 
-  &.current-color {
+  &.-is-base-color {
     border: 2px solid rgba(0, 0, 0, 0.5);
     box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
   }
@@ -21,21 +17,36 @@
   &.-is-light { color: #000 }
   &.-is-dark { color: #fff }
 
-  svg {
-    display: none;
-  }
-
   &.-is-tint svg.icon-tint { display: block }
   &.-is-shade svg.icon-shade { display: block }
 
   .item_percent {
     opacity: 0.5;
-    display: flex;
-    align-items: center;
     font-size: 0.7rem;
 
     & svg {
-      margin-left: 0.3em;
+      display: none;
+      margin-right: 0.25em;
+    }
+  }
+
+  .percentage--label {
+    margin: 0;
+  }
+
+  .hex--label {
+    margin: 0;
+  }
+
+  & > .color-item__copy-btn {
+    margin-left: 1rem;
+    opacity: 0;
+  }
+
+  &:hover,
+  &:focus-within {
+    & > .color-item__copy-btn {
+      opacity: 1;
     }
   }
 }

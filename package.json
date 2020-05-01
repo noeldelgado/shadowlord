@@ -1,43 +1,55 @@
 {
   "private": true,
   "name": "Shadowlord",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "Shades and tints generator online.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/noeldelgado/shadowlord.git"
-  },
-  "dependencies": {
-    "neon": "^2.0.0",
-    "values.js": "^1.1.0"
-  },
-  "author": "Noel Delgado",
-  "license": "MIT",
   "scripts": {
     "start": "gulp",
     "build": "gulp build"
   },
-  "keywords": [
-    "javascript",
-    "colors",
-    "tints",
-    "shades",
-    "hex",
-    "hsl",
-    "rgb"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noeldelgado/shadowlord.git"
+  },
   "bugs": {
     "url": "https://github.com/noeldelgado/shadowlord/issues"
   },
   "homepage": "https://github.com/noeldelgado/shadowlord",
-  "main": "gulpfile.js",
+  "license": "MIT",
+  "author": "Noel Delgado <pixelia.me@gmail.com> (https://pixelia.me/)",
+  "dependencies": {
+    "@material/button": "^6.0.0",
+    "@material/dialog": "^5.1.0",
+    "@material/icon-button": "^5.1.0",
+    "@material/ripple": "^5.1.0",
+    "@material/snackbar": "^5.1.0",
+    "@material/textfield": "^5.1.0",
+    "@simonwep/pickr": "^1.5.1",
+    "copy-text-to-clipboard": "^2.2.0",
+    "values.js": "^1.1.1"
+  },
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-export-default-from": "^7.8.3",
+    "@babel/plugin-proposal-function-bind": "^7.8.3",
+    "@babel/plugin-proposal-pipeline-operator": "^7.8.3",
+    "@babel/preset-env": "^7.9.5",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^1.0.0",
+    "gulp-better-rollup": "^4.0.1",
     "gulp-concat": "^2.4.0",
     "gulp-connect": "^2.0.6",
     "gulp-livereload": "^2.1.1",
     "gulp-sass": "^4.0.2",
-    "gulp-uglify-es": "^2.0.0"
+    "gulp-uglify-es": "^2.0.0",
+    "rollup": "^1.32.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-root-import": "^1.0.0",
+    "sass": "^1.26.3"
   }
 }
