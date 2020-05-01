@@ -7,29 +7,23 @@
 
 @import "vars";
 @import "utilities";
-
 @import "components/header";
-@import 'components/button';
-@import 'components/input';
 @import 'components/colors-collection';
-@import 'components/items';
-// @import "components/checkbox";
-@import "components/modal";
+@import 'components/color-item';
+@import 'vendor-overrides/pickr';
+@import 'vendor-overrides/material';
 
-*,
-*:before,
-*:after {
+* {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
+  margin: 0;
   font-size: 16px;
   line-height: 1.618;
   font-family: 'Roboto Mono', monospace;
-  font-weight: 700;
   color: $dark-color;
+  -webkit-font-smoothing: antialiased;
 }
 
 svg {
@@ -37,11 +31,14 @@ svg {
 }
 
 a {
-  color: #09f;
+  color: #018786;
+}
 
-  &:hover {
-    color: #33adff;
-  }
+code {
+  padding: 0.1rem 0.25em;
+  border-radius: $border-radius;
+  background-color: rgba($dark-color, 0.6);
+  color: $light-color;
 }
 
 main {
@@ -49,19 +46,7 @@ main {
   min-height: calc(100vh - #{$header-height});
 }
 
-code {
-  padding: 0.2rem 0.5em;
-  border-radius: $border-radius;
-  background-color: $border-color;
-  color: $light-color;
-}
-
-input[type="color"] {
-  visibility: hidden;
-  position: absolute;
-}
-
-.crdts {
+footer {
   position: fixed;
   bottom: 1rem;
   right: 1rem;
@@ -70,7 +55,4 @@ input[type="color"] {
   a {
     color: #fff;
   }
-}
-
-@media all and(max-width: 480px) {
 }
