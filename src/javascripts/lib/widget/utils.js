@@ -1,3 +1,4 @@
+export const placeholderString = (uuid) => `__${uuid}__`;
 
 export function createElementFromString(htmlString) {
   const el = document.createElement('div');
@@ -5,9 +6,12 @@ export function createElementFromString(htmlString) {
   return el.firstElementChild;
 }
 
-export const placeholderString = (uuid) => `__${uuid}__`;
-
 export function replaceTemplateWidgets(child) {
+  if (this.el.id === placeholderString(child.uuid)) {
+    this.el = child.el;
+    return;
+  }
+
   this.element
     ?.querySelector(`#${placeholderString(child.uuid)}`)
     ?.replaceWith(child.element);
