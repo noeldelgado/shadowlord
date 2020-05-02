@@ -56,13 +56,7 @@ export default class ColorItem extends Widget {
   */
   update(value) {
     const { TINT, SHADE, BASE, LIGHT, DARK } = this.constructor.CLASSNAMES;
-    const percentage = value.percentage?.toFixed(2) ?? 0 |> Number;
-    const classes = [
-      value.isTint && TINT,
-      value.isShade && SHADE,
-      value.isBaseColor && BASE,
-      value.getBrightness() > 50 ? LIGHT : DARK
-    ].filter(v => v);
+    const { isTint, isShade, isBaseColor } = value;
 
     this.color = value.hexString();
 
@@ -71,11 +65,17 @@ export default class ColorItem extends Widget {
       isShade && 'shade',
       isBaseColor && 'base color'
     ].filter(v => v));
+    this.percentageLabel.setText(`${value.percentage?.toFixed(2) ?? 0 |> Number}%`);
     this.hexLabel.setText(this.color);
     this.element.style.backgroundColor = this.color;
 
     this.element.classList.remove(...Object.values(this.constructor.CLASSNAMES));
-    this.element.classList.add(...classes);
+    this.element.classList.add(...[
+      isTint && TINT,
+      isShade && SHADE,
+      isBaseColor && BASE,
+      value.getBrightness() > 50 ? LIGHT : DARK
+    ].filter(v => v));
 
     return this;
   }
