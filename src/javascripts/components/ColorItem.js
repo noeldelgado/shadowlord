@@ -37,13 +37,13 @@ export default class ColorItem extends Widget {
 
   constructor(config) {
     super(config);
-    this.copyButton.el.addEventListener('click', ::this._clickHandler);
+    this.copyButton.el.addEventListener('click', ::this._copyClickHandler);
   }
 
   /**
    * @private
   */
-  _clickHandler() {
+  _copyClickHandler() {
     if (Copy(this.color) === false) return;
 
     this.appendChild(new Snackbar({
