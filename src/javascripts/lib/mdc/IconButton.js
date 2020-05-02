@@ -12,7 +12,7 @@ export default class IconButton extends Widget {
   template() {
     return `
     <button class='mdc-icon-button' type="button" aria-label='${this.label}'>
-      ${this.h(this.icon, { className: 'mdc-icon-button__icon', attr: { 'aria-hidden': true } })}
+      ${this.h(this.icon, { className: 'mdc-icon-button__icon' })}
     </button>
     `;
     }
