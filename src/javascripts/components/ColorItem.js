@@ -21,6 +21,7 @@ export default class ColorItem extends Widget {
         <div class='item_percent flex items-center'>
           ${this.h(FiberManualRecord, { className: 'icon-shade', width: 12, height: 12 })}
           ${this.h(RadioButtonUnchecked, { className: 'icon-tint', width: 12, height: 12 })}
+          ${this.h(Text, { name: 'ariaLabelPercentage', className: 'sr-only', attr: { style: 'margin: 0' } })}
           ${this.h(Text, { name: 'percentageLabel', className: 'percentage--label' })}
         </div>
         ${this.h(Text, { name: 'hexLabel', className: 'hex--label' })}
@@ -65,7 +66,11 @@ export default class ColorItem extends Widget {
 
     this.color = value.hexString();
 
-    this.percentageLabel.setText(`${percentage}%`);
+    this.ariaLabelPercentage.setText([
+      isTint && 'tint',
+      isShade && 'shade',
+      isBaseColor && 'base color'
+    ].filter(v => v));
     this.hexLabel.setText(this.color);
     this.element.style.backgroundColor = this.color;
 
