@@ -26,7 +26,7 @@ export default class ColorItem extends Widget {
         ${this.h(Text, { name: 'hexLabel', className: 'hex--label' })}
       </div>
       <div class='color-item__copy-btn'>
-        ${this.h(IconButton, { name: 'copyButton', icon: FileCopy })}
+        ${this.h(IconButton, { name: 'copyButton', icon: FileCopy, label: 'copy' })}
       </div>
     </div>
   `;
