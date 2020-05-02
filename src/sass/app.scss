@@ -44,6 +44,7 @@ code {
 main {
   display: flex;
   min-height: calc(100vh - #{$header-height});
+  background-color: $light-color;
 }
 
 footer {
