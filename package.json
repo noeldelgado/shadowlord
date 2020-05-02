@@ -19,7 +19,7 @@
   "author": "Noel Delgado <pixelia.me@gmail.com> (https://pixelia.me/)",
   "dependencies": {
     "@material/button": "^6.0.0",
-    "@material/dialog": "^5.1.0",
+    "@material/dialog": "^6.0.0",
     "@material/icon-button": "^5.1.0",
     "@material/ripple": "^5.1.0",
     "@material/snackbar": "^5.1.0",
