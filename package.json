@@ -21,7 +21,7 @@
     "@material/button": "^6.0.0",
     "@material/dialog": "^6.0.0",
     "@material/icon-button": "^6.0.0",
-    "@material/ripple": "^5.1.0",
+    "@material/ripple": "^6.0.0",
     "@material/snackbar": "^5.1.0",
     "@material/textfield": "^5.1.0",
     "@simonwep/pickr": "^1.5.1",
