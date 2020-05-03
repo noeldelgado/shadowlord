@@ -1,5 +1,8 @@
 # Shadowlord
 
+[![Dependencies](https://img.shields.io/david/noeldelgado/shadowlord.svg)](https://david-dm.org/noeldelgado/shadowlord)
+[![devDependencies](https://img.shields.io/david/dev/noeldelgado/shadowlord.svg)](https://david-dm.org/noeldelgado/shadowlord?type=dev)
+
 Simple color tints and shade generator using [values.js](https://github.com/noeldelgado/values.js).
 
 https://noeldelgado.github.io/shadowlord/
