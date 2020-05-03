@@ -40,7 +40,7 @@
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^1.0.0",
     "gulp-better-rollup": "^4.0.1",
-    "gulp-connect": "^2.0.6",
+    "gulp-connect": "^5.7.0",
     "gulp-sass": "^4.0.2",
     "gulp-uglify-es": "^2.0.0",
     "rollup": "^1.32.1",
