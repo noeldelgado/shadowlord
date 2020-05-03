@@ -17,7 +17,7 @@ const serverTask = (done) => {
     livereload: true
   });
   done();
-}
+};
 
 const stylesTask = () => src('src/sass/app.scss')
   .pipe(sass({
@@ -60,7 +60,7 @@ const watchTask = (done) => {
   watch('src/javascripts/**', scriptsTask);
   watch('src/sass/**', stylesTask);
   done();
-}
+};
 
 const stylesDist = () => src('dist/css/app.css')
   .pipe(sass({ outputStyle: 'compressed' }))
