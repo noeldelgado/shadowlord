@@ -14,6 +14,7 @@ sass.compiler = require('sass');
 const serverTask = (done) => {
   connect.server({
     root: '',
+    host: '0.0.0.0',
     livereload: true
   });
   done();
