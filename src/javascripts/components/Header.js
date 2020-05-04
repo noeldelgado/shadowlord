@@ -84,7 +84,7 @@ export default class Header extends Widget {
   */
   _bindEvents() {
     this.infoBtn.el.addEventListener('click', ::this.dialog.open);
-    this.colorInput.input.addEventListener('keyup', ::this._keyupHandler);
+    this.colorInput.input.addEventListener('change', ::this._handleColorInputChange);
     this.rangeInput.input.addEventListener('change', ::this._handleRangeInputChange);
     this.randomColorBtn.el.addEventListener('click', ::this._handleRandomColorButtonClick);
     this.pickr.on('show', (instance) => instance.getRoot().palette.palette.focus());
@@ -97,11 +97,9 @@ export default class Header extends Widget {
   /**
    * @private
   */
-  _keyupHandler({ target, key }) {
+  _handleColorInputChange({ target }) {
     const color = target.value;
-
-    if (key !== 'Enter') return;
-    if (isValidColorModel(color) === false) return this.colorInput.setError(true);
+    if (isValidColorModel(color) === false) return this.colorInput.setError();
 
     this.pickr.setColor(color, true);
     this.colorInput.setError(false);
