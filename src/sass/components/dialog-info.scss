@@ -1,0 +1,10 @@
+.dialog_info {
+  a[target="_blank"] {
+    display: inline-flex;
+    align-items: center;
+
+    & > svg:last-child {
+      margin-left: 0.2em;
+    }
+  }
+}
