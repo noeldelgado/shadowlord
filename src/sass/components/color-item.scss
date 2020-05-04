@@ -1,13 +1,9 @@
 .color-item {
-  display: none;
+  display: flex;
   position: relative;
   flex: 1 1 200px;
   padding: 1.5rem;
   background-color: rgba(0,0,0,0);
-
-  &.active {
-    display: flex;
-  }
 
   &.-is-base-color {
     border: 2px solid rgba(0, 0, 0, 0.5);

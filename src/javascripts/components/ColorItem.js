@@ -79,4 +79,24 @@ export default class ColorItem extends Widget {
 
     return this;
   }
+
+  /**
+   * @override
+  */
+  activate() {
+    if (this.el.parentElement) return this;
+
+    this.render(this.parent.el);
+    return this;
+  }
+
+  /**
+   * @override
+  */
+  deactivate() {
+    if (!this.el.parentElement) return this;
+
+    this.el.remove();
+    return this;
+  }
 }
