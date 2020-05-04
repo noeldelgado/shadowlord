@@ -112,7 +112,7 @@ export default class Header extends Widget {
    * @private
   */
   _changeHandler({ target }) {
-    if (!target.validity.valid) return;
+    if (!target.validity.valid) return this.rangeInput.setError();
 
     this.rangeInput.setError(false);
     this.dispatch('percentagechange', { percentage: target.value |> Number });
