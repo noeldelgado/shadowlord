@@ -92,6 +92,6 @@ export default class Widget extends NodeSupport {
   h(moduleName, options) {
     const uuid = Date.now();
     this.appendChild(new moduleName({ uuid, ...options }));
-    return `<div id='${placeholderString(uuid)}'></div>`;
+    return `<span id='${placeholderString(uuid)}'></span>`;
   }
 }
