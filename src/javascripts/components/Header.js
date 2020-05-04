@@ -105,7 +105,7 @@ export default class Header extends Widget {
 
     this.pickr.setColor(color, true);
     this.colorInput.setError(false);
-    this._dispatch('colorchange', { color });
+    this.dispatch('colorchange', { color });
   }
 
   /**
@@ -114,9 +114,8 @@ export default class Header extends Widget {
   _changeHandler({ target }) {
     if (!target.validity.valid) return;
 
-    this._dispatch('percentagechange', {
-      percentage: Number(target.value)
-    });
+    this.rangeInput.setError(false);
+    this.dispatch('percentagechange', { percentage: target.value |> Number });
   }
 
   /**
@@ -128,7 +127,7 @@ export default class Header extends Widget {
     this.pickr.setColor(color, true);
     this.colorInput.value = color;
 
-    this._dispatch('colorchange', { color });
+    this.dispatch('colorchange', { color });
   }
 
   /**
@@ -138,13 +137,6 @@ export default class Header extends Widget {
     const color = ev.getColor().toHEXA().toString();
 
     this.colorInput.setError(false).value = color;
-    this._dispatch('colorchange', { color });
-  }
-
-  /**
-   * @private
-  */
-  _dispatch(type, props) {
-    this.dispatch({ type, ...props });
+    this.dispatch('colorchange', { color });
   }
 }
