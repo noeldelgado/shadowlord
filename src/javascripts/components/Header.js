@@ -84,9 +84,9 @@ export default class Header extends Widget {
   */
   _bindEvents() {
     this.infoBtn.el.addEventListener('click', ::this.dialog.open);
-    this.colorInput.input.addEventListener('keyup', ::this._keyupHandler);
-    this.rangeInput.input.addEventListener('change', ::this._changeHandler);
-    this.randomColorBtn.el.addEventListener('click', ::this._handleClickRandom);
+    this.colorInput.input.addEventListener('change', ::this._handleColorInputChange);
+    this.rangeInput.input.addEventListener('change', ::this._handleRangeInputChange);
+    this.randomColorBtn.el.addEventListener('click', ::this._handleRandomColorButtonClick);
     this.pickr.on('show', (instance) => instance.getRoot().palette.palette.focus());
     this.pickr.on('hide', (instance) => instance.getRoot().button.focus());
     this.pickr.on('changestop', ::this._handlePickrChangeStop);
@@ -97,38 +97,33 @@ export default class Header extends Widget {
   /**
    * @private
   */
-  _keyupHandler({ target, key }) {
+  _handleColorInputChange({ target }) {
     const color = target.value;
-
-    if (key !== 'Enter') return;
-    if (isValidColorModel(color) === false) return this.colorInput.setError(true);
+    if (isValidColorModel(color) === false) return this.colorInput.setError();
 
     this.pickr.setColor(color, true);
     this.colorInput.setError(false);
-    this._dispatch('colorchange', { color });
+    this.dispatch('colorchange', { color });
   }
 
   /**
    * @private
   */
-  _changeHandler({ target }) {
-    if (!target.validity.valid) return;
+  _handleRangeInputChange({ target }) {
+    if (!target.validity.valid) return this.rangeInput.setError();
 
-    this._dispatch('percentagechange', {
-      percentage: Number(target.value)
-    });
+    this.rangeInput.setError(false);
+    this.dispatch('percentagechange', { percentage: target.value |> Number });
   }
 
   /**
    * @private
   */
-  _handleClickRandom() {
+  _handleRandomColorButtonClick() {
     const color = getRandomHexColor();
-
     this.pickr.setColor(color, true);
     this.colorInput.value = color;
-
-    this._dispatch('colorchange', { color });
+    this.dispatch('colorchange', { color });
   }
 
   /**
@@ -136,15 +131,7 @@ export default class Header extends Widget {
   */
   _handlePickrChangeStop(ev) {
     const color = ev.getColor().toHEXA().toString();
-
     this.colorInput.setError(false).value = color;
-    this._dispatch('colorchange', { color });
-  }
-
-  /**
-   * @private
-  */
-  _dispatch(type, props) {
-    this.dispatch({ type, ...props });
+    this.dispatch('colorchange', { color });
   }
 }

@@ -21,12 +21,13 @@ export default class ColorItem extends Widget {
         <div class='item_percent flex items-center'>
           ${this.h(FiberManualRecord, { className: 'icon-shade', width: 12, height: 12 })}
           ${this.h(RadioButtonUnchecked, { className: 'icon-tint', width: 12, height: 12 })}
+          ${this.h(Text, { name: 'ariaLabelPercentage', className: 'sr-only', attr: { style: 'margin: 0' } })}
           ${this.h(Text, { name: 'percentageLabel', className: 'percentage--label' })}
         </div>
         ${this.h(Text, { name: 'hexLabel', className: 'hex--label' })}
       </div>
       <div class='color-item__copy-btn'>
-        ${this.h(IconButton, { name: 'copyButton', icon: FileCopy })}
+        ${this.h(IconButton, { name: 'copyButton', icon: FileCopy, label: 'copy' })}
       </div>
     </div>
   `;
@@ -36,13 +37,13 @@ export default class ColorItem extends Widget {
 
   constructor(config) {
     super(config);
-    this.copyButton.el.addEventListener('click', ::this._clickHandler);
+    this.copyButton.el.addEventListener('click', ::this._copyClickHandler);
   }
 
   /**
    * @private
   */
-  _clickHandler() {
+  _copyClickHandler() {
     if (Copy(this.color) === false) return;
 
     this.appendChild(new Snackbar({
@@ -55,23 +56,47 @@ export default class ColorItem extends Widget {
   */
   update(value) {
     const { TINT, SHADE, BASE, LIGHT, DARK } = this.constructor.CLASSNAMES;
-    const percentage = value.percentage?.toFixed(2) ?? 0 |> Number;
-    const classes = [
-      value.isTint && TINT,
-      value.isShade && SHADE,
-      value.isBaseColor && BASE,
-      value.getBrightness() > 50 ? LIGHT : DARK
-    ].filter(v => v);
+    const { isTint, isShade, isBaseColor } = value;
 
     this.color = value.hexString();
 
-    this.percentageLabel.setText(`${percentage}%`);
+    this.ariaLabelPercentage.setText([
+      isTint && 'tint',
+      isShade && 'shade',
+      isBaseColor && 'base color'
+    ].filter(v => v));
+    this.percentageLabel.setText(`${value.percentage?.toFixed(2) ?? 0 |> Number}%`);
     this.hexLabel.setText(this.color);
     this.element.style.backgroundColor = this.color;
 
     this.element.classList.remove(...Object.values(this.constructor.CLASSNAMES));
-    this.element.classList.add(...classes);
+    this.element.classList.add(...[
+      isTint && TINT,
+      isShade && SHADE,
+      isBaseColor && BASE,
+      value.getBrightness() > 50 ? LIGHT : DARK
+    ].filter(v => v));
 
+    return this;
+  }
+
+  /**
+   * @override
+  */
+  activate() {
+    if (this.el.parentElement) return this;
+
+    this.render(this.parent.el);
+    return this;
+  }
+
+  /**
+   * @override
+  */
+  deactivate() {
+    if (!this.el.parentElement) return this;
+
+    this.el.remove();
     return this;
   }
 }

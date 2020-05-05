@@ -3,9 +3,7 @@ const { src, dest, parallel, watch } = require('gulp'),
   babel           = require('rollup-plugin-babel'),
   sass            = require('gulp-sass'),
   autoprefixer    = require('gulp-autoprefixer'),
-  concat          = require('gulp-concat'),
   uglify          = require('gulp-uglify-es').default,
-  livereload      = require('gulp-livereload'),
   connect         = require('gulp-connect'),
   rootImport      = require('rollup-plugin-root-import'),
   nodeResolve     = require('rollup-plugin-node-resolve'),
@@ -16,10 +14,11 @@ sass.compiler = require('sass');
 const serverTask = (done) => {
   connect.server({
     root: '',
+    host: '0.0.0.0',
     livereload: true
   });
   done();
-}
+};
 
 const stylesTask = () => src('src/sass/app.scss')
   .pipe(sass({
@@ -62,7 +61,7 @@ const watchTask = (done) => {
   watch('src/javascripts/**', scriptsTask);
   watch('src/sass/**', stylesTask);
   done();
-}
+};
 
 const stylesDist = () => src('dist/css/app.css')
   .pipe(sass({ outputStyle: 'compressed' }))

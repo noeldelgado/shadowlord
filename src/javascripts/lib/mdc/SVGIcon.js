@@ -5,13 +5,13 @@ export default class SVGIcon extends Widget {
   static defaults = {
     viewBox: '0 0 24 24',
     content: '',
-    width: '100%',
-    height: '100%'
+    width: 24,
+    height: 24
   }
 
   template() {
     return `
-    <svg viewBox='${this.viewBox}' width=${this.width} height=${this.height}>
+    <svg viewBox='${this.viewBox}' width=${this.width} height=${this.height} aria-hidden='true'>
       ${this.content}
     </svg>
     `;

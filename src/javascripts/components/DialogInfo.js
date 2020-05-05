@@ -1,15 +1,11 @@
 import { Dialog } from '/lib/mdc/index';
-
-const internals = {
-  link(href, content) {
-    return `
-    <a href=${href} target="_blank" rel="noopener noreferrer">${content}</a>`;
-  }
-};
+import { Launch } from '/lib/mdc/icons/index';
 
 export default class DialogInfo extends Dialog {
 
-  get html() {
+  static ELEMENT_CLASS = 'dialog_info'
+
+  content() {
     return `
     <p>Color tints and shades generator tool.</p>
     <ul>
@@ -22,20 +18,22 @@ export default class DialogInfo extends Dialog {
         </ul>
       </li>
     </ul>
-    <p>${internals.link('https://github.com/noeldelgado/shadowlord', '<span>View source on GitHub</span>')}</p>
+    <p>${this._link('https://github.com/noeldelgado/shadowlord', '<span>View source on GitHub</span>')}</p>
     <h3>Credits</h3>
     <ul>
-      <li>${internals.link('https://github.com/noeldelgado/values.js', 'values.js')} — JS library to get the tints and shades.</li>
-      <li>Material Design Components & Icons by ${internals.link('https://twitter.com/Google', '@Google')}.</li>
-      <li>“Percent” icon by Austin Andrews ${internals.link('https://twitter.com/templarian', '@templarian')}</a>
-    </li>
-  </ul>
-  <p>MIT © ${internals.link('https://github.com/noeldelgado', 'Noel Delgado')}</p>
+      <li>${this._link('https://github.com/noeldelgado/values.js', 'values.js')} — JS library to get the tints and shades.</li>
+      <li>Material Design Components & Icons by ${this._link('https://twitter.com/Google', '@Google')}.</li>
+      <li>“Percent” icon by Austin Andrews ${this._link('https://twitter.com/templarian', '@templarian')}</li>
+    </ul>
+    <p>MIT © ${this._link('https://pixelia.me', 'Noel Delgado')}</p>
     `;
   }
 
-  constructor(config) {
-    super(config);
-    this.insertHTML(this.html);
+  _link(href, content) {
+    return `
+    <a href=${href} target="_blank" rel="noopener noreferrer" aria-label='(will open in a new window)'><!--
+      -->${content}<!--
+      -->${this.h(Launch, { width: 16, height: 16 })}<!--
+   --></a>`;
   }
 }

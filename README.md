@@ -1,5 +1,11 @@
 # Shadowlord
 
+[![Dependencies](https://img.shields.io/david/noeldelgado/shadowlord.svg)](https://david-dm.org/noeldelgado/shadowlord)
+[![devDependencies](https://img.shields.io/david/dev/noeldelgado/shadowlord.svg)](https://david-dm.org/noeldelgado/shadowlord?type=dev)
+[![Known Vulnerabilities](https://snyk.io/test/github/noeldelgado/shadowlord/badge.svg)](https://snyk.io/test/github/noeldelgado/shadowlord)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/noeldelgado/shadowlord.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/noeldelgado/shadowlord/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/noeldelgado/shadowlord.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/noeldelgado/shadowlord/context:javascript)
+
 Simple color tints and shade generator using [values.js](https://github.com/noeldelgado/values.js).
 
 https://noeldelgado.github.io/shadowlord/

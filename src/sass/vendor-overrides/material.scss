@@ -15,13 +15,6 @@
   }
 }
 
-/** icon-button */
-.mdc-icon-button {
-  .mdc-icon-button__icon {
-    display: block;
-  }
-}
-
 /** text-field */
 .mdc-text-field {
   @include textfield.density(-4);
