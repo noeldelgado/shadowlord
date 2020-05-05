@@ -33,6 +33,7 @@ header {
 
   .header__input-wrapper {
     .mdc-text-field {
+      padding: 0;
       .mdc-text-field__input {
         max-width: 90px;
         padding-left: 0.5rem;
@@ -42,11 +43,11 @@ header {
 
       &.mdc-text-field--with-leading-icon {
         .mdc-text-field__icon {
-          left: 0.5rem;
+          margin: 0 8px;
         }
         .mdc-text-field__input {
-          max-width: calc(60px + 2rem);
-          padding-left: 2rem;
+          max-width: 60px;
+          padding: 0;
         }
       }
     }

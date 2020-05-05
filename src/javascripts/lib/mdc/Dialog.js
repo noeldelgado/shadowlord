@@ -16,20 +16,22 @@ export default class Dialog extends Widget {
       <div class="mdc-dialog__container">
         <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
           <h2 class="mdc-dialog__title" id="my-dialog-title">${this.title}</h2>
-          <div class="mdc-dialog__content" id="my-dialog-content"></div>
+          <div class="mdc-dialog__content" id="my-dialog-content">${this.content()}</div>
         </div>
       </div>
       <div class="mdc-dialog__scrim"></div>
     </div>`;
   }
 
+  content() {
+    return '';
+  }
+
   mdcdialog = null
-  content = null
 
   constructor(config) {
     super(config);
     this.mdcdialog = new MDCDialog(this.el);
-    this.content = this.el.querySelector('.mdc-dialog__content');
   }
 
   open() {
@@ -39,11 +41,6 @@ export default class Dialog extends Widget {
 
   close() {
     this.mdcdialog.close();
-    return this;
-  }
-
-  insertHTML(htmlString) {
-    this.content.insertAdjacentHTML('beforeend', htmlString);
     return this;
   }
 }

@@ -18,11 +18,11 @@ export default class EventSupport {
     this.listeners[type].splice(index, 1);
   }
 
-  dispatch(event) {
-    const listenerArray = this.listeners[event.type];
+  dispatch(type, event = {}) {
+    const listenerArray = this.listeners[type];
     if (listenerArray === undefined) return;
     for (let i = 0, l = listenerArray.length; i < l; i++) {
-      listenerArray[i].call(this, event);
+      listenerArray[i].call(this, { type, ...event });
     }
   }
 }
