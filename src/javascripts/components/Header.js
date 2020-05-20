@@ -31,7 +31,7 @@ export default class Header extends Widget {
       useAsButton: true,
       comparison: false,
       position: 'bottom-end',
-      components: { hue: true }
+      components: { hue: true, opacity: true }
     });
 
     this.appendChild(new TextField({
