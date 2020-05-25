@@ -12,4 +12,4 @@ jobs:
           temporaryPublicStorage: true
           runs: 2
           urls: |
-            /#0000ff
+            /index.html#0000ff

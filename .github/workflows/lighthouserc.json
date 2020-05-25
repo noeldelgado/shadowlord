@@ -4,7 +4,10 @@
       "staticDistDir": "./"
     },
     "assert": {
-      "preset": "lighthouse:no-pwa"
+      "preset": "lighthouse:no-pwa",
+      "assertions": {
+        "uses-rel-preconnect": "off"
+      }
     }
   }
 }
