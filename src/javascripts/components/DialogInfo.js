@@ -9,8 +9,14 @@ export default class DialogInfo extends Dialog {
     return `
     <p>Color tints and shades generator tool.</p>
     <ul>
-      <li>Color input accepts <b>hex</b>, <b>rgb/a</b> and <b>hsl/a</b> CSS color strings.</li>
-      <li>The accepted percent factor range goes from 1 to 100. The math is <code>round(100 / &lt;percent&gt;)</code>, so:
+      <li>Accepted Color input:
+        <ul>
+          <li>#RGB, #RRGGBB, #RGBA #RRGGBBAA</li>
+          <li>RGB/A, HSL/A</li>
+          <li>Pre-defined ${this._link('https://www.w3.org/wiki/CSS/Properties/color/keywords', 'color keywords')}</p>
+        </ul>
+      </li>
+      <li>The accepted percent balance point goes from 1 to 100. The math is <code>round(100 / &lt;percent&gt;)</code>, so:
         <ul>
           <li>1 will produce 100 tints and 100 shades</li>
           <li>2 will produce 50 tints and 50 shades</li>

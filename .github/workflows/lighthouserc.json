@@ -1,0 +1,15 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./",
+      "url": "/index.html#0000ff"
+    },
+    "assert": {
+      "preset": "lighthouse:no-pwa",
+      "assertions": {
+        "uses-rel-preconnect": "off",
+        "uses-passive-event-listeners": "off"
+      }
+    }
+  }
+}

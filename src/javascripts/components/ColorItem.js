@@ -7,7 +7,7 @@ import Text from '/components/Text';
 export default class ColorItem extends Widget {
 
   static CLASSNAMES = {
-    BASE: '-is-base-color',
+    BASE: '-is-base',
     TINT: '-is-tint',
     SHADE: '-is-shade',
     LIGHT: '-is-light',
@@ -55,26 +55,19 @@ export default class ColorItem extends Widget {
    * @param {Value} value - values.js instance
   */
   update(value) {
-    const { TINT, SHADE, BASE, LIGHT, DARK } = this.constructor.CLASSNAMES;
-    const { isTint, isShade, isBaseColor } = value;
+    const { LIGHT, DARK } = this.constructor.CLASSNAMES;
 
     this.color = value.hexString();
 
-    this.ariaLabelPercentage.setText([
-      isTint && 'tint',
-      isShade && 'shade',
-      isBaseColor && 'base color'
-    ].filter(v => v));
-    this.percentageLabel.setText(`${value.percentage?.toFixed(2) ?? 0 |> Number}%`);
+    this.ariaLabelPercentage.setText(value.type);
+    this.percentageLabel.setText(`${value.weight?.toFixed(2) ?? 0 |> Number}%`);
     this.hexLabel.setText(this.color);
     this.element.style.backgroundColor = this.color;
 
     this.element.classList.remove(...Object.values(this.constructor.CLASSNAMES));
     this.element.classList.add(...[
-      isTint && TINT,
-      isShade && SHADE,
-      isBaseColor && BASE,
-      value.getBrightness() > 50 ? LIGHT : DARK
+      `-is-${value.type}`,
+      value.getBrightness() > 55 ? LIGHT : DARK
     ].filter(v => v));
 
     return this;

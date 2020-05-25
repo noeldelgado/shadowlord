@@ -33,13 +33,14 @@ const stylesTask = () => src('src/sass/app.scss')
 
 const scriptsTask = () => src('src/javascripts/index.js')
   .pipe(rollup({
+    rollup: require('rollup'),
     // There is no `input` option as rollup integrates into the gulp pipeline
     plugins: [
       nodeResolve({
         mainFields: ['module', 'main', 'browser']
       }),
       commonjs({
-        include: ['node_modules/**']
+        include: [/node_modules/]
       }),
       rootImport({
         root: `src/javascripts`,
