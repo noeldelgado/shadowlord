@@ -6,7 +6,8 @@
     "assert": {
       "preset": "lighthouse:no-pwa",
       "assertions": {
-        "uses-rel-preconnect": "off"
+        "uses-rel-preconnect": "off",
+        "uses-passive-event-listeners": "off"
       }
     }
   }
