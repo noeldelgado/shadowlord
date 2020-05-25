@@ -11,3 +11,5 @@ jobs:
           configPath: '.github/workflows/lighthouserc.json'
           temporaryPublicStorage: true
           runs: 2
+          urls: |
+            /#0000ff
