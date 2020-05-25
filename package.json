@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "Shadowlord",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Shades and tints generator online.",
   "scripts": {
     "start": "gulp",
@@ -26,7 +26,7 @@
     "@material/textfield": "^6.0.0",
     "@simonwep/pickr": "^1.5.1",
     "copy-text-to-clipboard": "^2.2.0",
-    "values.js": "^1.1.1"
+    "values.js": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -36,14 +36,14 @@
     "@babel/plugin-proposal-pipeline-operator": "^7.8.3",
     "@babel/preset-env": "^7.9.5",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.1.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-better-rollup": "^4.0.1",
     "gulp-connect": "^5.7.0",
     "gulp-sass": "^4.0.2",
     "gulp-uglify-es": "^2.0.0",
-    "rollup": "^1.32.1",
+    "rollup": "^2.10.9",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
