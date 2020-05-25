@@ -26,7 +26,7 @@
     "@material/textfield": "^6.0.0",
     "@simonwep/pickr": "^1.5.1",
     "copy-text-to-clipboard": "^2.2.0",
-    "values.js": "^1.1.1"
+    "values.js": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
