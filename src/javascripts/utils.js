@@ -8,11 +8,15 @@ import Values from 'values.js';
  * @argument color <required> [String]
  * @return true|false [Boolean]
  */
-export const isValidColorModel = (color) => [
-  Values.Utils.isHEX(color),
-  Values.Utils.isRGB(color),
-  Values.Utils.isHSL(color)
-].some(v => v);
+export const isValidColorModel = (color) => {
+  try {
+    new Values(color);
+    return true;
+  }
+  catch(e) {
+    return false;
+  }
+};
 
 /**
  * Return a valid random hexadecimal color code.
