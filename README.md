@@ -1,8 +1,6 @@
 # Shadowlord
 
 ![][github-actions-lighthouse-image]
-[![Dependencies][david-image]][david-url]
-[![Dev Dependencies][david-dev-image]][david-dev-url]
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 [![Total alerts][lgtm-image]][lgtm-url]
 [![Language grade: JavaScript][lgtm-grade-image]][lgtm-grade-url]
@@ -29,10 +27,6 @@ Edit files on the `src` folder
 MIT © [Noel Delgado](https://pixelia.me/)
 
 [github-actions-lighthouse-image]: https://github.com/noeldelgado/shadowlord/workflows/Lighthouse/badge.svg
-[david-image]: https://img.shields.io/david/noeldelgado/shadowlord.svg
-[david-url]: https://david-dm.org/noeldelgado/shadowlord
-[david-dev-image]: https://img.shields.io/david/dev/noeldelgado/shadowlord.svg
-[david-dev-url]: https://david-dm.org/noeldelgado/shadowlord?type=dev
 [snyk-image]: https://snyk.io/test/github/noeldelgado/shadowlord/badge.svg
 [snyk-url]: https://snyk.io/test/github/noeldelgado/shadowlord
 [lgtm-image]: https://img.shields.io/lgtm/alerts/g/noeldelgado/shadowlord.svg?logo=lgtm&logoWidth=18
